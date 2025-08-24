@@ -318,7 +318,6 @@ function App() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-            [
               { icon: Camera, title: "Photography", description: "Street and studio photography specializing in portraits, landscapes, and product shoots that capture mood and detail with precision.", color: "from-blue-500 to-cyan-500" },
               { icon: Video, title: "Video Production", description: "Director of Photography bringing ideas from concept to screen through cinematography, editing, color grading in DaVinci Resolve, and motion graphics in After Effects.", color: "from-purple-500 to-pink-500" },
               { icon: Box, title: "3D", description: "Exploring 3D modeling and design to craft immersive visuals and creative concepts across digital platforms.", color: "from-green-500 to-teal-500" },
@@ -454,7 +453,7 @@ function App() {
 
           <div className="grid md:grid-cols-3 gap-8 text-center">
             {[
-            [
+            
               { icon: Mail, title: "Email", info: "stayelli.multimedia@gmail.com", color: "from-blue-500 to-cyan-500" },
               { icon: Phone, title: "Phone", info: "+63 995-970-2451 | +852 9159-9816", color: "from-green-500 to-teal-500" },
               { icon: MapPin, title: "Location", info: "Hong Kong & Manila, PH", color: "from-purple-500 to-pink-500" }
