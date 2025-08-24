@@ -1,0 +1,519 @@
+import React, { useState, useEffect } from 'react';
+import { Mail, Phone, MapPin, Camera, Video, Box, Image } from 'lucide-react';
+import { AnimatedSocialIcons } from './components/AnimatedSocialIcons';
+import { Enhanced3DNavigation } from './components/Enhanced3DNavigation';
+import { ScrollAnimation, ParallaxBackground, Floating3DElements } from './components/ScrollAnimations';
+
+function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false); // Default to light mode
+  const [scrollY, setScrollY] = useState(0);
+  const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Track active section based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'about', 'skills', 'portfolio', 'contact'];
+      const scrollPosition = window.scrollY + 100; // Offset for better detection
+      
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial position
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsMenuOpen(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen transition-all duration-500 relative overflow-hidden">
+      {/* Enhanced Animated Background */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-black dark:to-gray-800 transition-all duration-1000"></div>
+        
+        {/* Dynamic gradient overlay */}
+        <div 
+          className="absolute inset-0 opacity-30"
+          style={{
+            background: `radial-gradient(circle at ${50 + scrollY * 0.01}% ${50 + Math.sin(scrollY * 0.01) * 10}%, 
+              rgba(59, 130, 246, 0.1) 0%, 
+              rgba(147, 51, 234, 0.05) 50%, 
+              transparent 100%)`
+          }}
+        ></div>
+
+        {/* Animated particles with 3D effect */}
+        <div className="absolute inset-0 opacity-40 dark:opacity-60">
+          {[...Array(80)].map((_, i) => (
+            <div
+              key={i}
+              className={`absolute rounded-full ${
+                isDarkMode ? 'bg-white' : 'bg-blue-400'
+              } animate-pulse`}
+              style={{
+                width: `${2 + Math.random() * 4}px`,
+                height: `${2 + Math.random() * 4}px`,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${3 + Math.random() * 4}s`,
+                transform: `translateZ(${Math.random() * 100}px)`,
+                boxShadow: isDarkMode 
+                  ? '0 0 20px rgba(255, 255, 255, 0.3)' 
+                  : '0 0 20px rgba(59, 130, 246, 0.4)'
+              }}
+            ></div>
+          ))}
+        </div>
+
+        {/* Enhanced floating glass orbs with 3D transforms */}
+        <ParallaxBackground speed={0.2}>
+          <div 
+            className="absolute w-40 h-40 bg-gradient-to-br from-blue-200/20 to-purple-200/20 dark:from-white/10 dark:to-white/5 backdrop-blur-2xl rounded-full"
+            style={{
+              top: '10%',
+              left: '10%',
+              transform: `perspective(1000px) rotateX(${scrollY * 0.05}deg) rotateY(${scrollY * 0.03}deg)`,
+              animation: 'float-1 6s ease-in-out infinite',
+              boxShadow: '0 20px 60px rgba(59, 130, 246, 0.2)'
+            }}
+          ></div>
+          <div 
+            className="absolute w-32 h-32 bg-gradient-to-br from-purple-200/20 to-pink-200/20 dark:from-white/8 dark:to-white/4 backdrop-blur-2xl rounded-full"
+            style={{
+              top: '30%',
+              right: '15%',
+              transform: `perspective(1000px) rotateX(${-scrollY * 0.03}deg) rotateY(${scrollY * 0.04}deg)`,
+              animation: 'float-2 8s ease-in-out infinite',
+              animationDelay: '2s',
+              boxShadow: '0 20px 60px rgba(147, 51, 234, 0.2)'
+            }}
+          ></div>
+          <div 
+            className="absolute w-24 h-24 bg-gradient-to-br from-indigo-200/20 to-blue-200/20 dark:from-white/6 dark:to-white/3 backdrop-blur-2xl rounded-full"
+            style={{
+              bottom: '20%',
+              left: '20%',
+              transform: `perspective(1000px) rotateX(${scrollY * 0.04}deg) rotateY(${-scrollY * 0.02}deg)`,
+              animation: 'float-3 7s ease-in-out infinite',
+              animationDelay: '4s',
+              boxShadow: '0 20px 60px rgba(99, 102, 241, 0.2)'
+            }}
+          ></div>
+        </ParallaxBackground>
+      </div>
+
+      {/* Floating 3D Elements */}
+      <Floating3DElements isDarkMode={isDarkMode} />
+
+      {/* Enhanced Navigation */}
+      <Enhanced3DNavigation
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        isDarkMode={isDarkMode}
+        setIsDarkMode={setIsDarkMode}
+        scrollToSection={scrollToSection}
+        activeSection={activeSection}
+      />
+
+      {/* Hero Section with Enhanced Animations */}
+      <section id="home" className="min-h-screen flex items-center pt-24 pb-16 relative">
+        <div className="max-w-7xl mx-auto px-6 w-full">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left side - Text content with scroll animations */}
+            <div className="text-left">
+              <ScrollAnimation animation="slideUp" delay={0.2}>
+                <h1 className="text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white mb-6 leading-none tracking-tight">
+                  <span 
+                    className="inline-block transition-all duration-500 hover:scale-110 hover:-rotate-2 relative z-10"
+                    style={{
+                      textShadow: isDarkMode 
+                        ? '0 10px 30px rgba(255, 255, 255, 0.1)' 
+                        : '0 10px 30px rgba(59, 130, 246, 0.2)',
+                      color: isDarkMode ? '#ffffff' : '#1f2937'
+                    }}
+                  >
+                    Stay
+                  </span>
+                  <span 
+                    className="inline-block transition-all duration-500 hover:scale-110 hover:rotate-2 text-gray-600 dark:text-gray-400 relative z-10"
+                    style={{
+                      textShadow: isDarkMode 
+                        ? '0 10px 30px rgba(156, 163, 175, 0.3)' 
+                        : '0 10px 30px rgba(75, 85, 99, 0.3)'
+                    }}
+                  >
+                    elli
+                  </span>
+                </h1>
+              </ScrollAnimation>
+              
+              <ScrollAnimation animation="slideUp" delay={0.4}>
+                <div className="mb-8">
+                  <p className="text-2xl md:text-3xl lg:text-4xl text-gray-700 dark:text-gray-300 font-light mb-2 leading-tight">
+                    Multimedia Artist
+                  </p>
+                  <p className="text-2xl md:text-3xl lg:text-4xl text-gray-600 dark:text-gray-400 font-light leading-tight">
+                    & Creative Director
+                  </p>
+                </div>
+              </ScrollAnimation>
+
+              <ScrollAnimation animation="slideRight" delay={0.6}>
+                <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-white dark:to-gray-400 mb-8 rounded-full shadow-lg"></div>
+              </ScrollAnimation>
+
+              <ScrollAnimation animation="fadeIn" delay={0.8}>
+                <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-12 max-w-lg leading-relaxed">
+                  Bringing stories to life through the fusion of visual art, digital media, and innovative design. 
+                  Specializing in creating immersive experiences that captivate and inspire.
+                </p>
+              </ScrollAnimation>
+
+              <ScrollAnimation animation="slideUp" delay={1.0}>
+                <AnimatedSocialIcons isDarkMode={isDarkMode} />
+              </ScrollAnimation>
+            </div>
+            
+            {/* Right side - Enhanced image with 3D effects */}
+            <ScrollAnimation animation="scale" delay={0.5}>
+              <div className="flex justify-end">
+                <div className="relative group">
+                  <div 
+                    className="relative overflow-hidden rounded-3xl backdrop-blur-2xl border shadow-2xl p-2 transition-all duration-700 group-hover:scale-105 group-hover:rotate-2"
+                    style={{
+                      background: isDarkMode 
+                        ? 'rgba(255, 255, 255, 0.1)' 
+                        : 'rgba(255, 255, 255, 0.8)',
+                      border: isDarkMode 
+                        ? '1px solid rgba(255, 255, 255, 0.2)' 
+                        : '1px solid rgba(59, 130, 246, 0.3)',
+                      boxShadow: isDarkMode
+                        ? '0 25px 80px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                        : '0 25px 80px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+                    }}
+                  >
+                    <img
+                      src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      alt="Stayelli - Multimedia Artist"
+                      className="w-80 h-96 lg:w-96 lg:h-[500px] rounded-2xl object-cover transition-all duration-700 group-hover:scale-110"
+                    />
+                    {/* Overlay gradient on hover */}
+                    <div className="absolute inset-2 rounded-2xl bg-gradient-to-t from-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  </div>
+                  
+                  {/* Enhanced floating elements */}
+                  <div 
+                    className="absolute -bottom-8 -left-8 w-24 h-24 backdrop-blur-xl rounded-full border transition-all duration-500 group-hover:scale-125 group-hover:-rotate-12"
+                    style={{
+                      background: isDarkMode 
+                        ? 'rgba(255, 255, 255, 0.05)' 
+                        : 'rgba(59, 130, 246, 0.1)',
+                      border: isDarkMode 
+                        ? '1px solid rgba(255, 255, 255, 0.1)' 
+                        : '1px solid rgba(59, 130, 246, 0.2)',
+                      boxShadow: '0 10px 40px rgba(59, 130, 246, 0.2)'
+                    }}
+                  ></div>
+                  <div 
+                    className="absolute -top-8 -right-8 w-16 h-16 backdrop-blur-xl rounded-full border transition-all duration-500 group-hover:scale-125 group-hover:rotate-12"
+                    style={{
+                      background: isDarkMode 
+                        ? 'rgba(255, 255, 255, 0.05)' 
+                        : 'rgba(147, 51, 234, 0.1)',
+                      border: isDarkMode 
+                        ? '1px solid rgba(255, 255, 255, 0.1)' 
+                        : '1px solid rgba(147, 51, 234, 0.2)',
+                      boxShadow: '0 10px 40px rgba(147, 51, 234, 0.2)'
+                    }}
+                  ></div>
+                </div>
+              </div>
+            </ScrollAnimation>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section with Enhanced 3D Effects */}
+      <section id="about" className="py-20 relative">
+        <div className="max-w-6xl mx-auto px-6">
+          <ScrollAnimation animation="fadeIn" delay={0.2}>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">About Me</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-white dark:to-gray-400 mx-auto rounded-full"></div>
+            </div>
+          </ScrollAnimation>
+          
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <ScrollAnimation animation="slideRight" delay={0.3}>
+              <div 
+                className="backdrop-blur-2xl border rounded-3xl p-8 shadow-2xl transition-all duration-500 hover:scale-105 md:col-span-2"
+                style={{
+                  background: isDarkMode 
+                    ? 'rgba(255, 255, 255, 0.1)' 
+                    : 'rgba(255, 255, 255, 0.8)',
+                  border: isDarkMode 
+                    ? '1px solid rgba(255, 255, 255, 0.2)' 
+                    : '1px solid rgba(59, 130, 246, 0.3)',
+                  boxShadow: isDarkMode
+                    ? '0 25px 80px rgba(0, 0, 0, 0.4)'
+                    : '0 25px 80px rgba(59, 130, 246, 0.3)'
+                }}
+              >
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Creative Vision & Passion</h3>
+                <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                  With over 8 years of experience in multimedia arts, I specialize in creating compelling visual narratives 
+                  that bridge the gap between traditional artistry and cutting-edge digital innovation. My work spans across various mediums including digital illustration, video production, interactive design, and sound art.
+                </p>
+                <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                  I believe in the power of multimedia to tell stories that resonate deeply with audiences. Every project is an opportunity to push creative boundaries and explore new ways of expression, always keeping the human experience at the center of my artistic vision.
+                </p>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  Whether working on commercial projects or personal artistic endeavors, I strive to create work that not only meets technical excellence but also connects emotionally with viewers, creating lasting impressions and meaningful experiences.
+                </p>
+              </div>
+            </ScrollAnimation>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section with Enhanced Animations */}
+      <section id="skills" className="py-20 relative">
+        <div className="max-w-6xl mx-auto px-6">
+          <ScrollAnimation animation="fadeIn" delay={0.2}>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Skills & Expertise</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-white dark:to-gray-400 mx-auto rounded-full"></div>
+            </div>
+          </ScrollAnimation>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+            [
+              { icon: Camera, title: "Photography", description: "Street and studio photography specializing in portraits, landscapes, and product shoots that capture mood and detail with precision.", color: "from-blue-500 to-cyan-500" },
+              { icon: Video, title: "Video Production", description: "Director of Photography bringing ideas from concept to screen through cinematography, editing, color grading in DaVinci Resolve, and motion graphics in After Effects.", color: "from-purple-500 to-pink-500" },
+              { icon: Box, title: "3D", description: "Exploring 3D modeling and design to craft immersive visuals and creative concepts across digital platforms.", color: "from-green-500 to-teal-500" },
+              { icon: Image, title: "Photo Editing & Retouching", description: "Professional editing, retouching, and enhancement using Photoshop and Lightroom to elevate images with clarity and artistry.", color: "from-orange-500 to-red-500" }
+            ].map((skill, index) => (
+              <ScrollAnimation key={skill.title} animation="slideUp" delay={0.3 + index * 0.1}>
+                <div 
+                  className="group text-center p-8 backdrop-blur-2xl border rounded-3xl shadow-2xl transition-all duration-500 hover:scale-110 hover:-translate-y-4 cursor-pointer relative overflow-hidden h-80 flex flex-col justify-between skill-card"
+                  style={{
+                    background: isDarkMode 
+                      ? 'rgba(255, 255, 255, 0.1)' 
+                      : 'rgba(255, 255, 255, 0.8)',
+                    border: isDarkMode 
+                      ? '1px solid rgba(255, 255, 255, 0.2)' 
+                      : '1px solid rgba(59, 130, 246, 0.3)',
+                    boxShadow: isDarkMode
+                      ? '0 25px 80px rgba(0, 0, 0, 0.4)'
+                      : '0 25px 80px rgba(59, 130, 246, 0.3)'
+                  }}
+                >
+                  {/* Animated background gradient */}
+                  <div 
+                    className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                  ></div>
+                  
+                  <div className="flex-1 flex flex-col justify-center">
+                    {/* Icon with enhanced animation */}
+                    <div className="relative mb-4 group-hover:scale-125 transition-transform duration-500">
+                      <skill.icon className="w-12 h-12 text-gray-700 dark:text-gray-300 mx-auto transition-all duration-500 skill-icon" />
+                      <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} rounded-full opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500`}></div>
+                    </div>
+                    
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 transition-colors duration-500 skill-title">
+                      {skill.title}
+                    </h3>
+                  </div>
+                  
+                  <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-500 skill-description leading-relaxed">
+                    {skill.description}
+                  </p>
+                  
+                  {/* Floating particles on hover */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    {[...Array(8)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="absolute w-1 h-1 bg-white rounded-full animate-ping"
+                        style={{
+                          left: `${20 + Math.random() * 60}%`,
+                          top: `${20 + Math.random() * 60}%`,
+                          animationDelay: `${i * 0.2}s`,
+                          animationDuration: '2s'
+                        }}
+                      ></div>
+                    ))}
+                  </div>
+                </div>
+              </ScrollAnimation>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Portfolio Section with Enhanced 3D Gallery */}
+      <section id="portfolio" className="py-20 relative">
+        <div className="max-w-6xl mx-auto px-6">
+          <ScrollAnimation animation="fadeIn" delay={0.2}>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Featured Work</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-white dark:to-gray-400 mx-auto rounded-full"></div>
+            </div>
+          </ScrollAnimation>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { src: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800", title: "Digital Landscapes", category: "Mixed Media Art" },
+              { src: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800", title: "Motion Stories", category: "Video Production" },
+              { src: "https://images.pexels.com/photos/3184638/pexels-photo-3184638.jpeg?auto=compress&cs=tinysrgb&w=800", title: "Interactive Spaces", category: "Installation Art" },
+              { src: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800", title: "Urban Reflections", category: "Photography" },
+              { src: "https://images.pexels.com/photos/3184454/pexels-photo-3184454.jpeg?auto=compress&cs=tinysrgb&w=800", title: "Sound Visualizations", category: "Audio Visual" },
+              { src: "https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=800", title: "Collaborative Works", category: "Mixed Media" }
+            ].map((item, index) => (
+              <ScrollAnimation key={index} animation="scale" delay={0.2 + index * 0.1}>
+                <div className="group cursor-pointer">
+                  <div 
+                    className="relative overflow-hidden rounded-3xl backdrop-blur-2xl border shadow-2xl p-2 transition-all duration-700 hover:scale-110 hover:rotate-2 transform-gpu"
+                    style={{
+                      background: isDarkMode 
+                        ? 'rgba(255, 255, 255, 0.1)' 
+                        : 'rgba(255, 255, 255, 0.8)',
+                      border: isDarkMode 
+                        ? '1px solid rgba(255, 255, 255, 0.2)' 
+                        : '1px solid rgba(59, 130, 246, 0.3)',
+                      boxShadow: isDarkMode
+                        ? '0 25px 80px rgba(0, 0, 0, 0.4)'
+                        : '0 25px 80px rgba(59, 130, 246, 0.3)'
+                    }}
+                  >
+                    <img
+                      src={item.src}
+                      alt={item.title}
+                      className="w-full h-64 object-cover rounded-2xl group-hover:scale-125 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-2 bg-black/0 group-hover:bg-black/70 transition-all duration-500 flex items-center justify-center rounded-2xl">
+                      <div className="text-white text-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110">
+                        <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                        <p className="text-sm">{item.category}</p>
+                      </div>
+                    </div>
+                    
+                    {/* Glowing border effect */}
+                    <div className="absolute inset-0 rounded-3xl border-2 border-blue-400 opacity-0 group-hover:opacity-50 transition-opacity duration-500 animate-pulse"></div>
+                  </div>
+                </div>
+              </ScrollAnimation>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section with Enhanced 3D Cards */}
+      <section id="contact" className="py-20 relative">
+        <div className="max-w-4xl mx-auto px-6">
+          <ScrollAnimation animation="fadeIn" delay={0.2}>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Let's Create Together</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-white dark:to-gray-400 mx-auto rounded-full mb-6"></div>
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                Ready to bring your creative vision to life? Let's discuss your project and explore the possibilities.
+              </p>
+            </div>
+          </ScrollAnimation>
+
+          <div className="grid md:grid-cols-3 gap-8 text-center">
+            {[
+            [
+              { icon: Mail, title: "Email", info: "stayelli.multimedia@gmail.com", color: "from-blue-500 to-cyan-500" },
+              { icon: Phone, title: "Phone", info: "+63 995-970-2451 | +852 9159-9816", color: "from-green-500 to-teal-500" },
+              { icon: MapPin, title: "Location", info: "Hong Kong & Manila, PH", color: "from-purple-500 to-pink-500" }
+            ].map((contact, index) => (
+              <ScrollAnimation key={contact.title} animation="slideUp" delay={0.3 + index * 0.1}>
+                <div 
+                  className="group p-8 backdrop-blur-2xl border rounded-3xl shadow-2xl transition-all duration-500 hover:scale-110 hover:-translate-y-4 cursor-pointer relative overflow-hidden"
+                  style={{
+                    background: isDarkMode 
+                      ? 'rgba(255, 255, 255, 0.1)' 
+                      : 'rgba(255, 255, 255, 0.8)',
+                    border: isDarkMode 
+                      ? '1px solid rgba(255, 255, 255, 0.2)' 
+                      : '1px solid rgba(59, 130, 246, 0.3)',
+                    boxShadow: isDarkMode
+                      ? '0 25px 80px rgba(0, 0, 0, 0.4)'
+                      : '0 25px 80px rgba(59, 130, 246, 0.3)'
+                  }}
+                >
+                  {/* Animated background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${contact.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                  
+                  <contact.icon className="w-8 h-8 text-gray-700 dark:text-gray-300 mx-auto mb-4 transition-all duration-500 group-hover:scale-125 group-hover:text-white" />
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-500 group-hover:text-white">
+                    {contact.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 transition-colors duration-500 group-hover:text-gray-200">
+                    {contact.info}
+                  </p>
+                  
+                  {/* Ripple effect */}
+                  <div className="absolute inset-0 rounded-3xl border-2 border-current opacity-0 group-hover:opacity-30 scale-0 group-hover:scale-150 transition-all duration-700"></div>
+                </div>
+              </ScrollAnimation>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Enhanced Footer */}
+      <footer 
+        className="py-8 backdrop-blur-2xl border-t text-center transition-all duration-500"
+        style={{
+          background: isDarkMode 
+            ? 'rgba(0, 0, 0, 0.2)' 
+            : 'rgba(255, 255, 255, 0.8)',
+          borderTop: isDarkMode 
+            ? '1px solid rgba(255, 255, 255, 0.1)' 
+            : '1px solid rgba(59, 130, 246, 0.2)'
+        }}
+      >
+        <div className="max-w-6xl mx-auto px-6">
+          <p className="text-gray-600 dark:text-gray-400">
+            © 2025 Stayelli. All rights reserved. | Multimedia Artist & Creative Director
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+export default App;
