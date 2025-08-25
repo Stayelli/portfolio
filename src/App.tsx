@@ -376,7 +376,7 @@ function App() {
                   </div>
                 </div>
               </ScrollAnimation>
-            ))}
+            )}
           </div>
         </div>
       </section>
