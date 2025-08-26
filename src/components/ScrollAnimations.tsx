@@ -130,109 +130,77 @@ export const ParallaxBackground: React.FC<{ children: React.ReactNode; speed?: n
 // Floating 3D Elements Component
 export const Floating3DElements: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
   const [scrollY, setScrollY] = useState(0);
-  const [scrollVelocity, setScrollVelocity] = useState(0);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [lastScrollTime, setLastScrollTime] = useState(Date.now());
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const currentTime = Date.now();
-      const timeDelta = currentTime - lastScrollTime;
-      
-      if (timeDelta > 0) {
-        const velocity = Math.abs(currentScrollY - lastScrollY) / timeDelta;
-        setScrollVelocity(Math.min(velocity * 100, 50)); // Cap velocity for performance
-      }
-      
-      setScrollY(currentScrollY);
-      setLastScrollY(currentScrollY);
-      setLastScrollTime(currentTime);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, lastScrollTime]);
-
-  // Decay scroll velocity over time for smooth motion blur fade
-  useEffect(() => {
-    const decayInterval = setInterval(() => {
-      setScrollVelocity(prev => Math.max(0, prev * 0.95));
-    }, 16); // ~60fps
-
-    return () => clearInterval(decayInterval);
   }, []);
-
-  // Calculate motion blur intensity based on scroll velocity
-  const motionBlurIntensity = Math.min(scrollVelocity * 0.5, 10);
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Floating geometric shapes with scroll-based parallax */}
-      {[...Array(15)].map((_, i) => {
-        const parallaxSpeed = 0.1 + (i % 5) * 0.05; // Different speeds for depth
-        const rotationSpeed = 0.02 + (i % 3) * 0.01;
-        const floatOffset = Math.sin(Date.now() * 0.001 + i) * 20;
+      {/* Smooth floating geometric shapes with gentle parallax */}
+      {[...Array(12)].map((_, i) => {
+        const parallaxSpeed = 0.05 + (i % 4) * 0.02; // Gentler parallax speeds
+        const rotationSpeed = 0.01 + (i % 3) * 0.005; // Slower rotation
         
         return (
         <div
           key={i}
-          className={`absolute rounded-full transition-all duration-300 ${
+          className={`absolute rounded-full transition-all duration-1000 ease-out ${
             isDarkMode ? 'bg-white' : 'bg-blue-500'
           }`}
           style={{
-            width: `${15 + (i % 4) * 15}px`,
-            height: `${15 + (i % 4) * 15}px`,
+            width: `${8 + (i % 4) * 8}px`,
+            height: `${8 + (i % 4) * 8}px`,
             left: `${5 + (i % 10) * 10}%`,
             top: `${10 + (i % 8) * 12}%`,
-            opacity: isDarkMode ? 0.15 : 0.25,
+            opacity: isDarkMode ? 0.1 : 0.15,
             transform: `
               translate3d(
-                ${Math.sin(scrollY * 0.001 + i) * 30}px,
-                ${scrollY * -parallaxSpeed + floatOffset}px,
+                ${Math.sin(scrollY * 0.0005 + i) * 15}px,
+                ${scrollY * -parallaxSpeed}px,
                 0
               ) 
               rotate(${scrollY * rotationSpeed}deg)
-              scale(${1 + Math.sin(scrollY * 0.002 + i) * 0.1})
+              scale(${1 + Math.sin(scrollY * 0.001 + i) * 0.05})
             `,
-            filter: `blur(${motionBlurIntensity * 0.2}px)`,
             animation: `float-${(i % 3) + 1} ${4 + (i % 3)}s ease-in-out infinite`,
             animationDelay: `${i * 0.3}s`,
             boxShadow: isDarkMode
-              ? `0 0 ${20 + motionBlurIntensity}px rgba(255, 255, 255, 0.1)`
-              : `0 0 ${20 + motionBlurIntensity}px rgba(59, 130, 246, 0.2)`
+              ? `0 0 20px rgba(255, 255, 255, 0.05)`
+              : `0 0 20px rgba(59, 130, 246, 0.1)`
           }}
         />
         );
       })}
 
-      {/* 3D Cubes with enhanced parallax and motion blur */}
+      {/* 3D Cubes with smooth parallax */}
       {[...Array(8)].map((_, i) => {
-        const cubeParallaxSpeed = 0.15 + (i % 4) * 0.1;
-        const cubeRotationX = scrollY * (0.05 + i * 0.01);
-        const cubeRotationY = scrollY * (0.03 + i * 0.008);
-        const cubeScale = 1 + Math.sin(scrollY * 0.003 + i) * 0.2;
+        const cubeParallaxSpeed = 0.08 + (i % 4) * 0.03; // Gentler parallax
+        const cubeRotationX = scrollY * (0.02 + i * 0.005); // Slower rotation
+        const cubeRotationY = scrollY * (0.015 + i * 0.003);
+        const cubeScale = 1 + Math.sin(scrollY * 0.001 + i) * 0.1; // Subtle scaling
         
         return (
         <div
           key={`cube-${i}`}
-          className="absolute transition-all duration-200"
+          className="absolute transition-all duration-1000 ease-out"
           style={{
             left: `${8 + (i % 6) * 15}%`,
             top: `${15 + (i % 5) * 18}%`,
             transform: `
               perspective(1000px) 
               translate3d(
-                ${Math.cos(scrollY * 0.002 + i) * 40}px,
+                ${Math.cos(scrollY * 0.001 + i) * 20}px,
                 ${scrollY * -cubeParallaxSpeed}px,
-                ${Math.sin(scrollY * 0.003 + i) * 30}px
+                ${Math.sin(scrollY * 0.0015 + i) * 15}px
               )
               rotateX(${cubeRotationX}deg) 
               rotateY(${cubeRotationY}deg)
               scale(${cubeScale})
             `,
-            filter: `blur(${motionBlurIntensity * 0.3}px)`,
-            opacity: Math.max(0.1, 0.3 - motionBlurIntensity * 0.02)
+            opacity: isDarkMode ? 0.08 : 0.12
           }}
         >
           <div
@@ -247,44 +215,38 @@ export const Floating3DElements: React.FC<{ isDarkMode: boolean }> = ({ isDarkMo
               transform: `rotateX(${i * 45}deg) rotateY(${i * 45}deg)`,
               animation: `spin-3d ${6 + (i % 4)}s linear infinite`,
               boxShadow: isDarkMode
-                ? `0 8px 32px rgba(255, 255, 255, ${0.1 + motionBlurIntensity * 0.01})`
-                : `0 8px 32px rgba(59, 130, 246, ${0.2 + motionBlurIntensity * 0.01})`
+                ? `0 8px 32px rgba(255, 255, 255, 0.05)`
+                : `0 8px 32px rgba(59, 130, 246, 0.1)`
             }}
           />
         </div>
         );
       })}
 
-      {/* Dynamic light rays that respond to scroll velocity */}
-      {scrollVelocity > 5 && (
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={`ray-${i}`}
-              className={`absolute ${
-                isDarkMode ? 'bg-white' : 'bg-blue-400'
-              }`}
-              style={{
-                width: '2px',
-                height: `${100 + scrollVelocity * 10}px`,
-                left: `${10 + i * 15}%`,
-                top: `${Math.random() * 100}%`,
-                opacity: Math.min(scrollVelocity * 0.02, 0.3),
-                transform: `
-                  translateY(${-scrollY * 0.5}px) 
-                  rotate(${15 + i * 10}deg)
-                  scaleY(${1 + scrollVelocity * 0.1})
-                `,
-                filter: `blur(${scrollVelocity * 0.2}px)`,
-                boxShadow: isDarkMode
-                  ? `0 0 ${scrollVelocity}px rgba(255, 255, 255, 0.5)`
-                  : `0 0 ${scrollVelocity}px rgba(59, 130, 246, 0.5)`,
-                animation: `fadeIn 0.3s ease-out`
-              }}
-            />
-          ))}
-        </div>
-      )}
+      {/* Additional smooth floating orbs for depth */}
+      <ParallaxBackground speed={0.1}>
+        {[...Array(6)].map((_, i) => (
+          <div
+            key={`orb-${i}`}
+            className={`absolute rounded-full ${
+              isDarkMode ? 'bg-white' : 'bg-purple-400'
+            }`}
+            style={{
+              width: `${20 + i * 5}px`,
+              height: `${20 + i * 5}px`,
+              left: `${15 + i * 12}%`,
+              top: `${20 + i * 15}%`,
+              opacity: isDarkMode ? 0.05 : 0.08,
+              animation: `float-${(i % 3) + 1} ${8 + i}s ease-in-out infinite`,
+              animationDelay: `${i * 0.5}s`,
+              filter: 'blur(1px)',
+              boxShadow: isDarkMode
+                ? '0 0 30px rgba(255, 255, 255, 0.1)'
+                : '0 0 30px rgba(147, 51, 234, 0.2)'
+            }}
+          />
+        ))}
+      </ParallaxBackground>
     </div>
   );
 };

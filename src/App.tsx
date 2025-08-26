@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, Camera, Video, Box, Image } from 'lucide-react';
+import { Mail, Phone, MapPin, Camera, Video, Palette, Music, Box, Image } from 'lucide-react';
 import { AnimatedSocialIcons } from './components/AnimatedSocialIcons';
 import { Enhanced3DNavigation } from './components/Enhanced3DNavigation';
 import { ScrollAnimation, ParallaxBackground, Floating3DElements } from './components/ScrollAnimations';
@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['home', 'about', 'skills', 'portfolio', 'contact'];
-      const scrollPosition = window.scrollY + 100; // Offset for better detection
+      const scrollPosition = window.scrollY + 200; // Increased offset for better detection
       
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
@@ -30,6 +30,20 @@ function App() {
             setActiveSection(sectionId);
             break;
           }
+        }
+      }
+      
+      // Special handling for contact section (last section)
+      const contactElement = document.getElementById('contact');
+      if (contactElement) {
+        const { offsetTop } = contactElement;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        
+        // If we're near the bottom of the page or in the contact section
+        if (scrollPosition >= offsetTop - 100 || 
+            window.scrollY + windowHeight >= documentHeight - 100) {
+          setActiveSection('contact');
         }
       }
     };
@@ -318,10 +332,10 @@ function App() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: Camera, title: "Photography", description: "Street and studio photography specializing in portraits, landscapes, and product shoots that capture mood and detail with precision.", color: "from-blue-500 to-cyan-500" },
-              { icon: Video, title: "Video Production", description: "Director of Photography bringing ideas from concept to screen through cinematography, editing, color grading in DaVinci Resolve, and motion graphics in After Effects.", color: "from-purple-500 to-pink-500" },
-              { icon: Box, title: "3D", description: "Exploring 3D modeling and design to craft immersive visuals and creative concepts across digital platforms.", color: "from-green-500 to-teal-500" },
-              { icon: Image, title: "Photo Editing & Retouching", description: "Professional editing, retouching, and enhancement using Photoshop and Lightroom to elevate images with clarity and artistry.", color: "from-orange-500 to-red-500" }
+              { icon: Camera, title: "Photography", description: "Professional photography services with expertise in portrait, commercial, and creative conceptual work using both digital and film techniques.", color: "from-blue-500 to-cyan-500" },
+              { icon: Video, title: "Video Production", description: "Director of Photography role with comprehensive video production, editing, color grading, and motion graphics expertise.", color: "from-purple-500 to-pink-500" },
+              { icon: Box, title: "3D", description: "3D modeling, animation, and rendering for commercial projects, architectural visualization, and creative installations.", color: "from-green-500 to-teal-500" },
+              { icon: Image, title: "Photo Editing & Retouching", description: "Professional photo editing and retouching services for commercial, fashion, and artistic photography projects.", color: "from-orange-500 to-red-500" }
             ].map((skill, index) => (
               <ScrollAnimation key={skill.title} animation="slideUp" delay={0.3 + index * 0.1}>
                 <div 
@@ -376,7 +390,7 @@ function App() {
                   </div>
                 </div>
               </ScrollAnimation>
-            )}
+            ))}
           </div>
         </div>
       </section>
@@ -453,14 +467,13 @@ function App() {
 
           <div className="grid md:grid-cols-3 gap-8 text-center">
             {[
-            
               { icon: Mail, title: "Email", info: "stayelli.multimedia@gmail.com", color: "from-blue-500 to-cyan-500" },
               { icon: Phone, title: "Phone", info: "+63 995-970-2451 | +852 9159-9816", color: "from-green-500 to-teal-500" },
               { icon: MapPin, title: "Location", info: "Hong Kong & Manila, PH", color: "from-purple-500 to-pink-500" }
             ].map((contact, index) => (
               <ScrollAnimation key={contact.title} animation="slideUp" delay={0.3 + index * 0.1}>
                 <div 
-                  className="group p-8 backdrop-blur-2xl border rounded-3xl shadow-2xl transition-all duration-500 hover:scale-110 hover:-translate-y-4 cursor-pointer relative overflow-hidden"
+                  className="group p-8 backdrop-blur-2xl border rounded-3xl shadow-2xl transition-all duration-500 hover:scale-110 hover:-translate-y-4 cursor-pointer relative overflow-hidden h-48 flex flex-col justify-center items-center"
                   style={{
                     background: isDarkMode 
                       ? 'rgba(255, 255, 255, 0.1)' 
@@ -480,7 +493,7 @@ function App() {
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-500 group-hover:text-white">
                     {contact.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400 transition-colors duration-500 group-hover:text-gray-200">
+                  <p className="text-gray-600 dark:text-gray-400 transition-colors duration-500 group-hover:text-gray-200 text-center break-words">
                     {contact.info}
                   </p>
                   
