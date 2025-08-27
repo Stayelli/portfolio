@@ -3,10 +3,11 @@ import { Mail, Phone, MapPin, Camera, Video, Palette, Music, Box, Image } from '
 import { AnimatedSocialIcons } from './components/AnimatedSocialIcons';
 import { Enhanced3DNavigation } from './components/Enhanced3DNavigation';
 import { ScrollAnimation, ParallaxBackground, Floating3DElements } from './components/ScrollAnimations';
+import { PortfolioGrid } from './components/PortfolioGrid';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false); // Default to light mode
+  const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
   const [scrollY, setScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState('home');
 
@@ -63,7 +64,13 @@ function App() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const elementPosition = element.offsetTop;
+      const offsetPosition = elementPosition - 120; // Adjust for navbar height + extra padding
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
       setIsMenuOpen(false);
     }
   };
@@ -196,9 +203,6 @@ function App() {
                   <p className="text-2xl md:text-3xl lg:text-4xl text-gray-700 dark:text-gray-300 font-light mb-2 leading-tight">
                     Multimedia Artist
                   </p>
-                  <p className="text-2xl md:text-3xl lg:text-4xl text-gray-600 dark:text-gray-400 font-light leading-tight">
-                    & Creative Director
-                  </p>
                 </div>
               </ScrollAnimation>
 
@@ -207,10 +211,14 @@ function App() {
               </ScrollAnimation>
 
               <ScrollAnimation animation="fadeIn" delay={0.8}>
-                <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-12 max-w-lg leading-relaxed">
-                  Bringing stories to life through the fusion of visual art, digital media, and innovative design. 
-                  Specializing in creating immersive experiences that captivate and inspire.
-                </p>
+                <div className="mb-12 max-w-lg">
+                  <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white mb-4 leading-tight">
+                    One artist. Infinite ways to tell your story.
+                  </h2>
+                  <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
+                    Photography, video, and 3D design fused with storytelling to create versatile visuals that resonate.
+                  </p>
+                </div>
               </ScrollAnimation>
 
               <ScrollAnimation animation="slideUp" delay={1.0}>
@@ -282,7 +290,7 @@ function App() {
         <div className="max-w-6xl mx-auto px-6">
           <ScrollAnimation animation="fadeIn" delay={0.2}>
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">About Me</h2>
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">The Creative Chameleon</h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-white dark:to-gray-400 mx-auto rounded-full"></div>
             </div>
           </ScrollAnimation>
@@ -303,16 +311,14 @@ function App() {
                     : '0 25px 80px rgba(59, 130, 246, 0.3)'
                 }}
               >
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Creative Vision & Passion</h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                  With over 8 years of experience in multimedia arts, I specialize in creating compelling visual narratives 
-                  that bridge the gap between traditional artistry and cutting-edge digital innovation. My work spans across various mediums including digital illustration, video production, interactive design, and sound art.
+                <p className="text-xl text-gray-800 dark:text-gray-200 mb-6 leading-relaxed font-medium italic">
+                  "Minimal, playful, corporate, or cinematic — I wear every style like second skin."
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                  I believe in the power of multimedia to tell stories that resonate deeply with audiences. Every project is an opportunity to push creative boundaries and explore new ways of expression, always keeping the human experience at the center of my artistic vision.
+                  As a multimedia artist, I bring adaptability to the forefront. My skillset spans photography, videography, 3D modeling, and motion graphics, giving me the tools to deliver exactly what a project demands. From capturing fleeting street moments to producing polished studio portraits, from editing vibrant films to sculpting immersive 3D worlds — I thrive in switching gears without losing sight of the story.
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  Whether working on commercial projects or personal artistic endeavors, I strive to create work that not only meets technical excellence but also connects emotionally with viewers, creating lasting impressions and meaningful experiences.
+                  For me, creativity isn't about sticking to one look; it's about shaping visuals that fit the client, the message, and the moment.
                 </p>
               </div>
             </ScrollAnimation>
@@ -405,50 +411,9 @@ function App() {
             </div>
           </ScrollAnimation>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { src: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800", title: "Digital Landscapes", category: "Mixed Media Art" },
-              { src: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800", title: "Motion Stories", category: "Video Production" },
-              { src: "https://images.pexels.com/photos/3184638/pexels-photo-3184638.jpeg?auto=compress&cs=tinysrgb&w=800", title: "Interactive Spaces", category: "Installation Art" },
-              { src: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800", title: "Urban Reflections", category: "Photography" },
-              { src: "https://images.pexels.com/photos/3184454/pexels-photo-3184454.jpeg?auto=compress&cs=tinysrgb&w=800", title: "Sound Visualizations", category: "Audio Visual" },
-              { src: "https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=800", title: "Collaborative Works", category: "Mixed Media" }
-            ].map((item, index) => (
-              <ScrollAnimation key={index} animation="scale" delay={0.2 + index * 0.1}>
-                <div className="group cursor-pointer">
-                  <div 
-                    className="relative overflow-hidden rounded-3xl backdrop-blur-2xl border shadow-2xl p-2 transition-all duration-700 hover:scale-110 hover:rotate-2 transform-gpu"
-                    style={{
-                      background: isDarkMode 
-                        ? 'rgba(255, 255, 255, 0.1)' 
-                        : 'rgba(255, 255, 255, 0.8)',
-                      border: isDarkMode 
-                        ? '1px solid rgba(255, 255, 255, 0.2)' 
-                        : '1px solid rgba(59, 130, 246, 0.3)',
-                      boxShadow: isDarkMode
-                        ? '0 25px 80px rgba(0, 0, 0, 0.4)'
-                        : '0 25px 80px rgba(59, 130, 246, 0.3)'
-                    }}
-                  >
-                    <img
-                      src={item.src}
-                      alt={item.title}
-                      className="w-full h-64 object-cover rounded-2xl group-hover:scale-125 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-2 bg-black/0 group-hover:bg-black/70 transition-all duration-500 flex items-center justify-center rounded-2xl">
-                      <div className="text-white text-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110">
-                        <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                        <p className="text-sm">{item.category}</p>
-                      </div>
-                    </div>
-                    
-                    {/* Glowing border effect */}
-                    <div className="absolute inset-0 rounded-3xl border-2 border-blue-400 opacity-0 group-hover:opacity-50 transition-opacity duration-500 animate-pulse"></div>
-                  </div>
-                </div>
-              </ScrollAnimation>
-            ))}
-          </div>
+          <ScrollAnimation animation="fadeIn" delay={0.4}>
+            <PortfolioGrid isDarkMode={isDarkMode} />
+          </ScrollAnimation>
         </div>
       </section>
 
@@ -520,7 +485,7 @@ function App() {
       >
         <div className="max-w-6xl mx-auto px-6">
           <p className="text-gray-600 dark:text-gray-400">
-            © 2025 Stayelli. All rights reserved. | Multimedia Artist & Creative Director
+            © 2025 Stayelli. All rights reserved. | Multimedia Artist
           </p>
         </div>
       </footer>
