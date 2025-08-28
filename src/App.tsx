@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Mail, Phone, MapPin, Camera, Video, Palette, Music, Box, Image } from 'lucide-react';
 import { AnimatedSocialIcons } from './components/AnimatedSocialIcons';
 import { Enhanced3DNavigation } from './components/Enhanced3DNavigation';
@@ -6,6 +7,7 @@ import { ScrollAnimation, ParallaxBackground, Floating3DElements } from './compo
 import { PortfolioGrid } from './components/PortfolioGrid';
 
 function App() {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
   const [scrollY, setScrollY] = useState(0);
@@ -91,30 +93,6 @@ function App() {
               transparent 100%)`
           }}
         ></div>
-
-        {/* Animated particles with 3D effect */}
-        <div className="absolute inset-0 opacity-40 dark:opacity-60">
-          {[...Array(80)].map((_, i) => (
-            <div
-              key={i}
-              className={`absolute rounded-full ${
-                isDarkMode ? 'bg-white' : 'bg-blue-400'
-              } animate-pulse`}
-              style={{
-                width: `${2 + Math.random() * 4}px`,
-                height: `${2 + Math.random() * 4}px`,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${3 + Math.random() * 4}s`,
-                transform: `translateZ(${Math.random() * 100}px)`,
-                boxShadow: isDarkMode 
-                  ? '0 0 20px rgba(255, 255, 255, 0.3)' 
-                  : '0 0 20px rgba(59, 130, 246, 0.4)'
-              }}
-            ></div>
-          ))}
-        </div>
 
         {/* Enhanced floating glass orbs with 3D transforms */}
         <ParallaxBackground speed={0.2}>
@@ -338,13 +316,14 @@ function App() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: Camera, title: "Photography", description: "Professional photography services with expertise in portrait, commercial, and creative conceptual work using both digital and film techniques.", color: "from-blue-500 to-cyan-500" },
-              { icon: Video, title: "Video Production", description: "Director of Photography role with comprehensive video production, editing, color grading, and motion graphics expertise.", color: "from-purple-500 to-pink-500" },
-              { icon: Box, title: "3D", description: "3D modeling, animation, and rendering for commercial projects, architectural visualization, and creative installations.", color: "from-green-500 to-teal-500" },
-              { icon: Image, title: "Photo Editing & Retouching", description: "Professional photo editing and retouching services for commercial, fashion, and artistic photography projects.", color: "from-orange-500 to-red-500" }
+              { icon: Camera, title: "Photography", description: "Professional photography services with expertise in portrait, commercial, and creative conceptual work using both digital and film techniques.", color: "from-blue-500 to-cyan-500", category: "photography" },
+              { icon: Video, title: "Video Production", description: "Director of Photography role with comprehensive video production, editing, color grading, and motion graphics expertise.", color: "from-purple-500 to-pink-500", category: "video" },
+              { icon: Box, title: "3D", description: "3D modeling, animation, and rendering for commercial projects, architectural visualization, and creative installations.", color: "from-green-500 to-teal-500", category: "3d" },
+              { icon: Image, title: "Photo Editing & Retouching", description: "Professional photo editing and retouching services for commercial, fashion, and artistic photography projects.", color: "from-orange-500 to-red-500", category: "retouching" }
             ].map((skill, index) => (
               <ScrollAnimation key={skill.title} animation="slideUp" delay={0.3 + index * 0.1}>
                 <div 
+                  onClick={() => navigate(`/portfolio?filter=${skill.category}`)}
                   className="group text-center p-8 backdrop-blur-2xl border rounded-3xl shadow-2xl transition-all duration-500 hover:scale-110 hover:-translate-y-4 cursor-pointer relative overflow-hidden h-80 flex flex-col justify-between skill-card"
                   style={{
                     background: isDarkMode 
