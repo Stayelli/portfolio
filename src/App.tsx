@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Camera, Video, Palette, Music, Box, Image, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { AnimatedSocialIcons } from './components/AnimatedSocialIcons';
 import { Enhanced3DNavigation } from './components/Enhanced3DNavigation';
-import { ScrollAnimation, Floating3DElements } from './components/ScrollAnimations';
+import { ScrollAnimation, ParallaxBackground, Floating3DElements } from './components/ScrollAnimations';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
