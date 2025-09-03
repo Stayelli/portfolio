@@ -174,3 +174,133 @@ html {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* Enhanced lightbox animations */
+@keyframes lightbox-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes lightbox-exit {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes image-transition {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes liquid-ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.8), 0 0 60px rgba(147, 51, 234, 0.4);
+  }
+}
+
+@keyframes backdrop-blur-in {
+  from {
+    backdrop-filter: blur(0px);
+  }
+  to {
+    backdrop-filter: blur(40px);
+  }
+}
+/* Utility classes for lightbox animations */
+.animate-lightbox-enter {
+  animation: lightbox-enter 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-lightbox-exit {
+  animation: lightbox-exit 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-image-transition {
+  animation: image-transition 0.3s ease-in-out;
+}
+
+.animate-liquid-ripple {
+  animation: liquid-ripple 0.6s ease-out;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.animate-backdrop-blur {
+  animation: backdrop-blur-in 0.5s ease-out forwards;
+}
+/* Smooth backdrop blur animation */
+.backdrop-animate {
+  backdrop-filter: blur(0px);
+  transition: backdrop-filter 0.5s ease-in-out;
+}
+
+.backdrop-animate.active {
+  backdrop-filter: blur(20px);
+}
