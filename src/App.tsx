@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Camera, Video, Palette, Music, Box, Image, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { AnimatedSocialIcons } from './components/AnimatedSocialIcons';
 import { Enhanced3DNavigation } from './components/Enhanced3DNavigation';
-import { ScrollAnimation, ParallaxBackground, Floating3DElements } from './components/ScrollAnimations';
+import { ScrollAnimation, Floating3DElements } from './components/ScrollAnimations';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -550,7 +550,6 @@ function App() {
                   key={item.id}
                   onClick={() => openLightbox(item)}
                   className="group cursor-pointer relative overflow-hidden rounded-3xl transition-all duration-500 hover:scale-105 transform-gpu aspect-square"
-                  onClick={() => openLightbox(item)}
                   style={{
                     background: isDarkMode 
                       ? 'rgba(255, 255, 255, 0.1)' 
