@@ -424,7 +424,7 @@ function App() {
             ].map((skill, index) => (
               <ScrollAnimation key={skill.title} animation="slideUp" delay={0.3 + index * 0.1}>
                 <div 
-                  className="group text-center p-8 backdrop-blur-2xl border rounded-3xl shadow-2xl transition-all duration-500 hover:scale-110 hover:-translate-y-4 cursor-pointer relative overflow-hidden h-80 flex flex-col justify-between skill-card"
+                  className="group text-center p-4 md:p-8 backdrop-blur-2xl border rounded-2xl md:rounded-3xl shadow-2xl transition-all duration-500 hover:scale-110 hover:-translate-y-4 cursor-pointer relative overflow-hidden h-56 md:h-80 flex flex-col justify-between skill-card"
                   style={{
                     background: isDarkMode 
                       ? 'rgba(255, 255, 255, 0.1)' 
@@ -444,35 +444,19 @@ function App() {
                   
                   <div className="flex-1 flex flex-col justify-center">
                     {/* Icon with enhanced animation */}
-                    <div className="relative mb-4 group-hover:scale-125 transition-transform duration-500">
-                      <skill.icon className="w-12 h-12 text-gray-700 dark:text-gray-300 mx-auto transition-all duration-500 skill-icon" />
+                    <div className="relative mb-2 md:mb-4 group-hover:scale-125 transition-transform duration-500">
+                      <skill.icon className="w-8 h-8 md:w-12 md:h-12 text-gray-700 dark:text-gray-300 mx-auto transition-all duration-500 skill-icon" />
                       <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} rounded-full opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500`}></div>
                     </div>
                     
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 transition-colors duration-500 skill-title">
+                    <h3 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white mb-2 md:mb-3 transition-colors duration-500 skill-title">
                       {skill.title}
                     </h3>
                   </div>
                   
-                  <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-500 skill-description leading-relaxed">
+                  <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 transition-colors duration-500 skill-description leading-relaxed">
                     {skill.description}
                   </p>
-                  
-                  {/* Floating particles on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    {[...Array(8)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="absolute w-1 h-1 bg-white rounded-full animate-ping"
-                        style={{
-                          left: `${20 + Math.random() * 60}%`,
-                          top: `${20 + Math.random() * 60}%`,
-                          animationDelay: `${i * 0.2}s`,
-                          animationDuration: '2s'
-                        }}
-                      ></div>
-                    ))}
-                  </div>
                 </div>
               </ScrollAnimation>
             ))}
@@ -495,10 +479,10 @@ function App() {
 
           {/* Category Filter Buttons */}
           <ScrollAnimation animation="fadeIn" delay={0.3}>
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12 px-2">
               <button
                 onClick={() => setActiveFilter('all')}
-                className={`px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 ${
+                className={`px-4 md:px-8 py-2 md:py-4 rounded-xl md:rounded-2xl font-semibold text-sm md:text-lg transition-all duration-300 transform hover:scale-105 ${
                   activeFilter === 'all'
                     ? 'bg-blue-500 text-white shadow-xl scale-105'
                     : isDarkMode
@@ -520,7 +504,7 @@ function App() {
                 <button
                   key={key}
                   onClick={() => setActiveFilter(key as 'photography' | 'video' | '3d' | 'retouching')}
-                  className={`px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 ${
+                  className={`px-4 md:px-8 py-2 md:py-4 rounded-xl md:rounded-2xl font-semibold text-sm md:text-lg transition-all duration-300 transform hover:scale-105 ${
                     activeFilter === key
                       ? 'bg-blue-500 text-white shadow-xl scale-105'
                       : isDarkMode
@@ -544,7 +528,7 @@ function App() {
 
           {/* Portfolio Grid */}
           <ScrollAnimation animation="fadeIn" delay={0.5}>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 md:gap-6 lg:gap-8">
               {filteredItems.map((item) => (
                 <div
                   key={item.id}
@@ -554,30 +538,29 @@ function App() {
                     background: isDarkMode 
                       ? 'rgba(255, 255, 255, 0.1)' 
                       : 'rgba(255, 255, 255, 0.8)',
-                    backdropFilter: 'blur(20px)',
                     border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(59, 130, 246, 0.3)',
                     boxShadow: isDarkMode
                       ? '0 25px 80px rgba(0, 0, 0, 0.4)'
                       : '0 25px 80px rgba(59, 130, 246, 0.3)'
                   }}
                 >
-                  <div className="p-2 h-full">
+                  <div className="p-1 md:p-2 h-full">
                     <img
                       src={item.src}
                       alt={item.title}
-                      className="w-full h-full object-cover rounded-2xl group-hover:scale-110 transition-all duration-700 group-hover:brightness-110"
+                      className="w-full h-full object-cover rounded-xl md:rounded-2xl group-hover:scale-110 transition-all duration-700 group-hover:brightness-110"
                     />
                   </div>
                   
                   {/* Hover Overlay */}
-                  <div className="absolute inset-2 bg-black/0 group-hover:bg-black/70 transition-all duration-500 flex items-center justify-center rounded-2xl backdrop-blur-sm">
-                    <div className="text-white text-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 group-hover:scale-110 px-4">
-                      <h3 className="text-lg font-semibold mb-2 animate-in slide-in-from-bottom duration-300 delay-100">{item.title}</h3>
-                      <p className="text-sm text-gray-200 animate-in slide-in-from-bottom duration-300 delay-200">{categoryLabels[item.category]}</p>
+                  <div className="absolute inset-1 md:inset-2 bg-black/0 group-hover:bg-black/70 transition-all duration-500 flex items-center justify-center rounded-xl md:rounded-2xl">
+                    <div className="text-white text-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 group-hover:scale-110 px-2 md:px-4">
+                      <h3 className="text-sm md:text-lg font-semibold mb-1 md:mb-2 animate-in slide-in-from-bottom duration-300 delay-100">{item.title}</h3>
+                      <p className="text-xs md:text-sm text-gray-200 animate-in slide-in-from-bottom duration-300 delay-200">{categoryLabels[item.category]}</p>
                       {item.isVideo && (
-                        <div className="mt-2 text-xs bg-red-500 px-3 py-1 rounded-full animate-pulse animate-in slide-in-from-bottom duration-300 delay-300">VIDEO</div>
+                        <div className="mt-1 md:mt-2 text-xs bg-red-500 px-2 md:px-3 py-1 rounded-full animate-pulse animate-in slide-in-from-bottom duration-300 delay-300">VIDEO</div>
                       )}
-                      <div className="mt-3 text-xs text-gray-300 animate-in slide-in-from-bottom duration-300 delay-400">Click to view</div>
+                      <div className="mt-2 md:mt-3 text-xs text-gray-300 animate-in slide-in-from-bottom duration-300 delay-400">Click to view</div>
                     </div>
                   </div>
                   
@@ -593,59 +576,59 @@ function App() {
 
           {/* Lightbox Modal */}
           {selectedImage && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-2 md:p-4 animate-in fade-in duration-300">
               <div
                 className="absolute inset-0 bg-black/90 backdrop-blur-sm animate-in fade-in duration-500"
                 onClick={closeLightbox}
               />
               
-              <div className="relative max-w-6xl max-h-full w-full animate-in zoom-in-95 slide-in-from-bottom-4 duration-500">
+              <div className="relative max-w-6xl max-h-full w-full animate-in zoom-in-95 slide-in-from-bottom-4 duration-500 mx-2 md:mx-0">
                 <button
                   onClick={closeLightbox}
-                  className="absolute top-4 right-4 z-10 p-3 rounded-full bg-black/50 text-white hover:bg-black/70 hover:scale-110 hover:rotate-90 transition-all duration-300 backdrop-blur-sm border border-white/20"
+                  className="absolute top-2 md:top-4 right-2 md:right-4 z-10 p-2 md:p-3 rounded-full bg-black/50 text-white hover:bg-black/70 hover:scale-110 hover:rotate-90 transition-all duration-300 backdrop-blur-sm border border-white/20"
                 >
-                  <X size={24} />
+                  <X size={20} className="md:w-6 md:h-6" />
                 </button>
                 
                 <button
                   onClick={() => navigateLightbox('prev')}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-4 rounded-full bg-black/50 text-white hover:bg-black/70 hover:scale-110 hover:-translate-x-1 transition-all duration-300 backdrop-blur-sm border border-white/20 group"
+                  className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 p-2 md:p-4 rounded-full bg-black/50 text-white hover:bg-black/70 hover:scale-110 hover:-translate-x-1 transition-all duration-300 backdrop-blur-sm border border-white/20 group"
                 >
-                  <ChevronLeft size={32} className="group-hover:scale-125 transition-transform duration-300" />
+                  <ChevronLeft size={24} className="md:w-8 md:h-8 group-hover:scale-125 transition-transform duration-300" />
                 </button>
                 
                 <button
                   onClick={() => navigateLightbox('next')}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-4 rounded-full bg-black/50 text-white hover:bg-black/70 hover:scale-110 hover:translate-x-1 transition-all duration-300 backdrop-blur-sm border border-white/20 group"
+                  className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 p-2 md:p-4 rounded-full bg-black/50 text-white hover:bg-black/70 hover:scale-110 hover:translate-x-1 transition-all duration-300 backdrop-blur-sm border border-white/20 group"
                 >
-                  <ChevronRight size={32} className="group-hover:scale-125 transition-transform duration-300" />
+                  <ChevronRight size={24} className="md:w-8 md:h-8 group-hover:scale-125 transition-transform duration-300" />
                 </button>
                 
                 <div className="bg-white rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-[1.02]">
                   {selectedImage.isVideo ? (
-                    <div className="w-full h-auto max-h-[70vh] bg-gradient-to-br from-gray-900 to-black flex items-center justify-center relative overflow-hidden">
+                    <div className="w-full h-auto max-h-[60vh] md:max-h-[70vh] bg-gradient-to-br from-gray-900 to-black flex items-center justify-center relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 animate-pulse"></div>
-                      <div className="text-white text-center p-8 relative z-10">
-                        <div className="text-6xl mb-4 animate-bounce">▶️</div>
-                        <p className="text-xl font-semibold animate-pulse">Video Player Placeholder</p>
-                        <p className="text-gray-400 mt-2 animate-fade-in">Video content would be embedded here</p>
+                      <div className="text-white text-center p-4 md:p-8 relative z-10">
+                        <div className="text-4xl md:text-6xl mb-2 md:mb-4 animate-bounce">▶️</div>
+                        <p className="text-lg md:text-xl font-semibold animate-pulse">Video Player Placeholder</p>
+                        <p className="text-gray-400 mt-1 md:mt-2 animate-fade-in text-sm md:text-base">Video content would be embedded here</p>
                       </div>
                     </div>
                   ) : (
                     <img
                       src={selectedImage.src}
                       alt={selectedImage.title}
-                      className="w-full h-auto max-h-[70vh] object-contain transition-all duration-700 hover:scale-105"
+                      className="w-full h-auto max-h-[60vh] md:max-h-[70vh] object-contain transition-all duration-700 hover:scale-105"
                     />
                   )}
                   
-                  <div className="p-6 bg-white relative overflow-hidden">
+                  <div className="p-4 md:p-6 bg-white relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-purple-50 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
                     <div className="relative z-10">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2 animate-in slide-in-from-left duration-500">{selectedImage.title}</h3>
-                      <p className="text-lg text-blue-600 mb-3 animate-in slide-in-from-left duration-500 delay-100">{categoryLabels[selectedImage.category]}</p>
+                      <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1 md:mb-2 animate-in slide-in-from-left duration-500">{selectedImage.title}</h3>
+                      <p className="text-base md:text-lg text-blue-600 mb-2 md:mb-3 animate-in slide-in-from-left duration-500 delay-100">{categoryLabels[selectedImage.category]}</p>
                     {selectedImage.description && (
-                        <p className="text-gray-700 leading-relaxed animate-in slide-in-from-left duration-500 delay-200">{selectedImage.description}</p>
+                        <p className="text-sm md:text-base text-gray-700 leading-relaxed animate-in slide-in-from-left duration-500 delay-200">{selectedImage.description}</p>
                     )}
                     </div>
                   </div>
