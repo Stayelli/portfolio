@@ -4,6 +4,7 @@ import { AnimatedSocialIcons } from './components/AnimatedSocialIcons';
 import { Enhanced3DNavigation } from './components/Enhanced3DNavigation';
 import { ScrollAnimation, ParallaxBackground, Floating3DElements } from './components/ScrollAnimations';
 import { Analytics } from '@vercel/analytics/react';
+import stayelliPortrait from '../images/stayelli_portrait.avif';
 
 
 function App() {
@@ -326,7 +327,7 @@ function App() {
                     }}
                   >
                     <img
-                      src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src={stayelliPortrait}
                       alt="Stayelli - Multimedia Artist"
                       className="w-80 h-96 lg:w-96 lg:h-[500px] rounded-2xl object-cover transition-all duration-700 group-hover:scale-110"
                     />
