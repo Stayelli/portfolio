@@ -1,5 +1,8 @@
 import {
-  Branding,
+  BrandingJoaquinsantos,
+  BrandingMkjp,
+  BrandingPausepaws,
+  BrandingTgms,
   PhotoCapeaguilar,
   PhotoCasetify,
   PhotoFlowerknows,
@@ -164,121 +167,75 @@ export const portfolioProjects: PortfolioProject[] = [
 
   // BRANDING PROJECTS
   {
-    id: 'brand-a',
-    title: 'Brand A Identity',
+    id: 'joaquinsantos',
+    title: 'Joaquin Santos Branding',
     category: 'Branding',
-    description: 'Branding and identity design for Brand A.',
-    coverImage: Branding[0],
+    description: 'Branding and identity design for Joaquin Santos.',
+    coverImage: BrandingJoaquinsantos[0],
     year: '2024',
     tags: ['Branding', 'Identity', 'Design'],
-    images: Branding.map((src, idx) => ({
-      id: `brand-a-${idx + 1}`,
+    images: BrandingJoaquinsantos.map((src, idx) => ({
+      id: `joaquinsantos-${idx + 1}`,
       src,
-      title: `Brand A ${idx + 1}`
+      title: `Joaquin Santos ${idx + 1}`
     }))
   },
   {
-    id: 'brand-b',
-    title: 'Brand B Campaign',
+    id: 'mkjp',
+    title: 'MKJP Branding',
     category: 'Branding',
-    description: 'Branding campaign for Brand B.',
-    coverImage: Branding[0],
+    description: 'Branding campaign for MKJP.',
+    coverImage: BrandingMkjp[0],
     year: '2024',
     tags: ['Branding', 'Campaign'],
-    images: Branding.map((src, idx) => ({
-      id: `brand-b-${idx + 1}`,
+    images: BrandingMkjp.map((src, idx) => ({
+      id: `mkjp-${idx + 1}`,
       src,
-      title: `Brand B ${idx + 1}`
+      title: `MKJP ${idx + 1}`
     }))
   },
   {
-    id: 'branding-general',
-    title: 'General Branding Portfolio',
+    id: 'pausepaws',
+    title: 'Pausepaws Branding',
     category: 'Branding',
-    description: 'Various branding projects.',
-    coverImage: Branding[0],
+    description: 'Branding work for Pausepaws.',
+    coverImage: BrandingPausepaws[0],
+    year: '2024',
+    tags: ['Branding', 'Work'],
+    images: BrandingPausepaws.map((src, idx) => ({
+      id: `pausepaws-${idx + 1}`,
+      src,
+      title: `Pausepaws ${idx + 1}`
+    }))
+  },
+  {
+    id: 'tgms',
+    title: 'TGMS Branding',
+    category: 'Branding',
+    description: 'Branding portfolio for TGMS.',
+    coverImage: BrandingTgms[0],
     year: '2024',
     tags: ['Branding', 'Portfolio'],
-    images: Branding.map((src, idx) => ({
-      id: `branding-${idx + 1}`,
+    images: BrandingTgms.map((src, idx) => ({
+      id: `tgms-${idx + 1}`,
       src,
-      title: `Branding ${idx + 1}`
+      title: `TGMS ${idx + 1}`
     }))
   },
 
-  // 3D PROJECTS
+  // 3D PROJECT
   {
-    id: '3d-resort',
-    title: 'Luxury Resort Visualization',
+    id: 'mod-3d',
+    title: '3D Modelling Showcase',
     category: '3D',
-    description: 'Photorealistic 3D architectural visualization for a luxury resort development.',
+    description: 'A showcase of 3D models.',
     coverImage: ThreeD[0],
     year: '2024',
-    tags: ['Architecture', '3D Rendering', 'Luxury', 'Visualization'],
+    tags: ['3D', 'Modelling', 'Showcase'],
     images: ThreeD.map((src, idx) => ({
-      id: `3d-resort-${idx + 1}`,
+      id: `mod-3d-${idx + 1}`,
       src,
-      title: `Resort Visualization ${idx + 1}`
-    }))
-  },
-  {
-    id: '3d-product',
-    title: 'Product Design Showcase',
-    category: '3D',
-    description: 'High-end 3D product visualization for consumer electronics and luxury goods.',
-    coverImage: ThreeD[0],
-    year: '2024',
-    tags: ['Product Design', '3D Modeling', 'Rendering', 'Commercial'],
-    images: ThreeD.map((src, idx) => ({
-      id: `3d-product-${idx + 1}`,
-      src,
-      title: `Product Visualization ${idx + 1}`
-    }))
-  },
-  {
-    id: '3d-general',
-    title: 'General 3D Portfolio',
-    category: '3D',
-    description: 'Various 3D projects.',
-    coverImage: ThreeD[0],
-    year: '2024',
-    tags: ['3D', 'Portfolio'],
-    images: ThreeD.map((src, idx) => ({
-      id: `3d-general-${idx + 1}`,
-      src,
-      title: `3D ${idx + 1}`
-    }))
-  },
-
-  // VIDEO PROJECTS
-  {
-    id: 'music-video',
-    title: 'Music Video Production',
-    category: 'Video',
-    description: 'Creative music video with dynamic cinematography and post-production effects.',
-    coverImage: ThreeD[0],
-    year: '2024',
-    tags: ['Music Video', 'Cinematography', 'Creative', 'Post-Production'],
-    images: ThreeD.map((src, idx) => ({
-      id: `music-video-${idx + 1}`,
-      src,
-      title: `Music Video Frame ${idx + 1}`,
-      isVideo: true
-    }))
-  },
-  {
-    id: 'corporate-documentary',
-    title: 'Corporate Documentary',
-    category: 'Video',
-    description: 'Professional documentary showcasing company culture and business operations.',
-    coverImage: ThreeD[0],
-    year: '2024',
-    tags: ['Documentary', 'Corporate', 'Storytelling', 'Interview'],
-    images: ThreeD.map((src, idx) => ({
-      id: `corporate-doc-${idx + 1}`,
-      src,
-      title: `Corporate Documentary Frame ${idx + 1}`,
-      isVideo: true
+      title: `3D Model ${idx + 1}`
     }))
   }
 ];
