@@ -10,7 +10,7 @@ export interface ProjectImage {
 export interface PortfolioProject {
   id: string;
   title: string;
-  category: 'photography' | 'video' | '3d' | 'branding';
+  category: 'Photo' | 'Video' | '3D' | 'Branding';
   description: string;
   coverImage: string;
   images: ProjectImage[];
@@ -24,7 +24,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'luxury-wedding-hk',
     title: 'Luxury Wedding Collection',
-    category: 'photography',
+    category: 'Photo',
     description: 'Elegant wedding photography capturing intimate moments in Hong Kong\'s most prestigious venues.',
     coverImage: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
     client: 'Private Client',
@@ -60,7 +60,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'fashion-editorial',
     title: 'Fashion Editorial Series',
-    category: 'photography',
+    category: 'Photo',
     description: 'High-fashion editorial photography with creative styling and dramatic lighting.',
     coverImage: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=800',
     client: 'Fashion Magazine',
@@ -90,7 +90,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'corporate-branding',
     title: 'Corporate Branding Project',
-    category: 'photography',
+    category: 'Photo',
     description: 'Professional corporate photography for business branding and marketing materials.',
     coverImage: 'https://images.pexels.com/photos/3184464/pexels-photo-3184464.jpeg?auto=compress&cs=tinysrgb&w=800',
     client: 'Tech Startup',
@@ -122,7 +122,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'music-video-production',
     title: 'Music Video Production',
-    category: 'video',
+    category: 'Video',
     description: 'Creative music video with dynamic cinematography and post-production effects.',
     coverImage: 'https://images.pexels.com/photos/3184461/pexels-photo-3184461.jpeg?auto=compress&cs=tinysrgb&w=800',
     client: 'Independent Artist',
@@ -154,7 +154,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'corporate-documentary',
     title: 'Corporate Documentary',
-    category: 'video',
+    category: 'Video',
     description: 'Professional documentary showcasing company culture and business operations.',
     coverImage: 'https://images.pexels.com/photos/3184458/pexels-photo-3184458.jpeg?auto=compress&cs=tinysrgb&w=800',
     client: 'Fortune 500 Company',
@@ -188,7 +188,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'architectural-visualization',
     title: 'Luxury Resort Visualization',
-    category: '3d',
+    category: '3D',
     description: 'Photorealistic 3D architectural visualization for a luxury resort development.',
     coverImage: 'https://images.pexels.com/photos/3184455/pexels-photo-3184455.jpeg?auto=compress&cs=tinysrgb&w=800',
     client: 'Architecture Firm',
@@ -224,7 +224,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'product-visualization',
     title: 'Product Design Showcase',
-    category: '3d',
+    category: '3D',
     description: 'High-end 3D product visualization for consumer electronics and luxury goods.',
     coverImage: 'https://images.pexels.com/photos/3184451/pexels-photo-3184451.jpeg?auto=compress&cs=tinysrgb&w=800',
     client: 'Consumer Electronics Brand',
@@ -256,7 +256,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'beauty-branding-series',
     title: 'Beauty branding Portfolio',
-    category: 'branding',
+    category: 'Branding',
     description: 'Professional beauty and fashion branding with natural skin enhancement techniques.',
     coverImage: 'https://images.pexels.com/photos/3184448/pexels-photo-3184448.jpeg?auto=compress&cs=tinysrgb&w=800',
     client: 'Beauty Brand',
@@ -286,7 +286,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'commercial-compositing',
     title: 'Commercial Compositing',
-    category: 'branding',
+    category: 'Branding',
     description: 'Complex photo compositing and manipulation for advertising and commercial use.',
     coverImage: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800',
     client: 'Advertising Agency',
@@ -316,7 +316,7 @@ export const portfolioProjects: PortfolioProject[] = [
 ];
 
 export const categoryLabels = {
-  photography: "Photography",
+  photo: "Photo",
   video: "Video Production", 
   "3d": "3D",
   branding: "Branding"
