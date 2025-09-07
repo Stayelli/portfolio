@@ -228,7 +228,7 @@ export const portfolioProjects: PortfolioProject[] = [
     id: 'mod-3d',
     title: '3D Sanctuary Hills',
     category: '3D',
-    description: 'A showcase of 3D models, texturing, staging, and rendering in 3DS Max',
+    description: 'A showcase of 3D models, texturing, staging, and rendering in 3DS Max based on the Sanctuary Hills map from Fallout 4.',
     coverImage: ThreeD[0],
     year: '2024',
     tags: ['3D', 'Modelling', 'Showcase'],
