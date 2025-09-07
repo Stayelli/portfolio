@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, Camera, Video, Palette, Music, Box, Image, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Mail, Phone, MapPin, Camera, Video, Palette, Music, Box, Palette, Image, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { AnimatedSocialIcons } from './components/AnimatedSocialIcons';
 import { Enhanced3DNavigation } from './components/Enhanced3DNavigation';
 import { ScrollAnimation, ParallaxBackground, Floating3DElements } from './components/ScrollAnimations';
@@ -13,7 +13,7 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
   const [scrollY, setScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState('home');
-  const [activeFilter, setActiveFilter] = useState<'all' | 'photography' | 'video' | '3d' | 'retouching'>('all');
+  const [activeFilter, setActiveFilter] = useState<'all' | 'photography' | 'video' | '3d' | 'branding'>('all');
   const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
   const [openFolders, setOpenFolders] = useState<Set<string>>(new Set());
 
@@ -349,10 +349,10 @@ function App() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: Camera, title: "Photography", description: "Professional photography services with expertise in portrait, commercial, and creative conceptual work using both digital and film techniques.", color: "from-blue-500 to-cyan-500", category: "photography" },
-              { icon: Video, title: "Video Production", description: "Director of Photography role with comprehensive video production, editing, color grading, and motion graphics expertise.", color: "from-purple-500 to-pink-500", category: "video" },
-              { icon: Box, title: "3D", description: "3D modeling, animation, and rendering for commercial projects, architectural visualization, and creative installations.", color: "from-green-500 to-teal-500", category: "3d" },
-              { icon: Image, title: "Photo Editing & Retouching", description: "Professional photo editing and retouching services for commercial, fashion, and artistic photography projects.", color: "from-orange-500 to-red-500", category: "retouching" }
+              { icon: Camera, title: "Photo", description: "Professional photography services with expertise in portrait, commercial, and creative conceptual work. Also includes photo editing and retouching", color: "from-blue-500 to-cyan-500", category: "photography" },
+              { icon: Video, title: "Video", description: "Director of Photography role with comprehensive video production, editing, color grading, and motion graphics expertise.", color: "from-purple-500 to-pink-500", category: "video" },
+              { icon: Box, title: "3D", description: "3D modeling, animation, and rendering for commercial projects, architectural visualization, and creative expressions.", color: "from-green-500 to-teal-500", category: "3d" },
+              { icon: Palette, title: "Branding", description: "Professional branding services tailored to your needs, delivering modern solutions aligned with market trends.", color: "from-orange-500 to-red-500", category: "branding" }
             ].map((skill, index) => (
               <ScrollAnimation key={skill.title} animation="slideUp" delay={0.3 + index * 0.1}>
                 <div 
@@ -435,7 +435,7 @@ function App() {
               {Object.entries(categoryLabels).map(([key, label]) => (
                 <button
                   key={key}
-                  onClick={() => setActiveFilter(key as 'photography' | 'video' | '3d' | 'retouching')}
+                  onClick={() => setActiveFilter(key as 'photography' | 'video' | '3d' | 'branding')}
                   className={`px-4 md:px-8 py-2 md:py-4 rounded-xl md:rounded-2xl font-semibold text-sm md:text-lg transition-all duration-300 transform hover:scale-105 ${
                     activeFilter === key
                       ? 'bg-blue-500 text-white shadow-xl scale-105'

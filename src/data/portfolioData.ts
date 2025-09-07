@@ -10,7 +10,7 @@ export interface ProjectImage {
 export interface PortfolioProject {
   id: string;
   title: string;
-  category: 'photography' | 'video' | '3d' | 'retouching';
+  category: 'photography' | 'video' | '3d' | 'branding';
   description: string;
   coverImage: string;
   images: ProjectImage[];
@@ -252,22 +252,22 @@ export const portfolioProjects: PortfolioProject[] = [
     ]
   },
 
-  // Photo Editing & Retouching Projects
+  // Branding projects
   {
-    id: 'beauty-retouching-series',
-    title: 'Beauty Retouching Portfolio',
-    category: 'retouching',
-    description: 'Professional beauty and fashion retouching with natural skin enhancement techniques.',
+    id: 'beauty-branding-series',
+    title: 'Beauty branding Portfolio',
+    category: 'branding',
+    description: 'Professional beauty and fashion branding with natural skin enhancement techniques.',
     coverImage: 'https://images.pexels.com/photos/3184448/pexels-photo-3184448.jpeg?auto=compress&cs=tinysrgb&w=800',
     client: 'Beauty Brand',
     year: '2024',
-    tags: ['Beauty', 'Retouching', 'Fashion', 'Skin Enhancement'],
+    tags: ['Beauty', 'branding', 'Fashion', 'Skin Enhancement'],
     images: [
       {
         id: 'beauty-1',
         src: 'https://images.pexels.com/photos/3184448/pexels-photo-3184448.jpeg?auto=compress&cs=tinysrgb&w=1200',
         title: 'Before & After',
-        description: 'Natural beauty enhancement and skin retouching'
+        description: 'Natural beauty enhancement and skin branding'
       },
       {
         id: 'beauty-2',
@@ -286,7 +286,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'commercial-compositing',
     title: 'Commercial Compositing',
-    category: 'retouching',
+    category: 'branding',
     description: 'Complex photo compositing and manipulation for advertising and commercial use.',
     coverImage: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800',
     client: 'Advertising Agency',
@@ -318,6 +318,6 @@ export const portfolioProjects: PortfolioProject[] = [
 export const categoryLabels = {
   photography: "Photography",
   video: "Video Production", 
-  "3d": "3D Visualization",
-  retouching: "Photo Editing & Retouching"
+  "3d": "3D",
+  branding: "Branding"
 };
