@@ -1,7 +1,5 @@
 import {
   Branding,
-  BrandingBrandA,
-  BrandingBrandB,
   PhotoCapeaguilar,
   PhotoCasetify,
   PhotoFlowerknows,
@@ -11,11 +9,7 @@ import {
   PhotoRedconcept,
   PhotoStreethk,
   PhotoTattoo,
-  ThreeD,
-  ThreeDProduct,
-  ThreeDResort,
-  VideoMusic,
-  VideoCorporate
+  ThreeD
 } from '../images';
 
 // Portfolio project data with multiple images per project
@@ -174,10 +168,10 @@ export const portfolioProjects: PortfolioProject[] = [
     title: 'Brand A Identity',
     category: 'Branding',
     description: 'Branding and identity design for Brand A.',
-    coverImage: BrandingBrandA[0],
+    coverImage: Branding[0],
     year: '2024',
     tags: ['Branding', 'Identity', 'Design'],
-    images: BrandingBrandA.map((src, idx) => ({
+    images: Branding.map((src, idx) => ({
       id: `brand-a-${idx + 1}`,
       src,
       title: `Brand A ${idx + 1}`
@@ -188,10 +182,10 @@ export const portfolioProjects: PortfolioProject[] = [
     title: 'Brand B Campaign',
     category: 'Branding',
     description: 'Branding campaign for Brand B.',
-    coverImage: BrandingBrandB[0],
+    coverImage: Branding[0],
     year: '2024',
     tags: ['Branding', 'Campaign'],
-    images: BrandingBrandB.map((src, idx) => ({
+    images: Branding.map((src, idx) => ({
       id: `brand-b-${idx + 1}`,
       src,
       title: `Brand B ${idx + 1}`
@@ -218,10 +212,10 @@ export const portfolioProjects: PortfolioProject[] = [
     title: 'Luxury Resort Visualization',
     category: '3D',
     description: 'Photorealistic 3D architectural visualization for a luxury resort development.',
-    coverImage: ThreeDResort[0],
+    coverImage: ThreeD[0],
     year: '2024',
     tags: ['Architecture', '3D Rendering', 'Luxury', 'Visualization'],
-    images: ThreeDResort.map((src, idx) => ({
+    images: ThreeD.map((src, idx) => ({
       id: `3d-resort-${idx + 1}`,
       src,
       title: `Resort Visualization ${idx + 1}`
@@ -232,10 +226,10 @@ export const portfolioProjects: PortfolioProject[] = [
     title: 'Product Design Showcase',
     category: '3D',
     description: 'High-end 3D product visualization for consumer electronics and luxury goods.',
-    coverImage: ThreeDProduct[0],
+    coverImage: ThreeD[0],
     year: '2024',
     tags: ['Product Design', '3D Modeling', 'Rendering', 'Commercial'],
-    images: ThreeDProduct.map((src, idx) => ({
+    images: ThreeD.map((src, idx) => ({
       id: `3d-product-${idx + 1}`,
       src,
       title: `Product Visualization ${idx + 1}`
@@ -262,10 +256,10 @@ export const portfolioProjects: PortfolioProject[] = [
     title: 'Music Video Production',
     category: 'Video',
     description: 'Creative music video with dynamic cinematography and post-production effects.',
-    coverImage: VideoMusic[0],
+    coverImage: ThreeD[0],
     year: '2024',
     tags: ['Music Video', 'Cinematography', 'Creative', 'Post-Production'],
-    images: VideoMusic.map((src, idx) => ({
+    images: ThreeD.map((src, idx) => ({
       id: `music-video-${idx + 1}`,
       src,
       title: `Music Video Frame ${idx + 1}`,
@@ -277,10 +271,10 @@ export const portfolioProjects: PortfolioProject[] = [
     title: 'Corporate Documentary',
     category: 'Video',
     description: 'Professional documentary showcasing company culture and business operations.',
-    coverImage: VideoCorporate[0],
+    coverImage: ThreeD[0],
     year: '2024',
     tags: ['Documentary', 'Corporate', 'Storytelling', 'Interview'],
-    images: VideoCorporate.map((src, idx) => ({
+    images: ThreeD.map((src, idx) => ({
       id: `corporate-doc-${idx + 1}`,
       src,
       title: `Corporate Documentary Frame ${idx + 1}`,
