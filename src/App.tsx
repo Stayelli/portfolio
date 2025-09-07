@@ -6,7 +6,7 @@ import { ScrollAnimation, ParallaxBackground, Floating3DElements } from './compo
 import { ProjectFolder } from './components/ProjectFolder';
 import { ProjectViewer } from './components/ProjectViewer';
 import { portfolioProjects, categoryLabels, PortfolioProject } from './data/portfolioData';
-import stayelliPortrait from '../images/stayelli_portrait.avif';
+import stayelliPortrait from '../public/images/stayelli_portrait.avif';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
