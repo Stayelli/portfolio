@@ -316,8 +316,8 @@ export const portfolioProjects: PortfolioProject[] = [
 ];
 
 export const categoryLabels = {
-  photo: "Photo",
-  video: "Video Production", 
-  "3d": "3D",
-  branding: "Branding"
+  Photo: "Photo",
+  Video: "Video Production", 
+  "3D": "3D",
+  Branding: "Branding"
 };
