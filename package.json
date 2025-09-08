@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
     "framer-motion": "^12.23.12",
     "intersection-observer": "^0.12.2",
     "lucide-react": "^0.344.0",

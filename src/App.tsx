@@ -7,6 +7,9 @@ import { ProjectFolder } from './components/ProjectFolder';
 import { ProjectViewer } from './components/ProjectViewer';
 import { portfolioProjects, categoryLabels, PortfolioProject } from './data/portfolioData';
 import stayelliPortrait from '../public/images/stayelli_portrait.avif';
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react"
+
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -534,6 +537,8 @@ function App() {
           </p>
         </div>
       </footer>
+      <Analytics />
+      <SpeedInsights />
     </div>
   );
 }
