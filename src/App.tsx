@@ -459,19 +459,17 @@ function App() {
           </ScrollAnimation>
 
           {/* Portfolio Grid */}
-          <ScrollAnimation animation="fadeIn" delay={0.5}>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
-              {filteredProjects.map((project) => (
-                <ProjectFolder
-                  key={project.id}
-                  project={project}
-                  isOpen={openFolders.has(project.id)}
-                  onClick={() => openProject(project)}
-                  isDarkMode={isDarkMode}
-                />
-              ))}
-            </div>
-          </ScrollAnimation>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
+            {filteredProjects.map((project) => (
+              <ProjectFolder
+                key={project.id}
+                project={project}
+                isOpen={openFolders.has(project.id)}
+                onClick={() => openProject(project)}
+                isDarkMode={isDarkMode}
+              />
+            ))}
+          </div>
         </div>
         
         {/* Project Viewer Modal */}

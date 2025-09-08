@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from "react";
 import { X, ChevronLeft, ChevronRight, Calendar, User, Tag, Play, Image as ImageIcon } from 'lucide-react';
 import { PortfolioProject, ProjectImage } from '../data/portfolioData';
 
@@ -14,6 +14,30 @@ export const ProjectViewer: React.FC<ProjectViewerProps> = ({
   isDarkMode
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Get next and previous image URLs
+  const nextImageUrl =
+    project && project.images.length > 1
+      ? project.images[(currentImageIndex + 1) % project.images.length].src
+      : null;
+  const prevImageUrl =
+    project && project.images.length > 1
+      ? project.images[
+          (currentImageIndex - 1 + project.images.length) % project.images.length
+        ].src
+      : null;
+
+  // Preload next and previous images for smoother navigation
+  useEffect(() => {
+    if (nextImageUrl) {
+      const img = new window.Image();
+      img.src = nextImageUrl;
+    }
+    if (prevImageUrl) {
+      const img = new window.Image();
+      img.src = prevImageUrl;
+    }
+  }, [nextImageUrl, prevImageUrl]);
 
   // Reset to first image when project changes
   useEffect(() => {
@@ -111,7 +135,8 @@ export const ProjectViewer: React.FC<ProjectViewerProps> = ({
               <img
                 src={currentImage.src}
                 alt={currentImage.title}
-                className="w-full h-auto max-h-[50vh] md:max-h-[60vh] object-contain transition-all duration-700 hover:scale-105"
+                className="w-full h-auto max-h-[50vh] md:max-h-[60vh] object-contain" // Remove transition/hover classes
+                loading="lazy"
               />
             )}
             
@@ -213,6 +238,7 @@ export const ProjectViewer: React.FC<ProjectViewerProps> = ({
                       src={image.src}
                       alt={image.title}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                     {image.isVideo && (
                       <div className="absolute inset-0 bg-black/30 flex items-center justify-center">

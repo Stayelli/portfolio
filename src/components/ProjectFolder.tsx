@@ -18,7 +18,7 @@ export const ProjectFolder: React.FC<ProjectFolderProps> = ({
   return (
     <div
       onClick={onClick}
-      className="group cursor-pointer relative overflow-hidden rounded-3xl transition-all duration-500 hover:scale-105 transform-gpu"
+      className="group cursor-pointer relative overflow-hidden rounded-3xl"
       style={{
         background: isDarkMode 
           ? 'rgba(255, 255, 255, 0.1)' 
@@ -35,15 +35,15 @@ export const ProjectFolder: React.FC<ProjectFolderProps> = ({
           <img
             src={project.coverImage}
             alt={project.title}
-            className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700 group-hover:brightness-110"
+            className="w-full h-full object-cover"
           />
           
           {/* Folder Icon Overlay */}
-          <div className="absolute top-2 md:top-3 right-2 md:right-3 p-1.5 md:p-2 rounded-lg backdrop-blur-sm bg-black/30 transition-all duration-300">
+          <div className="absolute top-2 md:top-3 right-2 md:right-3 p-1.5 md:p-2 rounded-lg backdrop-blur-sm bg-black/30">
             {isOpen ? (
-              <FolderOpen size={16} className="md:w-5 md:h-5 text-white animate-pulse" />
+              <FolderOpen size={16} className="md:w-5 md:h-5 text-white" />
             ) : (
-              <Folder size={16} className="md:w-5 md:h-5 text-white group-hover:scale-110 transition-transform duration-300" />
+              <Folder size={16} className="md:w-5 md:h-5 text-white" />
             )}
           </div>
           
@@ -60,7 +60,7 @@ export const ProjectFolder: React.FC<ProjectFolderProps> = ({
         
         {/* Project Info */}
         <div className="px-1 md:px-2">
-          <h3 className="text-sm md:text-lg font-bold text-gray-900 dark:text-white mb-1 md:mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+          <h3 className="text-sm md:text-lg font-bold text-gray-900 dark:text-white mb-1 md:mb-2 line-clamp-2">
             {project.title}
           </h3>
           
@@ -88,20 +88,7 @@ export const ProjectFolder: React.FC<ProjectFolderProps> = ({
         </div>
       </div>
       
-      {/* Hover Overlay */}
-      <div className="absolute inset-2 md:inset-3 bg-black/0 group-hover:bg-black/20 transition-all duration-500 flex items-center justify-center rounded-xl md:rounded-2xl">
-        <div className="text-white text-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-          <div className="text-xs md:text-sm font-medium animate-in slide-in-from-bottom duration-300">
-            Click to explore project
-          </div>
-        </div>
-      </div>
-      
-      {/* Animated border on hover */}
-      <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-blue-400/30 transition-all duration-500"></div>
-      
-      {/* Subtle glow effect */}
-      <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-2xl shadow-blue-500/20"></div>
+      {/* Remove hover overlays and animated borders/glows */}
     </div>
   );
 };
