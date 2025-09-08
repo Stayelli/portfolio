@@ -13,14 +13,15 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
   const [scrollY, setScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState('home');
-  const [activeFilter, setActiveFilter] = useState<'all' | 'Photo' | 'Video' | '3D' | 'Branding'>('all');
+  // Remove 'all' from filter type and default to 'Photo'
+  const [activeFilter, setActiveFilter] = useState<'Photo' | 'Video' | '3D' | 'Branding'>('Photo');
   const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
   const [openFolders, setOpenFolders] = useState<Set<string>>(new Set());
 
-  // Filter portfolio items based on active filter
-  const filteredProjects = activeFilter === 'all' 
-    ? portfolioProjects 
-    : portfolioProjects.filter(project => project.category === activeFilter);
+  // Optimize filtering with useMemo
+  const filteredProjects = React.useMemo(() => {
+    return portfolioProjects.filter(project => project.category === activeFilter);
+  }, [activeFilter]);
 
   // Project viewer functions
   const openProject = (project: PortfolioProject) => {
@@ -412,30 +413,11 @@ function App() {
           {/* Category Filter Buttons */}
           <ScrollAnimation animation="fadeIn" delay={0.3}>
             <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12 px-2">
-              <button
-                onClick={() => setActiveFilter('all')}
-                className={`px-4 md:px-8 py-2 md:py-4 rounded-xl md:rounded-2xl font-semibold text-sm md:text-lg transition-all duration-300 transform hover:scale-105 ${
-                  activeFilter === 'all'
-                    ? 'bg-blue-500 text-white shadow-xl scale-105'
-                    : isDarkMode
-                      ? 'bg-white/10 text-gray-300 hover:bg-white/20 border border-white/20'
-                      : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-lg'
-                }`}
-                style={{
-                  backdropFilter: 'blur(20px)',
-                  boxShadow: activeFilter === 'all' 
-                    ? '0 10px 40px rgba(59, 130, 246, 0.3)' 
-                    : isDarkMode 
-                      ? '0 8px 25px rgba(0, 0, 0, 0.2)' 
-                      : '0 8px 25px rgba(0, 0, 0, 0.1)'
-                }}
-              >
-                All Works
-              </button>
+              {/* Remove "All Works" button */}
               {Object.entries(categoryLabels).map(([key, label]) => (
                 <button
                   key={key}
-                  onClick={() => setActiveFilter(key as 'Photography' | 'Video' | '3D' | 'Branding')}
+                  onClick={() => setActiveFilter(key as 'Photo' | 'Video' | '3D' | 'Branding')}
                   className={`px-4 md:px-8 py-2 md:py-4 rounded-xl md:rounded-2xl font-semibold text-sm md:text-lg transition-all duration-300 transform hover:scale-105 ${
                     activeFilter === key
                       ? 'bg-blue-500 text-white shadow-xl scale-105'
