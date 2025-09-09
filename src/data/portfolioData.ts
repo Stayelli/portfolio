@@ -113,7 +113,7 @@ export const portfolioProjects: PortfolioProject[] = [
     title: 'Motorcycles & Adventures',
     category: 'Photo',
     description: 'Motorcycle journeys and adventures.',
-    coverImage: PhotoMoto[0],
+    coverImage: PhotoMoto[4],
     year: '2024',
     tags: ['Moto', 'Adventure', 'Travel'],
     images: PhotoMoto.map((src, idx) => ({
@@ -127,7 +127,7 @@ export const portfolioProjects: PortfolioProject[] = [
     title: 'Red Concept',
     category: 'Photo',
     description: 'Red-themed creative concept studio shoot',
-    coverImage: PhotoRedconcept[0],
+    coverImage: PhotoRedconcept[5],
     year: '2024',
     tags: ['Creative', 'Red'],
     images: PhotoRedconcept.map((src, idx) => ({
@@ -199,7 +199,7 @@ export const portfolioProjects: PortfolioProject[] = [
     title: 'Pausepaws Branding',
     category: 'Branding',
     description: 'Branding work for Pausepaws, a pet grooming service concept.',
-    coverImage: BrandingPausepaws[0],
+    coverImage: BrandingPausepaws[7],
     year: '2025',
     tags: ['Branding', 'Work'],
     images: BrandingPausepaws.map((src, idx) => ({
@@ -229,7 +229,7 @@ export const portfolioProjects: PortfolioProject[] = [
     title: '3D Sanctuary Hills',
     category: '3D',
     description: 'A showcase of 3D models, texturing, staging, and rendering in 3DS Max based on the Sanctuary Hills map from Fallout 4.',
-    coverImage: ThreeD[0],
+    coverImage: ThreeD[10],
     year: '2024',
     tags: ['3D', 'Modelling', 'Showcase'],
     images: ThreeD.map((src, idx) => ({
