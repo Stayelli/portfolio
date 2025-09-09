@@ -141,7 +141,7 @@ export const portfolioProjects: PortfolioProject[] = [
     title: 'Streets of Hong Kong',
     category: 'Photo',
     description: 'Street photography in Hong Kong.',
-    coverImage: PhotoStreethk[0],
+    coverImage: PhotoStreethk[11],
     year: '2022-2024',
     tags: ['Street', 'Urban', 'HK'],
     images: PhotoStreethk.map((src, idx) => ({
