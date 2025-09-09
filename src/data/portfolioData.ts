@@ -57,7 +57,7 @@ export const portfolioProjects: PortfolioProject[] = [
     title: 'Cape D Aguilar',
     category: 'Photo',
     description: 'Scenic shots from Cape D Aguilar in Hong Kong using the iPhone 14 Pro',
-    coverImage: PhotoCapeaguilar[0],
+    coverImage: PhotoCapeaguilar[3],
     year: '2024',
     tags: ['Landscape', 'Nature'],
     images: PhotoCapeaguilar.map((src, idx) => ({
@@ -99,7 +99,7 @@ export const portfolioProjects: PortfolioProject[] = [
     title: 'Portraits of my Partner',
     category: 'Photo',
     description: 'I love taking portraits of my partner and capturing special moments together.',
-    coverImage: PhotoKristel[0],
+    coverImage: PhotoKristel[15],
     year: 'Mixed',
     tags: ['Partner', 'Portrait', 'Candid', 'Girl'],
     images: PhotoKristel.map((src, idx) => ({
