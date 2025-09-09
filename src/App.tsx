@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, Camera, Video, Palette, Music, Box, Palette, Image, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Mail, Phone, MapPin, Camera, Video, Palette, Music, Box, Image, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { AnimatedSocialIcons } from './components/AnimatedSocialIcons';
 import { Enhanced3DNavigation } from './components/Enhanced3DNavigation';
 import { ScrollAnimation, ParallaxBackground, Floating3DElements } from './components/ScrollAnimations';

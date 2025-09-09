@@ -33,7 +33,7 @@ export const ProjectFolder: React.FC<ProjectFolderProps> = ({
         {/* Cover Image */}
         <div className="relative aspect-square mb-3 md:mb-4 rounded-xl md:rounded-2xl overflow-hidden">
           <img
-            src={project.coverImage}
+            src={project.images[0]?.thumbnail || project.coverImage}
             alt={project.title}
             className="w-full h-full object-cover"
           />

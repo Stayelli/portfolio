@@ -8,6 +8,20 @@ interface ProjectViewerProps {
   isDarkMode: boolean;
 }
 
+const YouTubeEmbed: React.FC<{ youtubeId: string; title: string }> = ({ youtubeId, title }) => (
+  <div className="relative w-full h-auto max-h-[50vh] md:max-h-[60vh] bg-black">
+    <iframe
+      src={`https://www.youtube.com/embed/${youtubeId}?autoplay=0&rel=0&modestbranding=1`}
+      title={title}
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+      className="w-full h-[300px] md:h-[400px] lg:h-[500px]"
+    />
+  </div>
+);
+
+
 export const ProjectViewer: React.FC<ProjectViewerProps> = ({
   project,
   onClose,
@@ -116,29 +130,32 @@ export const ProjectViewer: React.FC<ProjectViewerProps> = ({
         )}
         
         <div className="bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-[1.01]">
-          {/* Main Image/Video Display */}
-          <div className="relative">
-            {currentImage.isVideo ? (
-              <div className="w-full h-auto max-h-[50vh] md:max-h-[60vh] bg-gradient-to-br from-gray-900 to-black flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 animate-pulse"></div>
-                <div className="text-white text-center p-4 md:p-8 relative z-10">
-                  <div className="text-4xl md:text-6xl mb-2 md:mb-4 animate-bounce">
-                    <Play className="w-12 h-12 md:w-16 md:h-16 mx-auto" />
+            {/* Main Image/Video Display */}
+            <div className="relative">
+              {currentImage.isVideo && currentImage.youtubeId ? (
+                <YouTubeEmbed youtubeId={currentImage.youtubeId} title={currentImage.title} />
+              ) : currentImage.isVideo ? (
+                // fallback for non-YouTube videos
+                <div className="w-full h-auto max-h-[50vh] md:max-h-[60vh] bg-gradient-to-br from-gray-900 to-black flex items-center justify-center relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 animate-pulse"></div>
+                  <div className="text-white text-center p-4 md:p-8 relative z-10">
+                    <div className="text-4xl md:text-6xl mb-2 md:mb-4 animate-bounce">
+                      <Play className="w-12 h-12 md:w-16 md:h-16 mx-auto" />
+                    </div>
+                    <p className="text-lg md:text-xl font-semibold animate-pulse">Video Content</p>
+                    <p className="text-gray-400 mt-1 md:mt-2 animate-fade-in text-sm md:text-base">
+                      {currentImage.title}
+                    </p>
                   </div>
-                  <p className="text-lg md:text-xl font-semibold animate-pulse">Video Content</p>
-                  <p className="text-gray-400 mt-1 md:mt-2 animate-fade-in text-sm md:text-base">
-                    {currentImage.title}
-                  </p>
                 </div>
-              </div>
-            ) : (
-              <img
-                src={currentImage.src}
-                alt={currentImage.title}
-                className="w-full h-auto max-h-[50vh] md:max-h-[60vh] object-contain" // Remove transition/hover classes
-                loading="lazy"
-              />
-            )}
+              ) : (
+                <img
+                  src={currentImage.thumbnail || currentImage.src}
+                  alt={currentImage.title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              )}
             
             {/* Image Counter */}
             {project.images.length > 1 && (

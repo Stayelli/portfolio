@@ -22,6 +22,8 @@ export interface ProjectImage {
   title: string;
   description?: string;
   isVideo?: boolean;
+  youtubeId?: string;   // ✅ for YouTube video ID
+  thumbnail?: string;   // ✅ preview image for YouTube
 }
 
 export interface PortfolioProject {
@@ -164,6 +166,87 @@ export const portfolioProjects: PortfolioProject[] = [
       title: `Tattoo Branding ${idx + 1}`
     }))
   },
+
+  // VIDEO PROJECTS
+  {
+    id: 'metrohk-cinematic',
+    title: 'Metro - Short Cinematic of Hong Kong (Sony A6400)',
+    category: 'Video',
+    description: 'A fun shoot covering North Point, Causeway Bay, Wanchai, and a Ferry ride to TST.',
+    coverImage: 'https://img.youtube.com/vi/HWcVawM4OMc/maxresdefault.jpg',
+    client: 'Personal',
+    year: '2024',
+    tags: ['Cinematography', 'Creative', 'Post-Production'],
+    images: [
+      {
+        id: 'metrohk-cinematic-1',
+        src: 'https://youtube.com/shorts/HWcVawM4OMc',
+        youtubeId: 'HWcVawM4OMc',
+        thumbnail: 'https://img.youtube.com/vi/HWcVawM4OMc/maxresdefault.jpg',
+        title: 'Metro - Short Cinematic of Hong Kong (Sony A6400)',
+        description: 'A fun shoot covering North Point, Causeway Bay, Wanchai, and a Ferry ride to TST.',
+        isVideo: true
+      },
+     // {
+       // id: 'music-2',
+       // src: 'https://www.youtube.com/watch?v=9bZkp7q19f0',
+       // youtubeId: '9bZkp7q19f0',
+       // thumbnail: 'https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg',
+       // title: 'Creative Sequences',
+      //  description: 'Artistic and conceptual video sequences',
+      //  isVideo: true
+     // },
+      //{
+       // id: 'music-3',
+       // src: 'https://www.youtube.com/watch?v=kJQP7kiw5Fk',
+      //  youtubeId: 'kJQP7kiw5Fk',
+       // thumbnail: 'https://img.youtube.com/vi/kJQP7kiw5Fk/maxresdefault.jpg',
+       // title: 'Behind the Scenes',
+       // description: 'Production process and setup documentation',
+       // isVideo: tru
+     // }
+    ]
+  },
+  {
+    id: 'corporate-documentary',
+    title: 'Corporate Documentary',
+    category: 'video',
+    description: 'Professional documentary showcasing company culture and business operations.',
+    coverImage: 'https://img.youtube.com/vi/QH2-TGUlwu4/maxresdefault.jpg',
+    client: 'Fortune 500 Company',
+    year: '2024',
+    tags: ['Documentary', 'Corporate', 'Storytelling', 'Interview'],
+    images: [
+      {
+        id: 'doc-1',
+        src: 'https://www.youtube.com/watch?v=QH2-TGUlwu4',
+        youtubeId: 'QH2-TGUlwu4',
+        thumbnail: 'https://img.youtube.com/vi/QH2-TGUlwu4/maxresdefault.jpg',
+        title: 'Executive Interviews',
+        description: 'In-depth interviews with company leadership',
+        isVideo: true
+      },
+      {
+        id: 'doc-2',
+        src: 'https://www.youtube.com/watch?v=nfWlot6h_JM',
+        youtubeId: 'nfWlot6h_JM',
+        thumbnail: 'https://img.youtube.com/vi/nfWlot6h_JM/maxresdefault.jpg',
+        title: 'Workplace Culture',
+        description: 'Capturing authentic workplace interactions',
+        isVideo: true
+      },
+      {
+        id: 'doc-3',
+        src: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        youtubeId: 'dQw4w9WgXcQ',
+        thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
+        title: 'Production Process',
+        description: 'Manufacturing and operational processes',
+        isVideo: true
+      }
+    ]
+  },
+
 
   // BRANDING PROJECTS
   {
