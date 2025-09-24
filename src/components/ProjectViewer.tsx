@@ -152,7 +152,7 @@ export const ProjectViewer: React.FC<ProjectViewerProps> = ({
                 <img
                   src={currentImage.thumbnail || currentImage.src}
                   alt={currentImage.title}
-                  className="w-full h-full object-cover"
+                  className="w-full max-h-[60vh] object-contain mx-auto"
                   loading="lazy"
                 />
               )}
