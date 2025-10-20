@@ -1,15 +1,16 @@
+// src/App.tsx
 import React, { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Camera, Video, Palette, Music, Box, Image, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { AnimatedSocialIcons } from './components/AnimatedSocialIcons';
 import { Enhanced3DNavigation } from './components/Enhanced3DNavigation';
-import { ScrollAnimation, ParallaxBackground, Floating3DElements } from './components/ScrollAnimations';
+import { ScrollAnimation, ParallaxBackground, Floating3DElements } from './components/ScrollAnimations'; // Ensure Floating3DElements is imported
 import { ProjectFolder } from './components/ProjectFolder';
 import { ProjectViewer } from './components/ProjectViewer';
 import { portfolioProjects, categoryLabels, PortfolioProject } from './data/portfolioData';
 import stayelliPortrait from '../public/images/stayelli_portrait.avif';
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import { Analytics } from "@vercel/analytics/react"
-
+import useMediaQuery from './hooks/useMediaQuery'; // Import the new hook
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,6 +21,9 @@ function App() {
   const [activeFilter, setActiveFilter] = useState<'Photo' | 'Video' | '3D' | 'Branding'>('Photo');
   const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
   const [openFolders, setOpenFolders] = useState<Set<string>>(new Set());
+
+  // Add this line: Use the hook to check for screens smaller than 'md' (768px)
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   // Optimize filtering with useMemo
   const filteredProjects = React.useMemo(() => {
@@ -61,7 +65,7 @@ function App() {
     const handleScroll = () => {
       const sections = ['home', 'about', 'skills', 'portfolio', 'contact'];
       const scrollPosition = window.scrollY + 200; // Increased offset for better detection
-      
+
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
         if (element) {
@@ -72,16 +76,16 @@ function App() {
           }
         }
       }
-      
+
       // Special handling for contact section (last section)
       const contactElement = document.getElementById('contact');
       if (contactElement) {
         const { offsetTop } = contactElement;
         const windowHeight = window.innerHeight;
         const documentHeight = document.documentElement.scrollHeight;
-        
+
         // If we're near the bottom of the page or in the contact section
-        if (scrollPosition >= offsetTop - 100 || 
+        if (scrollPosition >= offsetTop - 100 ||
             window.scrollY + windowHeight >= documentHeight - 100) {
           setActiveSection('contact');
         }
@@ -105,7 +109,7 @@ function App() {
     if (element) {
       const elementPosition = element.offsetTop;
       const offsetPosition = elementPosition - 120; // Adjust for navbar height + extra padding
-      
+
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
@@ -119,21 +123,21 @@ function App() {
       {/* Enhanced Animated Background */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-black dark:to-gray-800 transition-all duration-1000"></div>
-        
+
         {/* Dynamic gradient overlay */}
-        <div 
+        <div
           className="absolute inset-0 opacity-30"
           style={{
-            background: `radial-gradient(circle at ${50 + scrollY * 0.01}% ${50 + Math.sin(scrollY * 0.01) * 10}%, 
-              rgba(59, 130, 246, 0.1) 0%, 
-              rgba(147, 51, 234, 0.05) 50%, 
+            background: `radial-gradient(circle at ${50 + scrollY * 0.01}% ${50 + Math.sin(scrollY * 0.01) * 10}%,
+              rgba(59, 130, 246, 0.1) 0%,
+              rgba(147, 51, 234, 0.05) 50%,
               transparent 100%)`
           }}
         ></div>
 
         {/* Enhanced floating glass orbs with 3D transforms */}
         <ParallaxBackground speed={0.2}>
-          <div 
+          <div
             className="absolute w-40 h-40 bg-gradient-to-br from-blue-200/20 to-purple-200/20 dark:from-white/10 dark:to-white/5 backdrop-blur-2xl rounded-full"
             style={{
               top: '10%',
@@ -143,7 +147,7 @@ function App() {
               boxShadow: '0 20px 60px rgba(59, 130, 246, 0.2)'
             }}
           ></div>
-          <div 
+          <div
             className="absolute w-32 h-32 bg-gradient-to-br from-purple-200/20 to-pink-200/20 dark:from-white/8 dark:to-white/4 backdrop-blur-2xl rounded-full"
             style={{
               top: '30%',
@@ -154,7 +158,7 @@ function App() {
               boxShadow: '0 20px 60px rgba(147, 51, 234, 0.2)'
             }}
           ></div>
-          <div 
+          <div
             className="absolute w-24 h-24 bg-gradient-to-br from-indigo-200/20 to-blue-200/20 dark:from-white/6 dark:to-white/3 backdrop-blur-2xl rounded-full"
             style={{
               bottom: '20%',
@@ -168,8 +172,9 @@ function App() {
         </ParallaxBackground>
       </div>
 
-      {/* Floating 3D Elements */}
-      <Floating3DElements isDarkMode={isDarkMode} />
+      {/* Conditionally render Floating 3D Elements */}
+      {/* Only render if NOT mobile */}
+      {!isMobile && <Floating3DElements isDarkMode={isDarkMode} />}
 
       {/* Enhanced Navigation */}
       <Enhanced3DNavigation
@@ -189,22 +194,22 @@ function App() {
             <div className="text-left">
               <ScrollAnimation animation="slideUp" delay={0.2}>
                 <h1 className="text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white mb-6 leading-none tracking-tight">
-                  <span 
+                  <span
                     className="inline-block transition-all duration-500 hover:scale-110 hover:-rotate-2 relative z-10"
                     style={{
-                      textShadow: isDarkMode 
-                        ? '0 10px 30px rgba(255, 255, 255, 0.1)' 
+                      textShadow: isDarkMode
+                        ? '0 10px 30px rgba(255, 255, 255, 0.1)'
                         : '0 10px 30px rgba(59, 130, 246, 0.2)',
                       color: isDarkMode ? '#ffffff' : '#1f2937'
                     }}
                   >
                     Stay
                   </span>
-                  <span 
+                  <span
                     className="inline-block transition-all duration-500 hover:scale-110 hover:rotate-2 text-gray-600 dark:text-gray-400 relative z-10"
                     style={{
-                      textShadow: isDarkMode 
-                        ? '0 10px 30px rgba(156, 163, 175, 0.3)' 
+                      textShadow: isDarkMode
+                        ? '0 10px 30px rgba(156, 163, 175, 0.3)'
                         : '0 10px 30px rgba(75, 85, 99, 0.3)'
                     }}
                   >
@@ -212,7 +217,7 @@ function App() {
                   </span>
                 </h1>
               </ScrollAnimation>
-              
+
               <ScrollAnimation animation="slideUp" delay={0.4}>
                 <div className="mb-8">
                   <p className="text-2xl md:text-3xl lg:text-4xl text-gray-700 dark:text-gray-300 font-light mb-2 leading-tight">
@@ -240,19 +245,19 @@ function App() {
                 <AnimatedSocialIcons isDarkMode={isDarkMode} />
               </ScrollAnimation>
             </div>
-            
+
             {/* Right side - Enhanced image with 3D effects */}
             <ScrollAnimation animation="scale" delay={0.5}>
               <div className="flex justify-end">
                 <div className="relative group">
-                  <div 
+                  <div
                     className="relative overflow-hidden rounded-3xl backdrop-blur-2xl border shadow-2xl p-2 transition-all duration-700 group-hover:scale-105 group-hover:rotate-2"
                     style={{
-                      background: isDarkMode 
-                        ? 'rgba(255, 255, 255, 0.1)' 
+                      background: isDarkMode
+                        ? 'rgba(255, 255, 255, 0.1)'
                         : 'rgba(255, 255, 255, 0.8)',
-                      border: isDarkMode 
-                        ? '1px solid rgba(255, 255, 255, 0.2)' 
+                      border: isDarkMode
+                        ? '1px solid rgba(255, 255, 255, 0.2)'
                         : '1px solid rgba(59, 130, 246, 0.3)',
                       boxShadow: isDarkMode
                         ? '0 25px 80px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
@@ -263,32 +268,33 @@ function App() {
                       src={stayelliPortrait}
                       alt="Stayelli - Multimedia Artist"
                       className="w-80 h-96 lg:w-96 lg:h-[500px] rounded-2xl object-cover transition-all duration-700 group-hover:scale-110"
+                      fetchpriority="high" // Add fetchpriority="high"
                     />
                     {/* Overlay gradient on hover */}
                     <div className="absolute inset-2 rounded-2xl bg-gradient-to-t from-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   </div>
-                  
+
                   {/* Enhanced floating elements */}
-                  <div 
+                  <div
                     className="absolute -bottom-8 -left-8 w-24 h-24 backdrop-blur-xl rounded-full border transition-all duration-500 group-hover:scale-125 group-hover:-rotate-12"
                     style={{
-                      background: isDarkMode 
-                        ? 'rgba(255, 255, 255, 0.05)' 
+                      background: isDarkMode
+                        ? 'rgba(255, 255, 255, 0.05)'
                         : 'rgba(59, 130, 246, 0.1)',
-                      border: isDarkMode 
-                        ? '1px solid rgba(255, 255, 255, 0.1)' 
+                      border: isDarkMode
+                        ? '1px solid rgba(255, 255, 255, 0.1)'
                         : '1px solid rgba(59, 130, 246, 0.2)',
                       boxShadow: '0 10px 40px rgba(59, 130, 246, 0.2)'
                     }}
                   ></div>
-                  <div 
+                  <div
                     className="absolute -top-8 -right-8 w-16 h-16 backdrop-blur-xl rounded-full border transition-all duration-500 group-hover:scale-125 group-hover:rotate-12"
                     style={{
-                      background: isDarkMode 
-                        ? 'rgba(255, 255, 255, 0.05)' 
+                      background: isDarkMode
+                        ? 'rgba(255, 255, 255, 0.05)'
                         : 'rgba(147, 51, 234, 0.1)',
-                      border: isDarkMode 
-                        ? '1px solid rgba(255, 255, 255, 0.1)' 
+                      border: isDarkMode
+                        ? '1px solid rgba(255, 255, 255, 0.1)'
                         : '1px solid rgba(147, 51, 234, 0.2)',
                       boxShadow: '0 10px 40px rgba(147, 51, 234, 0.2)'
                     }}
@@ -309,17 +315,17 @@ function App() {
               <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-white dark:to-gray-400 mx-auto rounded-full"></div>
             </div>
           </ScrollAnimation>
-          
+
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <ScrollAnimation animation="slideRight" delay={0.3}>
-              <div 
+              <div
                 className="backdrop-blur-2xl border rounded-3xl p-8 shadow-2xl transition-all duration-500 hover:scale-105 md:col-span-2"
                 style={{
-                  background: isDarkMode 
-                    ? 'rgba(255, 255, 255, 0.1)' 
+                  background: isDarkMode
+                    ? 'rgba(255, 255, 255, 0.1)'
                     : 'rgba(255, 255, 255, 0.8)',
-                  border: isDarkMode 
-                    ? '1px solid rgba(255, 255, 255, 0.2)' 
+                  border: isDarkMode
+                    ? '1px solid rgba(255, 255, 255, 0.2)'
                     : '1px solid rgba(59, 130, 246, 0.3)',
                   boxShadow: isDarkMode
                     ? '0 25px 80px rgba(0, 0, 0, 0.4)'
@@ -359,14 +365,14 @@ function App() {
               { icon: Palette, title: "Branding", description: "Professional branding services tailored to your needs, delivering modern solutions aligned with market trends.", color: "from-orange-500 to-red-500", category: "Branding" }
             ].map((skill, index) => (
               <ScrollAnimation key={skill.title} animation="slideUp" delay={0.3 + index * 0.1}>
-                <div 
+                <div
                   className="group text-center p-4 md:p-8 backdrop-blur-2xl border rounded-2xl md:rounded-3xl shadow-2xl transition-all duration-500 hover:scale-110 hover:-translate-y-4 cursor-pointer relative overflow-hidden h-56 md:h-80 flex flex-col justify-between skill-card"
                   style={{
-                    background: isDarkMode 
-                      ? 'rgba(255, 255, 255, 0.1)' 
+                    background: isDarkMode
+                      ? 'rgba(255, 255, 255, 0.1)'
                       : 'rgba(255, 255, 255, 0.8)',
-                    border: isDarkMode 
-                      ? '1px solid rgba(255, 255, 255, 0.2)' 
+                    border: isDarkMode
+                      ? '1px solid rgba(255, 255, 255, 0.2)'
                       : '1px solid rgba(59, 130, 246, 0.3)',
                     boxShadow: isDarkMode
                       ? '0 25px 80px rgba(0, 0, 0, 0.4)'
@@ -374,22 +380,22 @@ function App() {
                   }}
                 >
                   {/* Animated background gradient */}
-                  <div 
+                  <div
                     className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
                   ></div>
-                  
+
                   <div className="flex-1 flex flex-col justify-center">
                     {/* Icon with enhanced animation */}
                     <div className="relative mb-2 md:mb-4 group-hover:scale-125 transition-transform duration-500">
                       <skill.icon className="w-8 h-8 md:w-12 md:h-12 text-gray-700 dark:text-gray-300 mx-auto transition-all duration-500 skill-icon" />
                       <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} rounded-full opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500`}></div>
                     </div>
-                    
+
                     <h3 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white mb-2 md:mb-3 transition-colors duration-500 skill-title">
                       {skill.title}
                     </h3>
                   </div>
-                  
+
                   <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 transition-colors duration-500 skill-description leading-relaxed">
                     {skill.description}
                   </p>
@@ -430,10 +436,10 @@ function App() {
                   }`}
                   style={{
                     backdropFilter: 'blur(20px)',
-                    boxShadow: activeFilter === key 
-                      ? '0 10px 40px rgba(59, 130, 246, 0.3)' 
-                      : isDarkMode 
-                        ? '0 8px 25px rgba(0, 0, 0, 0.2)' 
+                    boxShadow: activeFilter === key
+                      ? '0 10px 40px rgba(59, 130, 246, 0.3)'
+                      : isDarkMode
+                        ? '0 8px 25px rgba(0, 0, 0, 0.2)'
                         : '0 8px 25px rgba(0, 0, 0, 0.1)'
                   }}
                 >
@@ -456,7 +462,7 @@ function App() {
             ))}
           </div>
         </div>
-        
+
         {/* Project Viewer Modal */}
         <ProjectViewer
           project={selectedProject}
@@ -485,14 +491,14 @@ function App() {
               { icon: MapPin, title: "Location", info: "Hong Kong & Manila, PH", color: "from-purple-500 to-pink-500" }
             ].map((contact, index) => (
               <ScrollAnimation key={contact.title} animation="slideUp" delay={0.3 + index * 0.1}>
-                <div 
+                <div
                   className="group p-8 backdrop-blur-2xl border rounded-3xl shadow-2xl transition-all duration-500 hover:scale-110 hover:-translate-y-4 cursor-pointer relative overflow-hidden h-48 flex flex-col justify-center items-center"
                   style={{
-                    background: isDarkMode 
-                      ? 'rgba(255, 255, 255, 0.1)' 
+                    background: isDarkMode
+                      ? 'rgba(255, 255, 255, 0.1)'
                       : 'rgba(255, 255, 255, 0.8)',
-                    border: isDarkMode 
-                      ? '1px solid rgba(255, 255, 255, 0.2)' 
+                    border: isDarkMode
+                      ? '1px solid rgba(255, 255, 255, 0.2)'
                       : '1px solid rgba(59, 130, 246, 0.3)',
                     boxShadow: isDarkMode
                       ? '0 25px 80px rgba(0, 0, 0, 0.4)'
@@ -501,7 +507,7 @@ function App() {
                 >
                   {/* Animated background */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${contact.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-                  
+
                   <contact.icon className="w-8 h-8 text-gray-700 dark:text-gray-300 mx-auto mb-4 transition-all duration-500 group-hover:scale-125 group-hover:text-white" />
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-500 group-hover:text-white">
                     {contact.title}
@@ -509,7 +515,7 @@ function App() {
                   <p className="text-gray-600 dark:text-gray-400 transition-colors duration-500 group-hover:text-gray-200 text-center break-words">
                     {contact.info}
                   </p>
-                  
+
                   {/* Ripple effect */}
                   <div className="absolute inset-0 rounded-3xl border-2 border-current opacity-0 group-hover:opacity-30 scale-0 group-hover:scale-150 transition-all duration-700"></div>
                 </div>
@@ -520,14 +526,14 @@ function App() {
       </section>
 
       {/* Enhanced Footer */}
-      <footer 
+      <footer
         className="py-8 backdrop-blur-2xl border-t text-center transition-all duration-500"
         style={{
-          background: isDarkMode 
-            ? 'rgba(0, 0, 0, 0.2)' 
+          background: isDarkMode
+            ? 'rgba(0, 0, 0, 0.2)'
             : 'rgba(255, 255, 255, 0.8)',
-          borderTop: isDarkMode 
-            ? '1px solid rgba(255, 255, 255, 0.1)' 
+          borderTop: isDarkMode
+            ? '1px solid rgba(255, 255, 255, 0.1)'
             : '1px solid rgba(59, 130, 246, 0.2)'
         }}
       >
