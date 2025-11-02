@@ -1,36 +1,34 @@
 // src/App.tsx
-import React, { useState, useEffect } from 'react';
+
+import React, { useState, useEffect, Suspense } from 'react'; // Added Suspense
 import { Mail, Phone, MapPin, Camera, Video, Palette, Music, Box, Image, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { AnimatedSocialIcons } from './components/AnimatedSocialIcons';
 import { Enhanced3DNavigation } from './components/Enhanced3DNavigation';
-import { ScrollAnimation, ParallaxBackground, Floating3DElements } from './components/ScrollAnimations'; // Ensure Floating3DElements is imported
+// Removed Floating3DElements from this import
+import { ScrollAnimation, ParallaxBackground } from './components/ScrollAnimations';
 import { ProjectFolder } from './components/ProjectFolder';
 import { ProjectViewer } from './components/ProjectViewer';
 import { portfolioProjects, categoryLabels, PortfolioProject } from './data/portfolioData';
 import stayelliPortrait from '../public/images/stayelli_portrait.avif';
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import { Analytics } from "@vercel/analytics/react"
-import useMediaQuery from './hooks/useMediaQuery'; // Import the new hook
+import useMediaQuery from './hooks/useMediaQuery'; 
+import { ThreeDBackground } from './components/ThreeDBackground'; // Import new 3D component
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const [scrollY, setScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState('home');
-  // Remove 'all' from filter type and default to 'Photo'
   const [activeFilter, setActiveFilter] = useState<'Photo' | 'Video' | '3D' | 'Branding'>('Photo');
   const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
   const [openFolders, setOpenFolders] = useState<Set<string>>(new Set());
-
-  // Add this line: Use the hook to check for screens smaller than 'md' (768px)
   const isMobile = useMediaQuery('(max-width: 767px)');
 
-  // Optimize filtering with useMemo
   const filteredProjects = React.useMemo(() => {
     return portfolioProjects.filter(project => project.category === activeFilter);
   }, [activeFilter]);
 
-  // Project viewer functions
   const openProject = (project: PortfolioProject) => {
     document.body.style.overflow = 'hidden';
     setSelectedProject(project);
@@ -60,12 +58,11 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Track active section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['home', 'about', 'skills', 'portfolio', 'contact'];
-      const scrollPosition = window.scrollY + 200; // Increased offset for better detection
-
+      const scrollPosition = window.scrollY + 200; 
+      
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
         if (element) {
@@ -76,16 +73,14 @@ function App() {
           }
         }
       }
-
-      // Special handling for contact section (last section)
+      
       const contactElement = document.getElementById('contact');
       if (contactElement) {
         const { offsetTop } = contactElement;
         const windowHeight = window.innerHeight;
         const documentHeight = document.documentElement.scrollHeight;
-
-        // If we're near the bottom of the page or in the contact section
-        if (scrollPosition >= offsetTop - 100 ||
+        
+        if (scrollPosition >= offsetTop - 100 || 
             window.scrollY + windowHeight >= documentHeight - 100) {
           setActiveSection('contact');
         }
@@ -93,7 +88,7 @@ function App() {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check initial position
+    handleScroll(); 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   useEffect(() => {
@@ -108,8 +103,8 @@ function App() {
     const element = document.getElementById(sectionId);
     if (element) {
       const elementPosition = element.offsetTop;
-      const offsetPosition = elementPosition - 120; // Adjust for navbar height + extra padding
-
+      const offsetPosition = elementPosition - 120; 
+      
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
@@ -118,26 +113,23 @@ function App() {
     }
   };
 
+
   return (
     <div className="min-h-screen transition-all duration-500 relative overflow-hidden">
-      {/* Enhanced Animated Background */}
+      {/* ... (Your background elements and navigation remain the same) ... */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-black dark:to-gray-800 transition-all duration-1000"></div>
-
-        {/* Dynamic gradient overlay */}
-        <div
+        <div 
           className="absolute inset-0 opacity-30"
           style={{
-            background: `radial-gradient(circle at ${50 + scrollY * 0.01}% ${50 + Math.sin(scrollY * 0.01) * 10}%,
-              rgba(59, 130, 246, 0.1) 0%,
-              rgba(147, 51, 234, 0.05) 50%,
+            background: `radial-gradient(circle at ${50 + scrollY * 0.01}% ${50 + Math.sin(scrollY * 0.01) * 10}%, 
+              rgba(59, 130, 246, 0.1) 0%, 
+              rgba(147, 51, 234, 0.05) 50%, 
               transparent 100%)`
           }}
         ></div>
-
-        {/* Enhanced floating glass orbs with 3D transforms */}
         <ParallaxBackground speed={0.2}>
-          <div
+          <div 
             className="absolute w-40 h-40 bg-gradient-to-br from-blue-200/20 to-purple-200/20 dark:from-white/10 dark:to-white/5 backdrop-blur-2xl rounded-full"
             style={{
               top: '10%',
@@ -147,7 +139,7 @@ function App() {
               boxShadow: '0 20px 60px rgba(59, 130, 246, 0.2)'
             }}
           ></div>
-          <div
+          <div 
             className="absolute w-32 h-32 bg-gradient-to-br from-purple-200/20 to-pink-200/20 dark:from-white/8 dark:to-white/4 backdrop-blur-2xl rounded-full"
             style={{
               top: '30%',
@@ -158,7 +150,7 @@ function App() {
               boxShadow: '0 20px 60px rgba(147, 51, 234, 0.2)'
             }}
           ></div>
-          <div
+          <div 
             className="absolute w-24 h-24 bg-gradient-to-br from-indigo-200/20 to-blue-200/20 dark:from-white/6 dark:to-white/3 backdrop-blur-2xl rounded-full"
             style={{
               bottom: '20%',
@@ -172,11 +164,13 @@ function App() {
         </ParallaxBackground>
       </div>
 
-      {/* Conditionally render Floating 3D Elements */}
-      {/* Only render if NOT mobile */}
-      {!isMobile && <Floating3DElements isDarkMode={isDarkMode} />}
+      {/* MODIFIED: Replaced Floating3DElements with new ThreeDBackground */}
+      {!isMobile && (
+        <Suspense fallback={null}>
+          <ThreeDBackground isDarkMode={isDarkMode} />
+        </Suspense>
+      )}
 
-      {/* Enhanced Navigation */}
       <Enhanced3DNavigation
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
@@ -186,30 +180,33 @@ function App() {
         activeSection={activeSection}
       />
 
-      {/* Hero Section with Enhanced Animations */}
+      {/* ============================================
+      HERO SECTION
+      ============================================
+      */}
       <section id="home" className="min-h-screen flex items-center pt-24 pb-16 relative">
         <div className="max-w-7xl mx-auto px-6 w-full">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left side - Text content with scroll animations */}
-            <div className="text-left">
+          <div className="flex justify-center text-center">
+            
+            <div className="max-w-lg">
               <ScrollAnimation animation="slideUp" delay={0.2}>
                 <h1 className="text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white mb-6 leading-none tracking-tight">
-                  <span
+                  <span 
                     className="inline-block transition-all duration-500 hover:scale-110 hover:-rotate-2 relative z-10"
                     style={{
-                      textShadow: isDarkMode
-                        ? '0 10px 30px rgba(255, 255, 255, 0.1)'
+                      textShadow: isDarkMode 
+                        ? '0 10px 30px rgba(255, 255, 255, 0.1)' 
                         : '0 10px 30px rgba(59, 130, 246, 0.2)',
                       color: isDarkMode ? '#ffffff' : '#1f2937'
                     }}
                   >
                     Stay
                   </span>
-                  <span
+                  <span 
                     className="inline-block transition-all duration-500 hover:scale-110 hover:rotate-2 text-gray-600 dark:text-gray-400 relative z-10"
                     style={{
-                      textShadow: isDarkMode
-                        ? '0 10px 30px rgba(156, 163, 175, 0.3)'
+                      textShadow: isDarkMode 
+                        ? '0 10px 30px rgba(156, 163, 175, 0.3)' 
                         : '0 10px 30px rgba(75, 85, 99, 0.3)'
                     }}
                   >
@@ -217,96 +214,45 @@ function App() {
                   </span>
                 </h1>
               </ScrollAnimation>
-
+              
               <ScrollAnimation animation="slideUp" delay={0.4}>
                 <div className="mb-8">
                   <p className="text-2xl md:text-3xl lg:text-4xl text-gray-700 dark:text-gray-300 font-light mb-2 leading-tight">
-                    Multimedia Artist
+                    Digital Creator
                   </p>
                 </div>
               </ScrollAnimation>
 
               <ScrollAnimation animation="slideRight" delay={0.6}>
-                <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-white dark:to-gray-400 mb-8 rounded-full shadow-lg"></div>
+                <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-white dark:to-gray-400 mb-8 rounded-full shadow-lg mx-auto"></div>
               </ScrollAnimation>
 
               <ScrollAnimation animation="fadeIn" delay={0.8}>
                 <div className="mb-12 max-w-lg">
                   <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white mb-4 leading-tight">
-                    One artist. Infinite ways to tell your story.
+                    One Vision. Unlimited ways to capture your story.
                   </h2>
                   <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
-                    Photography, video, and 3D design fused with storytelling to create versatile visuals that resonate.
+                    My focus is on <strong className="font-semibold">blending diverse creative mediums</strong>—including high-resolution image-making and dynamic video production—to forge powerful, cohesive visual stories.
                   </p>
                 </div>
               </ScrollAnimation>
 
               <ScrollAnimation animation="slideUp" delay={1.0}>
-                <AnimatedSocialIcons isDarkMode={isDarkMode} />
+                <div className="flex justify-center">
+                  <AnimatedSocialIcons isDarkMode={isDarkMode} />
+                </div>
               </ScrollAnimation>
             </div>
-
-            {/* Right side - Enhanced image with 3D effects */}
-            <ScrollAnimation animation="scale" delay={0.5}>
-              <div className="flex justify-end">
-                <div className="relative group">
-                  <div
-                    className="relative overflow-hidden rounded-3xl backdrop-blur-2xl border shadow-2xl p-2 transition-all duration-700 group-hover:scale-105 group-hover:rotate-2"
-                    style={{
-                      background: isDarkMode
-                        ? 'rgba(255, 255, 255, 0.1)'
-                        : 'rgba(255, 255, 255, 0.8)',
-                      border: isDarkMode
-                        ? '1px solid rgba(255, 255, 255, 0.2)'
-                        : '1px solid rgba(59, 130, 246, 0.3)',
-                      boxShadow: isDarkMode
-                        ? '0 25px 80px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
-                        : '0 25px 80px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
-                    }}
-                  >
-                    <img
-                      src={stayelliPortrait}
-                      alt="Stayelli - Multimedia Artist"
-                      className="w-80 h-96 lg:w-96 lg:h-[500px] rounded-2xl object-cover transition-all duration-700 group-hover:scale-110"
-                      fetchpriority="high" // Add fetchpriority="high"
-                    />
-                    {/* Overlay gradient on hover */}
-                    <div className="absolute inset-2 rounded-2xl bg-gradient-to-t from-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  </div>
-
-                  {/* Enhanced floating elements */}
-                  <div
-                    className="absolute -bottom-8 -left-8 w-24 h-24 backdrop-blur-xl rounded-full border transition-all duration-500 group-hover:scale-125 group-hover:-rotate-12"
-                    style={{
-                      background: isDarkMode
-                        ? 'rgba(255, 255, 255, 0.05)'
-                        : 'rgba(59, 130, 246, 0.1)',
-                      border: isDarkMode
-                        ? '1px solid rgba(255, 255, 255, 0.1)'
-                        : '1px solid rgba(59, 130, 246, 0.2)',
-                      boxShadow: '0 10px 40px rgba(59, 130, 246, 0.2)'
-                    }}
-                  ></div>
-                  <div
-                    className="absolute -top-8 -right-8 w-16 h-16 backdrop-blur-xl rounded-full border transition-all duration-500 group-hover:scale-125 group-hover:rotate-12"
-                    style={{
-                      background: isDarkMode
-                        ? 'rgba(255, 255, 255, 0.05)'
-                        : 'rgba(147, 51, 234, 0.1)',
-                      border: isDarkMode
-                        ? '1px solid rgba(255, 255, 255, 0.1)'
-                        : '1px solid rgba(147, 51, 234, 0.2)',
-                      boxShadow: '0 10px 40px rgba(147, 51, 234, 0.2)'
-                    }}
-                  ></div>
-                </div>
-              </div>
-            </ScrollAnimation>
+            
           </div>
         </div>
       </section>
 
-      {/* About Section with Enhanced 3D Effects */}
+      {/* ============================================
+      ABOUT SECTION
+      ============================================
+      */}
       <section id="about" className="py-20 relative">
         <div className="max-w-6xl mx-auto px-6">
           <ScrollAnimation animation="fadeIn" delay={0.2}>
@@ -315,17 +261,19 @@ function App() {
               <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-white dark:to-gray-400 mx-auto rounded-full"></div>
             </div>
           </ScrollAnimation>
-
+          
           <div className="grid md:grid-cols-2 gap-12 items-center">
+            
+            {/* Item 1: The Text Block */}
             <ScrollAnimation animation="slideRight" delay={0.3}>
-              <div
-                className="backdrop-blur-2xl border rounded-3xl p-8 shadow-2xl transition-all duration-500 hover:scale-105 md:col-span-2"
+              <div 
+                className="backdrop-blur-2xl border rounded-3xl p-8 shadow-2xl transition-all duration-500 hover:scale-105 h-full"
                 style={{
-                  background: isDarkMode
-                    ? 'rgba(255, 255, 255, 0.1)'
+                  background: isDarkMode 
+                    ? 'rgba(255, 255, 255, 0.1)' 
                     : 'rgba(255, 255, 255, 0.8)',
-                  border: isDarkMode
-                    ? '1px solid rgba(255, 255, 255, 0.2)'
+                  border: isDarkMode 
+                    ? '1px solid rgba(255, 255, 255, 0.2)' 
                     : '1px solid rgba(59, 130, 246, 0.3)',
                   boxShadow: isDarkMode
                     ? '0 25px 80px rgba(0, 0, 0, 0.4)'
@@ -333,21 +281,77 @@ function App() {
                 }}
               >
                 <p className="text-xl text-gray-800 dark:text-gray-200 mb-6 leading-relaxed font-medium italic">
-                  "Minimal, playful, corporate, or cinematic — I wear every style like second skin."
-                </p>
-                <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                  As a multimedia artist, I bring adaptability to the forefront. My skillset spans photography, videography, 3D modeling, and motion graphics, giving me the tools to deliver exactly what a project demands. From capturing fleeting street moments to producing polished studio portraits, from editing vibrant films to sculpting immersive 3D worlds — I thrive in switching gears without losing sight of the story.
+                  "The visual medium changes, but the core goal remains constant: impactful storytelling."
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  For me, creativity isn't about sticking to one look; it's about shaping visuals that fit the client, the message, and the moment.
+                  As a <strong className="font-semibold">Digital Creator</strong> and visual strategist, I maintain a sharp focus on trending aesthetic standards across film, photography, and motion graphics. But knowing a trend isn't the strategy. I strategically blend my full technical mastery with your unique brand story, ensuring the final visual solution is potent, purposeful, and perfectly tailored to your project's specific goals.
                 </p>
               </div>
             </ScrollAnimation>
+            
+            {/* Item 2: The Image Block */}
+            <ScrollAnimation animation="slideLeft" delay={0.3}>
+              <div className="flex justify-center">
+                <div className="relative group">
+                  <div 
+                    className="relative overflow-hidden rounded-3xl backdrop-blur-2xl border shadow-2xl p-2 transition-all duration-700 group-hover:scale-105 group-hover:rotate-2"
+                    style={{
+                      background: isDarkMode 
+                        ? 'rgba(255, 255, 255, 0.1)' 
+                        : 'rgba(255, 255, 255, 0.8)',
+                      border: isDarkMode 
+                        ? '1px solid rgba(255, 255, 255, 0.2)' 
+                        : '1px solid rgba(59, 130, 246, 0.3)',
+                      boxShadow: isDarkMode
+                        ? '0 25px 80px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                        : '0 25px 80px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+                    }}
+                  >
+                    <img
+                      src={stayelliPortrait}
+                      alt="Stayelli - Digital Creator"
+                      className="w-80 h-96 lg:w-96 lg:h-[500px] rounded-2xl object-cover transition-all duration-700 group-hover:scale-110"
+                      fetchpriority="high"
+                    />
+                    <div className="absolute inset-2 rounded-2xl bg-gradient-to-t from-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  </div>
+                  
+                  <div 
+                    className="absolute -bottom-8 -left-8 w-24 h-24 backdrop-blur-xl rounded-full border transition-all duration-500 group-hover:scale-125 group-hover:-rotate-12"
+                    style={{
+                      background: isDarkMode 
+                        ? 'rgba(255, 255, 255, 0.05)' 
+                        : 'rgba(59, 130, 246, 0.1)',
+                      border: isDarkMode 
+                        ? '1px solid rgba(255, 255, 255, 0.1)' 
+                        : '1px solid rgba(59, 130, 246, 0.2)',
+                      boxShadow: '0 10px 40px rgba(59, 130, 246, 0.2)'
+                    }}
+                  ></div>
+                  <div 
+                    className="absolute -top-8 -right-8 w-16 h-16 backdrop-blur-xl rounded-full border transition-all duration-500 group-hover:scale-125 group-hover:rotate-12"
+                    style={{
+                      background: isDarkMode 
+                        ? 'rgba(255, 255, 255, 0.05)' 
+                        : 'rgba(147, 51, 234, 0.1)',
+                      border: isDarkMode 
+                        ? '1px solid rgba(255, 255, 255, 0.1)' 
+                        : '1px solid rgba(147, 51, 234, 0.2)',
+                      boxShadow: '0 10px 40px rgba(147, 51, 234, 0.2)'
+                    }}
+                  ></div>
+                </div>
+              </div>
+            </ScrollAnimation>
+
           </div>
         </div>
       </section>
 
-      {/* Skills Section with Enhanced Animations */}
+      {/* ============================================
+      SKILLS SECTION
+      ============================================
+      */}
       <section id="skills" className="py-20 relative">
         <div className="max-w-6xl mx-auto px-6">
           <ScrollAnimation animation="fadeIn" delay={0.2}>
@@ -365,38 +369,38 @@ function App() {
               { icon: Palette, title: "Branding", description: "Professional branding services tailored to your needs, delivering modern solutions aligned with market trends.", color: "from-orange-500 to-red-500", category: "Branding" }
             ].map((skill, index) => (
               <ScrollAnimation key={skill.title} animation="slideUp" delay={0.3 + index * 0.1}>
-                <div
-                  className="group text-center p-4 md:p-8 backdrop-blur-2xl border rounded-2xl md:rounded-3xl shadow-2xl transition-all duration-500 hover:scale-110 hover:-translate-y-4 cursor-pointer relative overflow-hidden h-56 md:h-80 flex flex-col justify-between skill-card"
+                <div 
+                  className="group text-center p-4 md:p-8 backdrop-blur-2xl border rounded-2xl md:rounded-3xl shadow-2xl transition-all duration-500 hover:scale-110 hover:-translate-y-4 cursor-pointer relative overflow-hidden h-56 md:h-80 flex flex-col justify-center skill-card"
                   style={{
-                    background: isDarkMode
-                      ? 'rgba(255, 255, 255, 0.1)'
+                    background: isDarkMode 
+                      ? 'rgba(255, 255, 255, 0.1)' 
                       : 'rgba(255, 255, 255, 0.8)',
-                    border: isDarkMode
-                      ? '1px solid rgba(255, 255, 255, 0.2)'
+                    border: isDarkMode 
+                      ? '1px solid rgba(255, 255, 255, 0.2)' 
                       : '1px solid rgba(59, 130, 246, 0.3)',
                     boxShadow: isDarkMode
                       ? '0 25px 80px rgba(0, 0, 0, 0.4)'
                       : '0 25px 80px rgba(59, 130, 246, 0.3)'
                   }}
                 >
-                  {/* Animated background gradient */}
-                  <div
+                  
+                  <div 
                     className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
                   ></div>
-
-                  <div className="flex-1 flex flex-col justify-center">
-                    {/* Icon with enhanced animation */}
+                  
+                  <div className="flex flex-col justify-center"> 
+                    
                     <div className="relative mb-2 md:mb-4 group-hover:scale-125 transition-transform duration-500">
                       <skill.icon className="w-8 h-8 md:w-12 md:h-12 text-gray-700 dark:text-gray-300 mx-auto transition-all duration-500 skill-icon" />
                       <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} rounded-full opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500`}></div>
                     </div>
-
+                    
                     <h3 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white mb-2 md:mb-3 transition-colors duration-500 skill-title">
                       {skill.title}
                     </h3>
                   </div>
-
-                  <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 transition-colors duration-500 skill-description leading-relaxed">
+                  
+                  <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 transition-colors duration-500 skill-description leading-relaxed h-[5rem] md:h-[6rem]">
                     {skill.description}
                   </p>
                 </div>
@@ -406,7 +410,10 @@ function App() {
         </div>
       </section>
 
-      {/* Portfolio Section with Enhanced 3D Gallery */}
+      {/* ============================================
+      PORTFOLIO SECTION
+      ============================================
+      */}
       <section id="portfolio" className="py-20 relative">
         <div className="max-w-6xl mx-auto px-6">
           <ScrollAnimation animation="fadeIn" delay={0.2}>
@@ -418,11 +425,8 @@ function App() {
               </p>
             </div>
           </ScrollAnimation>
-
-          {/* Category Filter Buttons */}
           <ScrollAnimation animation="fadeIn" delay={0.3}>
             <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12 px-2">
-              {/* Remove "All Works" button */}
               {Object.entries(categoryLabels).map(([key, label]) => (
                 <button
                   key={key}
@@ -436,10 +440,10 @@ function App() {
                   }`}
                   style={{
                     backdropFilter: 'blur(20px)',
-                    boxShadow: activeFilter === key
-                      ? '0 10px 40px rgba(59, 130, 246, 0.3)'
-                      : isDarkMode
-                        ? '0 8px 25px rgba(0, 0, 0, 0.2)'
+                    boxShadow: activeFilter === key 
+                      ? '0 10px 40px rgba(59, 130, 246, 0.3)' 
+                      : isDarkMode 
+                        ? '0 8px 25px rgba(0, 0, 0, 0.2)' 
                         : '0 8px 25px rgba(0, 0, 0, 0.1)'
                   }}
                 >
@@ -448,8 +452,6 @@ function App() {
               ))}
             </div>
           </ScrollAnimation>
-
-          {/* Portfolio Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
             {filteredProjects.map((project) => (
               <ProjectFolder
@@ -462,8 +464,6 @@ function App() {
             ))}
           </div>
         </div>
-
-        {/* Project Viewer Modal */}
         <ProjectViewer
           project={selectedProject}
           onClose={closeProject}
@@ -471,7 +471,10 @@ function App() {
         />
       </section>
 
-      {/* Contact Section with Enhanced 3D Cards */}
+      {/* ============================================
+      CONTACT SECTION
+      ============================================
+      */}
       <section id="contact" className="py-20 relative">
         <div className="max-w-4xl mx-auto px-6">
           <ScrollAnimation animation="fadeIn" delay={0.2}>
@@ -483,7 +486,6 @@ function App() {
               </p>
             </div>
           </ScrollAnimation>
-
           <div className="grid md:grid-cols-3 gap-8 text-center">
             {[
               { icon: Mail, title: "Email", info: "stayelli.multimedia@gmail.com", color: "from-blue-500 to-cyan-500" },
@@ -491,23 +493,21 @@ function App() {
               { icon: MapPin, title: "Location", info: "Hong Kong & Manila, PH", color: "from-purple-500 to-pink-500" }
             ].map((contact, index) => (
               <ScrollAnimation key={contact.title} animation="slideUp" delay={0.3 + index * 0.1}>
-                <div
+                <div 
                   className="group p-8 backdrop-blur-2xl border rounded-3xl shadow-2xl transition-all duration-500 hover:scale-110 hover:-translate-y-4 cursor-pointer relative overflow-hidden h-48 flex flex-col justify-center items-center"
                   style={{
-                    background: isDarkMode
-                      ? 'rgba(255, 255, 255, 0.1)'
+                    background: isDarkMode 
+                      ? 'rgba(255, 255, 255, 0.1)' 
                       : 'rgba(255, 255, 255, 0.8)',
-                    border: isDarkMode
-                      ? '1px solid rgba(255, 255, 255, 0.2)'
+                    border: isDarkMode 
+                      ? '1px solid rgba(255, 255, 255, 0.2)' 
                       : '1px solid rgba(59, 130, 246, 0.3)',
                     boxShadow: isDarkMode
                       ? '0 25px 80px rgba(0, 0, 0, 0.4)'
                       : '0 25px 80px rgba(59, 130, 246, 0.3)'
                   }}
                 >
-                  {/* Animated background */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${contact.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-
                   <contact.icon className="w-8 h-8 text-gray-700 dark:text-gray-300 mx-auto mb-4 transition-all duration-500 group-hover:scale-125 group-hover:text-white" />
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-500 group-hover:text-white">
                     {contact.title}
@@ -515,8 +515,6 @@ function App() {
                   <p className="text-gray-600 dark:text-gray-400 transition-colors duration-500 group-hover:text-gray-200 text-center break-words">
                     {contact.info}
                   </p>
-
-                  {/* Ripple effect */}
                   <div className="absolute inset-0 rounded-3xl border-2 border-current opacity-0 group-hover:opacity-30 scale-0 group-hover:scale-150 transition-all duration-700"></div>
                 </div>
               </ScrollAnimation>
@@ -525,21 +523,24 @@ function App() {
         </div>
       </section>
 
-      {/* Enhanced Footer */}
-      <footer
+      {/* ============================================
+      FOOTER
+      ============================================
+      */}
+      <footer 
         className="py-8 backdrop-blur-2xl border-t text-center transition-all duration-500"
         style={{
-          background: isDarkMode
-            ? 'rgba(0, 0, 0, 0.2)'
+          background: isDarkMode 
+            ? 'rgba(0, 0, 0, 0.2)' 
             : 'rgba(255, 255, 255, 0.8)',
-          borderTop: isDarkMode
-            ? '1px solid rgba(255, 255, 255, 0.1)'
+          borderTop: isDarkMode 
+            ? '1px solid rgba(255, 255, 255, 0.1)' 
             : '1px solid rgba(59, 130, 246, 0.2)'
         }}
       >
         <div className="max-w-6xl mx-auto px-6">
           <p className="text-gray-600 dark:text-gray-400">
-            © 2025 Stayelli. All rights reserved. | Multimedia Artist
+            © 2025 Stayelli. All rights reserved. | Digital Creator
           </p>
         </div>
       </footer>
