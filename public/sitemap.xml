@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 
+  IMPROVEMENT: For a Single-Page App, we list all main sections 
+  to help Google understand the full structure of your site.
+  -->
+  
+  <!-- Homepage (Highest Priority) -->
   <url>
     <loc>https://stayelli.com/</loc>
-    <lastmod>2025-09-24</lastmod>
+    <lastmod>2025-11-03</lastmod>
     <priority>1.0</priority>
   </url>
+  
+  <!-- Main Site Sections -->
+  <url>
+    <loc>https://stayelli.com/#about</loc>
+    <lastmod>2025-11-03</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://stayelli.com/#skills</loc>
+    <lastmod>2025-11-03</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://stayelli.com/#portfolio</loc>
+    <lastmod>2025-11-03</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://stayelli.com/#contact</loc>
+    <lastmod>2025-11-03</lastmod>
+    <priority>0.8</priority>
+  </url>
 </urlset>
+

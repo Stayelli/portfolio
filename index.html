@@ -3,18 +3,21 @@
   <head>
  <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <!-- IMPROVEMENT: Preload your main portrait image for faster hero loading -->
   <link rel="preload" as="image" href="/images/stayelli_portrait.avif">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SEO -->
-  <title>Stayelli</title>
+  <!-- UPDATED: Title tag now matches your job title and OG title -->
+  <title>Stayelli | Digital Creator in Manila & Hong Kong</title>
+  <!-- UPDATED: Description reflects "Digital Creator" -->
   <meta name="description" content="Stayelli — a Digital Creator based in Manila and Hong Kong. Specializing in cinematography, photography, video editing, 3D modelling, motion graphics, and graphic design.">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Stayelli">
   <link rel="canonical" href="https://stayelli.com/" />
 
   <!-- Open Graph (social preview) -->
-   <!-- TESTING-->
+  <!-- UPDATED: "Digital Creator" -->
   <meta property="og:title" content="Stayelli | Digital Creator in Manila & Hong Kong" />
   <meta property="og:description" content="Cinematography, Photography, Video Editing, 3D Modelling, Motion Graphics, and Graphic Design." />
   <meta property="og:type" content="website" />
@@ -24,30 +27,38 @@
   <meta property="og:image:height" content="1208" />
 
   <!-- Twitter Card -->
+  <!-- UPDATED: "Digital Creator" -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Stayelli | Digital Creator in Manila & Hong Kong" />
   <meta name="twitter:description" content="Cinematography, Photography, Video Editing, 3D Modelling, Motion Graphics, and Graphic Design." />
   <meta name="twitter:image" content="https://stayelli.com/og-preview.avif" />
 
-  <!-- JSON-LD structured data test -->
+  <!-- JSON-LD structured data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Stayelli",
     "alternateName": "Stanley John Paul Latonero",
+    <!-- UPDATED: "Digital Creator" -->
     "jobTitle": "Digital Creator",
+    <!-- UPDATED: "Digital Creator" -->
     "description": "Digital Creator based in Manila and Hong Kong specializing in cinematography, photography, video editing, 3D modelling, motion graphics, and graphic design.",
     "url": "https://stayelli.com",
+    <!-- IMPROVEMENT: Kept all social links for better entity association -->
     "sameAs": [
-      "https://www.instagram.com/stanleylatonero/",
+      "https://www.instagram.com/stayelli/",
+      "https://twitter.com/stayelli",
+      "https://tiktok.com/@stayelli",
       "https://www.linkedin.com/in/stanley-john-paul-latonero-126486240/"
     ]
   }
   </script>
+    <!-- Your app's script and style links will be injected here by Vite -->
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+
