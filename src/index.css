@@ -304,3 +304,32 @@ html {
 .backdrop-animate.active {
   backdrop-filter: blur(20px);
 }
+
+/* ... (keep all your existing CSS) ... */
+
+/* Custom scrollbar hiding utility */
+.scrollbar-hide {
+  /* Firefox */
+  scrollbar-width: none;
+  /* Safari and Chrome */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ... all your other styles ... */
+
+/* Custom scrollbar hiding utility */
+.scrollbar-hide {
+  /* Firefox */
+  scrollbar-width: none;
+  /* Safari and Chrome */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+
+
