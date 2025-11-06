@@ -331,5 +331,11 @@ html {
   display: none;
 }
 
+/* ... all your other styles ... */
 
+/* Custom class for 100% dynamic viewport height */
+.min-h-dvh {
+  min-height: 100vh; /* Fallback for older browsers */
+  min-height: 100dvh; /* The new, dynamic viewport height */
+}
 

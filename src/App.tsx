@@ -4,18 +4,14 @@ import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 import { AnimatedSocialIcons } from './components/AnimatedSocialIcons';
 import { Enhanced3DNavigation } from './components/Enhanced3DNavigation';
-// MODIFIED: Import for list item is no longer needed
-// import { PortfolioListItem, listItemVariants } from './components/PortfolioListItem'; 
 import { ProjectViewer } from './components/ProjectViewer';
 import { portfolioProjects, categoryLabels, PortfolioProject } from './data/portfolioData';
-// This is your original import path, left unchanged
-import stayelliPortrait from '../public/images/stayelli_portrait.avif';
+import stayelliPortrait from '/images/stayelli_portrait.avif';
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import { Analytics } from "@vercel/analytics/react"
-// import useMediaQuery from './hooks/useMediaQuery'; // FIXED: Removed unused import
 import { LiquidBackground } from './components/LiquidBackground'; 
 
-// This is your original glassCardStyle, left unchanged
+// Define a consistent "glass" style for all cards
 const glassCardStyle = (isDarkMode: boolean) => ({
   background: isDarkMode 
     ? 'rgba(18, 18, 18, 0.4)' // Premium black
@@ -28,8 +24,6 @@ const glassCardStyle = (isDarkMode: boolean) => ({
     : '0 10px 30px rgba(0, 0, 0, 0.1)'
 });
 
-// This is your original sectionVariants, left unchanged
-// FIXED: Added Variants type
 const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
@@ -44,8 +38,6 @@ const sectionVariants: Variants = {
   }
 };
 
-// ADDED: Animation variants for the new grid items
-// FIXED: Added Variants type
 const gridItemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { 
@@ -61,18 +53,12 @@ const gridItemVariants: Variants = {
 };
 
 function App() {
-  // All your original state, left unchanged
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [activeSection, setActiveSection] = useState('home');
   const [activeFilter, setActiveFilter] = useState<'Branded' | 'Personal'>('Branded');
   const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
-  // FIXED: Removed unused variable
-  // const [openFolders, setOpenFolders] = useState<Set<string>>(new Set());
-  // FIXED: Removed unused variable
-  // const isMobile = useMediaQuery('(max-width: 767px)'); 
 
-  // All your original functions and hooks, left unchanged
   const filteredProjects = React.useMemo(() => {
     return portfolioProjects.filter(project => project.category === activeFilter);
   }, [activeFilter]);
@@ -80,8 +66,6 @@ function App() {
   const openProject = (project: PortfolioProject) => {
     document.body.style.overflow = 'hidden';
     setSelectedProject(project);
-    // FIXED: Removed unused logic
-    // setOpenFolders(prev => new Set([...prev, project.id]));
   };
 
   const closeProject = () => {
@@ -146,8 +130,7 @@ function App() {
   };
 
   return (
-    // Your original main div, left unchanged
-    <div className="min-h-screen transition-colors duration-500 bg-transparent">
+    <div className="min-h-dvh transition-colors duration-500 bg-transparent">
       
       <LiquidBackground />
 
@@ -160,8 +143,8 @@ function App() {
         activeSection={activeSection}
       />
 
-      {/* Home Section (Your original code, unchanged) */}
-      <section id="home" className="min-h-screen flex items-center pt-24 pb-16 relative">
+      {/* Home Section */}
+      <section id="home" className="min-h-dvh flex items-center pt-24 pb-16 relative">
         <div className="max-w-7xl mx-auto px-6 w-full">
           <div className="flex justify-center text-center">
             
@@ -210,7 +193,7 @@ function App() {
         </div>
       </section>
 
-      {/* About Section (Your original code, unchanged) */}
+      {/* About Section */}
       <section id="about" className="py-20 relative">
         <motion.div 
           className="max-w-6xl mx-auto px-6"
@@ -248,7 +231,6 @@ function App() {
                   src={stayelliPortrait}
                   alt="Stayelli - Digital Creator"
                   className="w-80 h-96 lg:w-96 lg:h-[500px] rounded-2xl object-cover transition-all duration-700 group-hover:scale-110"
-                  // FIXED: Corrected typo 'fetchpriority' to 'fetchPriority'
                   fetchPriority="high"
                 />
                 <div className="absolute inset-2 rounded-2xl bg-gradient-to-t from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -259,7 +241,7 @@ function App() {
         </motion.div>
       </section>
 
-      {/* Skills Section (Your original code, unchanged) */}
+      {/* Skills Section */}
       <section id="skills" className="py-20 relative">
         <motion.div 
           className="max-w-6xl mx-auto px-6"
@@ -471,7 +453,7 @@ function App() {
       >
         <div className="max-w-6xl mx-auto px-6">
           <p className="text-gray-600 dark:text-gray-400">
-            &copy; 2025 Stayelli. All rights reserved. | Digital Creator
+            © 2025 Stayelli. All rights reserved. | Digital Creator
           </p>
         </div>
       </footer>
