@@ -15,21 +15,21 @@ import {
   ThreeD
 } from '../images';
 
-// Portfolio project data with multiple images per project
+// ... (interface definitions are correct) ...
 export interface ProjectImage {
   id: string;
   src: string;
   title: string;
   description?: string;
   isVideo?: boolean;
-  youtubeId?: string;   // ✅ for YouTube video ID
-  thumbnail?: string;   // ✅ preview image for YouTube
+  youtubeId?: string;
+  thumbnail?: string;
 }
 
 export interface PortfolioProject {
   id: string;
   title: string;
-  category: 'Branded' | 'Personal'; // MODIFIED: New categories
+  category: 'Branded' | 'Personal';
   description: string;
   coverImage: string;
   images: ProjectImage[];
@@ -43,7 +43,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'mkjp',
     title: 'MKJP Branding',
-    category: 'Personal', // MODIFIED
+    category: 'Personal', // FIXED: Reverted to Personal
     description: 'Logos for MKJP, an Interior Design student in the Philippines.',
     coverImage: BrandingMkjp[0],
     year: '2025',
@@ -58,7 +58,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'pausepaws',
     title: 'Pausepaws Branding',
-    category: 'Personal', // MODIFIED
+    category: 'Personal', // FIXED: Reverted to Personal
     description: 'Branding work for Pausepaws, a pet grooming service concept.',
     coverImage: BrandingPausepaws[7],
     year: '2025',
@@ -182,7 +182,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'foodphotog',
     title: 'Food Photography',
-    category: 'Personal', // MODIFIED
+    category: 'Personal',
     description: 'Delicious food photography.',
     coverImage: PhotoFoodphotog[0],
     year: '2024',
@@ -224,7 +224,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'tattoo-branding',
     title: 'Tattoo Photography for JianL',
-    category: 'Personal', // MODIFIED
+    category: 'Personal', // FIXED: Reverted to Personal
     description: 'Photography for business branding and marketing materials.',
     coverImage: PhotoTattoo[0],
     year: '2024',
@@ -249,7 +249,7 @@ export const portfolioProjects: PortfolioProject[] = [
       {
         id: 'metrohk-cinematic-1',
         src: 'https://youtube.com/shorts/rV5BhvNZmcI',
-        youtubeId: 'HWcVawM4OMc',
+        youtubeId: 'rV5BhvNZmcI', // FIXED: Mismatched ID
         thumbnail: 'https://img.youtube.com/vi/rV5BhvNZmcI/maxresdefault.jpg',
         title: 'Reel | Hong Kong Metro',
         description: 'Shot using the Sony A6400 (16-50 kit lens OSS, Sony 50mm 1.8 OSS, and Sony 35mm 1.8 OSS). This was my first exposure to color grading, video setting, color spaces, and a lot of other things. This is where I started',
@@ -260,7 +260,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'tgms',
     title: 'TGMS Branding',
-    category: 'Personal', // MODIFIED
+    category: 'Personal', // FIXED: Reverted to Personal
     description: 'Branding for TheGrace Medical Services.',
     coverImage: BrandingTgms[0],
     year: '2024',
@@ -307,7 +307,7 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     id: 'joaquinsantos',
     title: 'Joaquin Santos Branding',
-    category: 'Personal', // MODIFIED
+    category: 'Personal', // FIXED: Reverted to Personal
     description: 'Branding and identity design for Joaquin Santos, a music producer based in the Philippines.',
     coverImage: BrandingJoaquinsantos[0],
     year: '2019',
@@ -337,9 +337,7 @@ export const portfolioProjects: PortfolioProject[] = [
   },
 ];
 
-// MODIFIED: New labels
 export const categoryLabels = {
   Branded: "Branded Content",
   Personal: "Personal"
 };
-

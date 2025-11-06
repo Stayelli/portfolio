@@ -1,6 +1,6 @@
-import React, { useState, useEffect, Suspense, Fragment } from 'react';
-import { Mail, Phone, MapPin, Camera, Video, Palette, Music, Box } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { Mail, Phone, MapPin, Camera, Video, Palette, Box } from 'lucide-react';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 import { AnimatedSocialIcons } from './components/AnimatedSocialIcons';
 import { Enhanced3DNavigation } from './components/Enhanced3DNavigation';
@@ -12,7 +12,7 @@ import { portfolioProjects, categoryLabels, PortfolioProject } from './data/port
 import stayelliPortrait from '../public/images/stayelli_portrait.avif';
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import { Analytics } from "@vercel/analytics/react"
-import useMediaQuery from './hooks/useMediaQuery'; 
+// import useMediaQuery from './hooks/useMediaQuery'; // FIXED: Removed unused import
 import { LiquidBackground } from './components/LiquidBackground'; 
 
 // This is your original glassCardStyle, left unchanged
@@ -29,7 +29,8 @@ const glassCardStyle = (isDarkMode: boolean) => ({
 });
 
 // This is your original sectionVariants, left unchanged
-const sectionVariants = {
+// FIXED: Added Variants type
+const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
@@ -44,7 +45,8 @@ const sectionVariants = {
 };
 
 // ADDED: Animation variants for the new grid items
-const gridItemVariants = {
+// FIXED: Added Variants type
+const gridItemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { 
     opacity: 1, 
@@ -65,8 +67,10 @@ function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [activeFilter, setActiveFilter] = useState<'Branded' | 'Personal'>('Branded');
   const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
-  const [openFolders, setOpenFolders] = useState<Set<string>>(new Set());
-  const isMobile = useMediaQuery('(max-width: 767px)'); 
+  // FIXED: Removed unused variable
+  // const [openFolders, setOpenFolders] = useState<Set<string>>(new Set());
+  // FIXED: Removed unused variable
+  // const isMobile = useMediaQuery('(max-width: 767px)'); 
 
   // All your original functions and hooks, left unchanged
   const filteredProjects = React.useMemo(() => {
@@ -76,7 +80,8 @@ function App() {
   const openProject = (project: PortfolioProject) => {
     document.body.style.overflow = 'hidden';
     setSelectedProject(project);
-    setOpenFolders(prev => new Set([...prev, project.id]));
+    // FIXED: Removed unused logic
+    // setOpenFolders(prev => new Set([...prev, project.id]));
   };
 
   const closeProject = () => {
@@ -243,7 +248,8 @@ function App() {
                   src={stayelliPortrait}
                   alt="Stayelli - Digital Creator"
                   className="w-80 h-96 lg:w-96 lg:h-[500px] rounded-2xl object-cover transition-all duration-700 group-hover:scale-110"
-                  fetchpriority="high"
+                  // FIXED: Corrected typo 'fetchpriority' to 'fetchPriority'
+                  fetchPriority="high"
                 />
                 <div className="absolute inset-2 rounded-2xl bg-gradient-to-t from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
@@ -465,7 +471,7 @@ function App() {
       >
         <div className="max-w-6xl mx-auto px-6">
           <p className="text-gray-600 dark:text-gray-400">
-            © 2025 Stayelli. All rights reserved. | Digital Creator
+            &copy; 2025 Stayelli. All rights reserved. | Digital Creator
           </p>
         </div>
       </footer>
@@ -476,4 +482,3 @@ function App() {
 }
 
 export default App;
-
