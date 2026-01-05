@@ -54,7 +54,7 @@ export const portfolioProjects: PortfolioProject[] = [
         id: 'penrose-lyric-1',
         src: 'https://youtu.be/eLaTL3bNzvc',
         youtubeId: 'eLaTL3bNzvc',
-        thumbnail: 'https://img.youtube.com/vi/eLaTL3bNzvc/maxresdefault.jpg',
+        thumbnail: 'https://img.youtube.com/vi/eLaTL3bNzvc/hqdefault.jpg',
         title: 'Lexie Liu - Penrose Lyric Video',
         description: 'Simple Lyric Video for Lexie Liu\'s "Penrose" using Kinetic Typography techniques in Adobe After Effects and Premiere Pro.',
         isVideo: true
