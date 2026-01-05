@@ -41,6 +41,29 @@ export interface PortfolioProject {
 export const portfolioProjects: PortfolioProject[] = [
   // === 2025 PROJECTS ===
   {
+    id: 'PenroseLyric',
+    title: 'Video | Lexie Liu - Penrose Lyric Video',
+    category: 'Personal',
+    description: 'Kinetic Typography lyric video for Lexie Liu\'s "Penrose" using Adobe After Effects and Premiere Pro.',
+    coverImage: 'https://img.youtube.com/vi/2HXWvLMD5cw/maxresdefault.jpg',
+    client: 'Personal',
+    year: '2025',
+    tags: ['Cinematography', 'Automotive', 'Post-Production', 'Video'],
+    images: [
+      {
+        id: 'penrose-lyric-1',
+        src: 'https://youtu.be/eLaTL3bNzvc',
+        youtubeId: 'eLaTL3bNzvc',
+        thumbnail: 'https://img.youtube.com/vi/eLaTL3bNzvc/maxresdefault.jpg',
+        title: 'Lexie Liu - Penrose Lyric Video',
+        description: 'Simple Lyric Video for Lexie Liu\'s "Penrose" using Kinetic Typography techniques in Adobe After Effects and Premiere Pro.',
+        isVideo: true
+      },
+    ]
+  },
+  
+  
+  {
     id: 'mkjp',
     title: 'MKJP Branding',
     category: 'Personal', // FIXED: Reverted to Personal
@@ -106,12 +129,15 @@ export const portfolioProjects: PortfolioProject[] = [
         src: 'https://youtu.be/2HXWvLMD5cw',
         youtubeId: '2HXWvLMD5cw',
         thumbnail: 'https://img.youtube.com/vi/2HXWvLMD5cw/maxresdefault.jpg',
-        title: 'Honda S2000 - Short Cinematic (Sony A6400)',
-        description: 'A short cinematic feature of a Honda S2000.',
+        title: 'JS Color Grading',
+        description: 'Color Grading Reel for Joaquin Santos Motorcycle Documentary',
         isVideo: true
       },
     ]
   },
+
+
+  
   {
     id: 'al80-color-grading',
     title: 'Reel | AL80 Keyboard Color Grading',
