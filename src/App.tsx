@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, Camera, Video, Palette, Box } from 'lucide-react';
+import { Mail, Phone, MapPin, Camera, Video, Palette, Box, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 import { AnimatedSocialIcons } from './components/AnimatedSocialIcons';
@@ -143,18 +143,18 @@ function App() {
         activeSection={activeSection}
       />
 
-      {/* Home Section */}
+      {/* === HERO SECTION: MODIFIED FOR CONVERSION === */}
       <section id="home" className="min-h-dvh flex items-center pt-24 pb-16 relative">
         <div className="max-w-7xl mx-auto px-6 w-full">
           <div className="flex justify-center text-center">
             
             <motion.div 
-              className="max-w-lg"
+              className="max-w-4xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <h1 className="text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white mb-6 leading-none tracking-tight">
+              <h1 className="text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 dark:text-white mb-4 leading-none tracking-tight">
                 <motion.span 
                   className="inline-block relative z-10"
                   whileHover={{ scale: 1.1, rotate: -2, transition: { type: 'spring', stiffness: 300 } }}
@@ -169,24 +169,36 @@ function App() {
                 </motion.span>
               </h1>
               
-              <p className="text-2xl md:text-3xl lg:text-4xl text-gray-700 dark:text-gray-300 font-light mb-8 leading-tight">
-                Digital Creator
-              </p>
+              {/* The Hook */}
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight tracking-tight">
+                High-Retention Visual Campaigns for Premium Brands.
+              </h2>
 
               <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-white dark:to-gray-400 mb-8 rounded-full shadow-lg mx-auto"></div>
 
-              <div className="mb-12 max-w-lg">
-                <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white mb-4 leading-tight">
-                  One Vision. Unlimited ways to capture your story.
-                </h2>
-                <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
-                  My focus is on <strong className="font-semibold text-gray-800 dark:text-gray-100">blending diverse creative mediums</strong>—including high-resolution image-making and dynamic video production—to forge powerful, cohesive visual stories.
+              {/* The Authority */}
+              <div className="mb-10 max-w-2xl mx-auto">
+                <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
+                  Engineered cinematography and strategic editing designed to <strong className="font-semibold text-gray-900 dark:text-white">capture attention and drive conversion.</strong>
                 </p>
               </div>
 
-              <div className="flex justify-center">
-                <AnimatedSocialIcons isDarkMode={isDarkMode} />
-              </div>
+              {/* The Primary CTA */}
+              <motion.div 
+                className="mb-12 flex justify-center"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <a 
+                  href="https://placeholder-link-to-your-google-form.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-bold text-lg shadow-[0_0_20px_rgba(0,0,0,0.2)] dark:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(0,0,0,0.4)] dark:hover:shadow-[0_0_40px_rgba(255,255,255,0.5)] transition-all duration-300"
+                >
+                  Start a Project
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </motion.div>
             </motion.div>
             
           </div>
@@ -218,7 +230,7 @@ function App() {
                 "The visual medium changes, but the core goal remains constant: impactful storytelling."
               </p>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                As a <strong className="font-semibold text-gray-800 dark:text-gray-100">Digital Creator</strong> and visual strategist, I maintain a sharp focus on trending aesthetic standards across film, photography, and motion graphics. But knowing a trend isn't the strategy. I strategically blend my full technical mastery with your unique brand story, ensuring the final visual solution is potent, purposeful, and perfectly tailored to your project's specific goals.
+                As a visual strategist, I maintain a sharp focus on trending aesthetic standards across film, photography, and motion graphics. But knowing a trend isn't the strategy. I strategically blend technical mastery with your unique brand story, ensuring the final visual solution is potent, purposeful, and perfectly tailored to your project's specific goals.
               </p>
             </motion.div>
             
@@ -294,10 +306,10 @@ function App() {
         </motion.div>
       </section>
 
-      {/* === PORTFOLIO SECTION: MODIFIED === */}
+      {/* Portfolio Section */}
       <section id="portfolio" className="py-20 relative">
         <motion.div 
-          className="w-full max-w-6xl mx-auto px-6" // MODIFIED: Changed max-width for a grid
+          className="w-full max-w-6xl mx-auto px-6" 
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
@@ -311,7 +323,6 @@ function App() {
             </p>
           </div>
           
-          {/* Your original filter, unchanged */}
           <motion.div 
             className="flex w-full max-w-sm mx-auto p-1.5 rounded-2xl mb-8 md:mb-12"
             style={glassCardStyle(isDarkMode)}
@@ -333,8 +344,8 @@ function App() {
                     className="absolute inset-0 rounded-xl"
                     style={{
                       background: isDarkMode 
-                        ? 'rgba(255, 255, 255, 0.9)' // Solid white pill
-                        : 'rgba(255, 255, 255, 0.9)', // Solid white pill
+                        ? 'rgba(255, 255, 255, 0.9)' 
+                        : 'rgba(255, 255, 255, 0.9)', 
                       boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
                     }}
                     layoutId="filter-pill"
@@ -345,9 +356,8 @@ function App() {
             ))}
           </motion.div>
           
-          {/* MODIFIED: Replaced vertical list with Instagram-style grid */}
           <motion.div 
-            layout // Animate layout changes when filtering
+            layout 
             className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4"
           >
             <AnimatePresence>
@@ -356,11 +366,11 @@ function App() {
                   key={project.id}
                   onClick={() => openProject(project)}
                   className="relative w-full aspect-square rounded-xl overflow-hidden group shadow-lg"
-                  variants={gridItemVariants} // Use the new grid item variants
+                  variants={gridItemVariants} 
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  layout // Animate position changes
+                  layout 
                   transition={{ duration: 0.3, delay: index * 0.05 }}
                 >
                   <img
@@ -369,7 +379,6 @@ function App() {
                     className="w-full h-full object-cover transition-all duration-300 group-hover:scale-110"
                     loading="lazy"
                   />
-                  {/* Hover effect to show title */}
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
                     <p className="text-white text-base md:text-lg font-bold text-center">
                       {project.title}
@@ -381,17 +390,14 @@ function App() {
           </motion.div>
         </motion.div>
         
-        {/* Your original ProjectViewer, unchanged */}
         <ProjectViewer
           project={selectedProject}
           onClose={closeProject}
           isDarkMode={isDarkMode}
         />
       </section>
-      {/* === END OF PORTFOLIO SECTION === */}
 
-
-      {/* Contact Section (Your original code, unchanged) */}
+      {/* Contact Section */}
       <section id="contact" className="py-20 relative">
         <motion.div 
           className="max-w-4xl mx-auto px-6"
@@ -436,13 +442,26 @@ function App() {
           </div>
         </motion.div>
       </section>
+      <br>
+      </br>
+       <br>
+      </br>
+       <br>
+      </br>
+       <br>
+      </br>
+       <br>
+      </br>
+       <br>
+      </br>
+    
 
-      {/* Footer (Your original code, unchanged) */}
+      {/* Footer */}
       <footer 
-        className="py-8 border-t text-center transition-all duration-500"
+        className="py-6 border-t text-center transition-all duration-500"
         style={{
           background: isDarkMode 
-            ? 'rgba(18, 18, 18, 0.7)' // Premium black
+            ? 'rgba(18, 18, 18, 0.7)' 
             : 'rgba(255, 255, 255, 0.7)',
           borderColor: isDarkMode 
             ? 'rgba(255, 255, 255, 0.1)' 
@@ -451,9 +470,15 @@ function App() {
           WebkitBackdropFilter: 'blur(10px)',
         }}
       >
-        <div className="max-w-6xl mx-auto px-6">
-          <p className="text-gray-600 dark:text-gray-400">
-            © 2025 Stayelli. All rights reserved. | Digital Creator
+        <div className="max-w-6xl mx-auto px-6 flex flex-col items-center gap-3">
+          
+          {/* Relocated Social Icons */}
+          <div className="flex justify-center scale-75 opacity-80 hover:opacity-100 transition-opacity duration-300">
+            <AnimatedSocialIcons isDarkMode={isDarkMode} />
+          </div>
+
+          <p className="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wider uppercase">
+            © 2026 Stayelli. All rights reserved. | Visual Strategist
           </p>
         </div>
       </footer>
