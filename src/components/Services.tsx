@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Check, ArrowLeft, ArrowRight, Zap, Film, Layers, Camera } from 'lucide-react';
+import { Link } from 'react-router-dom'; // ADDED: Import Link for routing
 import { LiquidBackground } from './LiquidBackground'; 
 
 const glassCardStyle = {
-  background: 'rgba(24, 24, 27, 0.6)', // zinc-900 with transparency for a warmer dark base
+  background: 'rgba(24, 24, 27, 0.6)', 
   backdropFilter: 'blur(20px)',
   WebkitBackdropFilter: 'blur(20px)',
   border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -70,10 +71,11 @@ export const Services: React.FC = () => {
       
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 px-6 py-6 flex justify-between items-center bg-zinc-950/60 backdrop-blur-md border-b border-white/5">
-        <a href="/" className="flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-zinc-400 hover:text-orange-400 transition-colors">
+        {/* CHANGED: Replaced <a> with <Link> for internal routing */}
+        <Link to="/" className="flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-zinc-400 hover:text-orange-400 transition-colors">
           <ArrowLeft className="w-4 h-4" />
           Back to Portfolio
-        </a>
+        </Link>
         <span className="text-xl font-bold tracking-tighter text-zinc-100">Stayelli</span>
       </nav>
 
@@ -136,10 +138,9 @@ export const Services: React.FC = () => {
                 ))}
               </div>
               
-              <a 
-                href="https://placeholder-link-to-your-google-form.com"
-                target="_blank"
-                rel="noopener noreferrer"
+              {/* CHANGED: Replaced the placeholder <a> tag with <Link to="/start"> */}
+              <Link 
+                to="/start"
                 className={`w-full py-4 rounded-xl font-bold text-center transition-all duration-300 flex items-center justify-center gap-2 ${
                   tier.highlight 
                     ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-zinc-950 hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] hover:scale-[1.02]' 
@@ -147,7 +148,7 @@ export const Services: React.FC = () => {
                 }`}
               >
                 Inquire Now <ArrowRight className="w-4 h-4" />
-              </a>
+              </Link>
             </motion.div>
           ))}
         </div>
