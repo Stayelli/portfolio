@@ -74,7 +74,7 @@ export const Services: React.FC = () => {
           <ArrowLeft className="w-4 h-4" />
           Back to Portfolio
         </a>
-        <span className="text-xl font-bold tracking-tighter text-zinc-100">Stayelli.</span>
+        <span className="text-xl font-bold tracking-tighter text-zinc-100">Stayelli</span>
       </nav>
 
       <main className="max-w-7xl mx-auto px-6 pt-32 pb-24 relative z-10">

@@ -171,7 +171,7 @@ function App() {
               
               {/* The Hook */}
               <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight tracking-tight">
-                High-Retention Visual Campaigns for Premium Brands.
+                High-Retention Visual Campaigns for Brands.
               </h2>
 
               <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-white dark:to-gray-400 mb-8 rounded-full shadow-lg mx-auto"></div>
