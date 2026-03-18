@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /services
 
 Sitemap: https://stayelli.com/sitemap.xml
