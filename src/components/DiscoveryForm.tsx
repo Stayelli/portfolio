@@ -270,9 +270,9 @@ export const DiscoveryForm = () => {
                         <option value="">Select a tier...</option>
                         {isHK ? (
                         <>
-                            <option value="Tier 1: $4,800 HKD">Tier 1: $4,800 HKD</option>
-                            <option value="Tier 2: $8,500 HKD">Tier 2: $8,500 HKD</option>
-                            <option value="Tier 3: $14,500+ HKD">Tier 3: $14,500+ HKD</option>
+                            <option value="Tier 1: $3,500 HKD">Tier 1: $3,500 HKD</option>
+                            <option value="Tier 2: $7,500 HKD">Tier 2: $7,500 HKD</option>
+                            <option value="Tier 3: $12,500+ HKD">Tier 3: $12,500+ HKD</option>
                         </>
                         ) : (
                         <>
