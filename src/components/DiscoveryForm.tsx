@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ArrowLeft, CheckCircle, X } from 'lucide-react';
+import { ArrowRight, ArrowLeft, CheckCircle, X, Mail, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { LiquidBackground } from './LiquidBackground';
+import { Link, useSearchParams } from 'react-router-dom';
 
 export const DiscoveryForm = () => {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  // Form State mapping to your PDF, now including the email field
+  // ADD THIS LOGIC: Check the URL for the hidden region tag
+  const [searchParams] = useSearchParams();
+  const isHK = searchParams.get('region') === 'hk';
+
+  // Form State mapping to your PDF
   const [formData, setFormData] = useState({
     brandName: '', stakeholder: '', email: '', website: '', brandValues: '',
     primaryGoal: '', targetAudience: '', keyMessage: '', desiredAction: '',
@@ -71,13 +76,42 @@ export const DiscoveryForm = () => {
 
   if (isSuccess) {
     return (
-      <div className="min-h-dvh flex items-center justify-center relative">
+      <div className="min-h-dvh flex items-center justify-center relative py-20">
         <LiquidBackground />
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="p-10 rounded-3xl text-center max-w-lg mx-6" style={glassStyle}>
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="p-8 md:p-10 rounded-3xl text-center max-w-lg mx-6 w-full" style={glassStyle}>
           <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-6" />
           <h2 className="text-3xl font-bold text-white mb-4">Brief Received.</h2>
-          <p className="text-gray-300 mb-8">Thank you for outlining your vision. I'll review these details and get back to you within 24-48 hours to discuss the next steps.</p>
-          <Link to="/" className="px-8 py-4 bg-white text-gray-900 rounded-full font-bold hover:bg-gray-200 transition-colors inline-block">Return Home</Link>
+          
+          <p className="text-gray-300 mb-8 leading-relaxed">
+            Thank you for outlining your vision. I'll review these details against my production schedule and get back to you within 24-48 hours.
+          </p>
+
+          {/* Urgent Inquiries Block */}
+          <div className="bg-gray-900/50 rounded-2xl p-6 mb-8 border border-gray-700/50 backdrop-blur-sm">
+            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Need Immediate Assistance?</h3>
+            <div className="space-y-4 text-left">
+              <a href="mailto:stayelli.multimedia@gmail.com" className="flex items-center gap-4 text-gray-300 hover:text-white transition-colors group">
+                <div className="p-2 bg-blue-500/10 rounded-lg group-hover:bg-blue-500/20 transition-colors">
+                  <Mail className="w-5 h-5 text-blue-400" />
+                </div>
+                <span className="text-sm font-medium">stayelli.multimedia@gmail.com</span>
+              </a>
+              
+              <div className="flex items-center gap-4 text-gray-300 group">
+                <div className="p-2 bg-green-500/10 rounded-lg group-hover:bg-green-500/20 transition-colors">
+                  <Phone className="w-5 h-5 text-green-400" />
+                </div>
+                <div className="flex flex-col text-sm font-medium gap-1">
+                  <a href="tel:+639959702451" className="hover:text-white transition-colors">+63 995-970-2451 (PH)</a>
+                  <a href="tel:+85291599816" className="hover:text-white transition-colors">+852 9159-9816 (HK)</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <Link to="/" className="w-full py-4 bg-white text-gray-900 rounded-full font-bold hover:bg-gray-200 transition-colors inline-block shadow-lg">
+            Return to Portfolio
+          </Link>
         </motion.div>
       </div>
     );
@@ -208,7 +242,7 @@ export const DiscoveryForm = () => {
                       </div>
                     </div>
                     <div>
-                      <label className={labelClass}>Deliverable List (e.g., 1x 60s Brand Film + 3x 15s Hooks/Verticals)</label>
+                      <label className={labelClass}>Deliverable List (e.g., 1x 60s Brand Film + 3x 15s Hooks)</label>
                       <textarea required className={`${inputClass} min-h-[80px]`} value={formData.deliverables} onChange={e => updateForm('deliverables', e.target.value)} />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
@@ -231,13 +265,24 @@ export const DiscoveryForm = () => {
                   <h2 className="text-3xl font-bold text-white mb-6">5. Budget & Wrap Up</h2>
                   <div className="space-y-6">
                     <div>
-                      <label className={labelClass}>Project Budget Tier</label>
-                      <select required className={inputClass} value={formData.budgetRange} onChange={e => updateForm('budgetRange', e.target.value)}>
+                    <label className={labelClass}>Project Budget Tier</label>
+                    <select required className={inputClass} value={formData.budgetRange} onChange={e => updateForm('budgetRange', e.target.value)}>
                         <option value="">Select a tier...</option>
-                        <option value="₱10,000-₱15,000">₱10,000-₱15,000</option>
-                        <option value="₱15,000-₱22,000">₱15,000-₱22,000</option>
-                      </select>
-                      <p className="text-xs text-gray-400 mt-2">Selecting your budget range allows me to accurately tailor the production scope, crew size, and deliverables to your resources and needs.</p>
+                        {isHK ? (
+                        <>
+                            <option value="Tier 1: $4,800 HKD">Tier 1: $4,800 HKD</option>
+                            <option value="Tier 2: $8,500 HKD">Tier 2: $8,500 HKD</option>
+                            <option value="Tier 3: $14,500+ HKD">Tier 3: $14,500+ HKD</option>
+                        </>
+                        ) : (
+                        <>
+                            <option value="Tier 1: ₱10,000">Tier 1: ₱10,000</option>
+                            <option value="Tier 2: ₱15,000">Tier 2: ₱15,000</option>
+                            <option value="Tier 3: ₱22,000+">Tier 3: ₱22,000+</option>
+                        </>
+                        )}
+                    </select>
+                    <p className="text-xs text-gray-400 mt-2">Selecting a tier allows me to accurately tailor the production scope, crew size, and deliverables to your resources.</p>
                     </div>
                     <div>
                       <label className={labelClass}>Any other details or questions?</label>

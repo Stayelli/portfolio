@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { LiquidBackground } from './LiquidBackground'; 
 
 const glassCardStyle = {
-  background: 'rgba(24, 24, 27, 0.6)', // zinc-900 with transparency for a warmer dark base
+  background: 'rgba(24, 24, 27, 0.6)', 
   backdropFilter: 'blur(20px)',
   WebkitBackdropFilter: 'blur(20px)',
   border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -16,7 +16,7 @@ const tiers = [
   {
     name: "The Social Suite",
     target: "High-retention social growth (Reels/TikTok).",
-    price: "₱10,000",
+    price: "$3,500 HKD",
     icon: Zap,
     deliverables: [
       "4x Vertical Videos (15-30s, 9:16 format)",
@@ -28,7 +28,7 @@ const tiers = [
   {
     name: "The Brand Story",
     target: "Website hero headers and brand authority.",
-    price: "₱15,000",
+    price: "$7,500 HKD",
     icon: Film,
     highlight: true, 
     deliverables: [
@@ -41,7 +41,7 @@ const tiers = [
   {
     name: "The Full Campaign",
     target: "Complete brand launches & multi-platform presence.",
-    price: "₱22,000",
+    price: "$12,500 HKD",
     icon: Layers,
     deliverables: [
       "1x Cinematic Master Cut (60-90s, 16:9)",
@@ -53,13 +53,13 @@ const tiers = [
 ];
 
 const addOns = [
-  { name: "Professional Brand Photography", price: "₱5,000", desc: "15–25 high-res retouched stills captured during the video production window." },
+  { name: "Professional Brand Photography", price: "$2,500 HKD", desc: "15–25 high-res retouched stills captured during the video production window." },
   { name: "Raw Footage Archive Transfer", price: "+50% of Base", desc: "Full delivery of unedited 4K source files + Archive Usage Rights." },
   { name: "72-Hour Expedited Delivery", price: "+30% of Base", desc: "Priority post-production status. Skip the standard 14-day queue." },
-  { name: "Additional Social Cut-downs", price: "₱2,000", desc: "Extra vertical edits leveraged from the captured project footage." }
+  { name: "Additional Social Cut-downs", price: "$800 HKD", desc: "Extra vertical edits leveraged from the captured project footage." }
 ];
 
-export const Services: React.FC = () => {
+export const ServicesHK: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     document.documentElement.classList.add('dark');
@@ -69,7 +69,6 @@ export const Services: React.FC = () => {
     <div className="min-h-dvh bg-zinc-950 text-zinc-50 relative selection:bg-orange-500/30">
       <LiquidBackground />
       
-      {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 px-6 py-6 flex justify-between items-center bg-zinc-950/60 backdrop-blur-md border-b border-white/5">
         <Link to="/" className="flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-zinc-400 hover:text-orange-400 transition-colors">
           <ArrowLeft className="w-4 h-4" />
@@ -80,21 +79,14 @@ export const Services: React.FC = () => {
 
       <main className="max-w-7xl mx-auto px-6 pt-32 pb-24 relative z-10">
         
-        {/* Header Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center max-w-3xl mx-auto mb-20"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center max-w-3xl mx-auto mb-20">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight text-white">Engagement Baselines</h1>
-          {/* Warm Gradient Line */}
           <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-amber-400 mx-auto rounded-full mb-8 shadow-[0_0_15px_rgba(249,115,22,0.5)]"></div>
           <p className="text-xl text-zinc-400 font-light leading-relaxed">
             We do not just shoot footage; we engineer visual assets designed to capture attention and drive conversion. Review our baseline production tiers below.
           </p>
         </motion.div>
 
-        {/* Pricing Tiers Grid */}
         <div className="grid lg:grid-cols-3 gap-8 mb-24">
           {tiers.map((tier, index) => (
             <motion.div
@@ -103,14 +95,9 @@ export const Services: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.15 }}
               className={`relative rounded-3xl p-8 flex flex-col transition-all duration-500 ${
-                tier.highlight 
-                  ? 'border-orange-500/50 scale-105 shadow-2xl shadow-orange-900/20' 
-                  : 'hover:border-zinc-700 hover:bg-zinc-900/80'
+                tier.highlight ? 'border-orange-500/50 scale-105 shadow-2xl shadow-orange-900/20' : 'hover:border-zinc-700 hover:bg-zinc-900/80'
               }`}
-              style={{
-                ...glassCardStyle,
-                border: tier.highlight ? '1px solid rgba(249, 115, 22, 0.4)' : glassCardStyle.border
-              }}
+              style={{ ...glassCardStyle, border: tier.highlight ? '1px solid rgba(249, 115, 22, 0.4)' : glassCardStyle.border }}
             >
               {tier.highlight && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full text-xs font-bold tracking-widest uppercase shadow-[0_0_20px_rgba(249,115,22,0.4)] text-zinc-950">
@@ -119,7 +106,6 @@ export const Services: React.FC = () => {
               )}
               
               <tier.icon className={`w-10 h-10 mb-6 ${tier.highlight ? 'text-orange-400' : 'text-zinc-500'}`} />
-              
               <h3 className="text-2xl font-bold mb-2 text-zinc-100">{tier.name}</h3>
               <p className="text-sm text-zinc-400 mb-8 min-h-[40px]">{tier.target}</p>
               
@@ -137,13 +123,11 @@ export const Services: React.FC = () => {
                 ))}
               </div>
               
-              {/* Regional parameter added to link */}
+              {/* IMPORTANT: This passes the ?region=hk hidden parameter to the form */}
               <Link 
-                to="/start?region=ph"
+                to="/start?region=hk"
                 className={`w-full py-4 rounded-xl font-bold text-center transition-all duration-300 flex items-center justify-center gap-2 ${
-                  tier.highlight 
-                    ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-zinc-950 hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] hover:scale-[1.02]' 
-                    : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white'
+                  tier.highlight ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-zinc-950 hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] hover:scale-[1.02]' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white'
                 }`}
               >
                 Inquire Now <ArrowRight className="w-4 h-4" />
@@ -152,23 +136,13 @@ export const Services: React.FC = () => {
           ))}
         </div>
 
-        {/* Strategic Add-Ons Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="rounded-3xl p-8 md:p-12 mb-20 border border-white/5"
-          style={glassCardStyle}
-        >
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-3xl p-8 md:p-12 mb-20 border border-white/5" style={glassCardStyle}>
           <div className="flex flex-col md:flex-row gap-12 items-start">
             <div className="md:w-1/3">
               <Camera className="w-10 h-10 text-amber-500 mb-4" />
               <h3 className="text-3xl font-bold mb-4 text-zinc-100">Strategic<br/>Enhancements</h3>
-              <p className="text-zinc-400 leading-relaxed">
-                Add-on services designed to maximize the utility and lifespan of your production. Can be added to any baseline tier.
-              </p>
+              <p className="text-zinc-400 leading-relaxed">Add-on services designed to maximize the utility and lifespan of your production. Can be added to any baseline tier.</p>
             </div>
-            
             <div className="md:w-2/3 w-full grid sm:grid-cols-2 gap-6">
               {addOns.map((addon, index) => (
                 <div key={index} className="bg-zinc-900/50 p-6 rounded-2xl border border-white/5 hover:border-orange-500/30 transition-colors duration-300 group">
@@ -183,14 +157,10 @@ export const Services: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Operational Terms Footer */}
         <div className="text-center max-w-2xl mx-auto border-t border-white/5 pt-10">
           <p className="text-xs text-zinc-500 uppercase tracking-widest font-semibold mb-4">Standard Operational Terms</p>
-          <p className="text-sm text-zinc-400 leading-relaxed">
-            All tiers include two (2) rounds of consolidated revisions and standard commercial digital licensing. Standard project turnaround is 14 business days from production wrap. A 50% non-refundable retainer is required to lock production dates.
-          </p>
+          <p className="text-sm text-zinc-400 leading-relaxed">All tiers include two (2) rounds of consolidated revisions and standard commercial digital licensing. Standard project turnaround is 14 business days from production wrap. A 50% non-refundable retainer is required to lock production dates.</p>
         </div>
-
       </main>
     </div>
   );
