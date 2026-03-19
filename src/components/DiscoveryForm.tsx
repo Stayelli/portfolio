@@ -273,15 +273,15 @@ export const DiscoveryForm = () => {
                         <option value="">Select a tier...</option>
                         {isHK ? (
                           <>
-                            <option value="Tier 1: $4,800 HKD">Tier 1: $4,800 HKD</option>
-                            <option value="Tier 2: $8,500 HKD">Tier 2: $8,500 HKD</option>
-                            <option value="Tier 3: $14,500+ HKD">Tier 3: $14,500+ HKD</option>
+                            <option value="Tier 1: HK$3,500 ">Tier 1: HK$3,500 </option>
+                            <option value="Tier 2: HK$7,500">Tier 2: HK$7,500</option>
+                            <option value="Tier 3: HK$12,500+">Tier 3: HK$12,500+</option>
                           </>
                         ) : (
                           <>
                             <option value="Tier 1: ₱10,000">Tier 1: ₱10,000</option>
                             <option value="Tier 2: ₱15,000">Tier 2: ₱15,000</option>
-                            <option value="Tier 3: ₱22,000+">Tier 3: ₱22,000+</option>
+                            <option value="Tier 3: ₱22,000">Tier 3: ₱22,000</option>
                           </>
                         )}
                       </select>

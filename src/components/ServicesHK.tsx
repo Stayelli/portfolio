@@ -16,7 +16,7 @@ const tiers = [
   {
     name: "The Social Suite",
     target: "High-retention social growth (Reels/TikTok).",
-    price: "$3,500 HKD",
+    price: "HK$3,500 ",
     icon: Zap,
     deliverables: [
       "4x Vertical Videos (15-30s, 9:16 format)",
@@ -28,7 +28,7 @@ const tiers = [
   {
     name: "The Brand Story",
     target: "Website hero headers and brand authority.",
-    price: "$7,500 HKD",
+    price: "HK$7,500 ",
     icon: Film,
     highlight: true, 
     deliverables: [
@@ -41,7 +41,7 @@ const tiers = [
   {
     name: "The Full Campaign",
     target: "Complete brand launches & multi-platform presence.",
-    price: "$12,500 HKD",
+    price: "HK$12,500 ",
     icon: Layers,
     deliverables: [
       "1x Cinematic Master Cut (60-90s, 16:9)",
