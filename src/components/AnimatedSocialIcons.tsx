@@ -23,7 +23,7 @@ export const AnimatedSocialIcons: React.FC<AnimatedSocialIconsProps> = ({ isDark
     <div className="flex space-x-6">
       {/* Instagram Icon with Gradient Animation */}
       <a
-        href="https://instagram.com/stayelli"
+        href="https://www.instagram.com/bystayelli/"
         target="_blank"
         rel="noopener noreferrer"
         className="group relative w-14 h-14 rounded-2xl flex items-center justify-center overflow-hidden transform-gpu transition-all duration-500 hover:scale-110 hover:rotate-12"
