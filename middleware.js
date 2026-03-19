@@ -1,18 +1,27 @@
 export const config = {
-  // This tells Vercel to ONLY run this script when someone visits the default premium page
-  matcher: '/services', 
+  // Now it watches BOTH the services page and the direct form page
+  matcher: ['/services', '/start'], 
 };
 
 export default function middleware(request) {
-  // Vercel automatically injects the user's country code based on their IP address
   const country = request.headers.get('x-vercel-ip-country');
+  const url = new URL(request.url);
 
-  // If the user is in the Philippines, intercept and reroute to the local PHP page
-  if (country === 'PH') {
-    const url = new URL('/services-ph', request.url);
-    return Response.redirect(url, 307); // 307 is a temporary redirect
+  // 1. Handle the Services routing
+  if (url.pathname === '/services') {
+    if (country === 'PH') {
+      url.pathname = '/services-ph';
+      return Response.redirect(url, 307); 
+    }
   }
 
-  // If the user is in Hong Kong, the US, or anywhere else, do nothing. 
-  // Let them proceed to the premium HKD pricing.
+  // 2. Handle the Hero CTA routing (/start)
+  if (url.pathname === '/start') {
+    // If the user is NOT in the Philippines, and the URL doesn't already have the HK tag...
+    if (country !== 'PH' && !url.searchParams.has('region')) {
+      // Invisibly add the HK tag to the URL so the form renders premium pricing
+      url.searchParams.set('region', 'hk');
+      return Response.redirect(url, 307);
+    }
+  }
 }
