@@ -1,30 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ArrowLeft, CheckCircle, X, Mail, Phone } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { LiquidBackground } from './LiquidBackground';
 import { Link, useSearchParams } from 'react-router-dom';
-import React, { useState, useEffect } from 'react'; // ADDED useEffect
+import { LiquidBackground } from './LiquidBackground';
 
 export const DiscoveryForm = () => {
-  const [step, setStep] = useState(1);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-
-  export const DiscoveryForm = () => {
-  // ADD THIS BLOCK: Forces the page to the top and locks in dark mode
+  // Forces the page to the top and locks in dark mode immediately
   useEffect(() => {
     window.scrollTo(0, 0);
     document.documentElement.classList.add('dark');
   }, []);
 
-  const [step, setStep] = useState(1);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  // ... rest of your state
-
-  // ADD THIS LOGIC: Check the URL for the hidden region tag
   const [searchParams] = useSearchParams();
   const isHK = searchParams.get('region') === 'hk';
+
+  const [step, setStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   // Form State mapping to your PDF
   const [formData, setFormData] = useState({
@@ -57,7 +49,6 @@ export const DiscoveryForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Uses your secure local environment variable
       const response = await fetch(import.meta.env.VITE_FORMSPREE_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -277,24 +268,24 @@ export const DiscoveryForm = () => {
                   <h2 className="text-3xl font-bold text-white mb-6">5. Budget & Wrap Up</h2>
                   <div className="space-y-6">
                     <div>
-                    <label className={labelClass}>Project Budget Tier</label>
-                    <select required className={inputClass} value={formData.budgetRange} onChange={e => updateForm('budgetRange', e.target.value)}>
+                      <label className={labelClass}>Project Budget Tier</label>
+                      <select required className={inputClass} value={formData.budgetRange} onChange={e => updateForm('budgetRange', e.target.value)}>
                         <option value="">Select a tier...</option>
                         {isHK ? (
-                        <>
-                            <option value="Tier 1: $3,500 HKD">Tier 1: $3,500 HKD</option>
-                            <option value="Tier 2: $7,500 HKD">Tier 2: $7,500 HKD</option>
-                            <option value="Tier 3: $12,500+ HKD">Tier 3: $12,500+ HKD</option>
-                        </>
+                          <>
+                            <option value="Tier 1: $4,800 HKD">Tier 1: $4,800 HKD</option>
+                            <option value="Tier 2: $8,500 HKD">Tier 2: $8,500 HKD</option>
+                            <option value="Tier 3: $14,500+ HKD">Tier 3: $14,500+ HKD</option>
+                          </>
                         ) : (
-                        <>
+                          <>
                             <option value="Tier 1: ₱10,000">Tier 1: ₱10,000</option>
                             <option value="Tier 2: ₱15,000">Tier 2: ₱15,000</option>
                             <option value="Tier 3: ₱22,000+">Tier 3: ₱22,000+</option>
-                        </>
+                          </>
                         )}
-                    </select>
-                    <p className="text-xs text-gray-400 mt-2">Selecting a tier allows me to accurately tailor the production scope, crew size, and deliverables to your resources.</p>
+                      </select>
+                      <p className="text-xs text-gray-400 mt-2">Selecting a tier allows me to accurately tailor the production scope, crew size, and deliverables to your resources.</p>
                     </div>
                     <div>
                       <label className={labelClass}>Any other details or questions?</label>
