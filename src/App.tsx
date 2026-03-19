@@ -197,7 +197,7 @@ function App() {
                 {/* The Authority */}
                 <div className="mb-10 max-w-2xl mx-auto">
                   <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
-                    Engineered cinematography and strategic editing designed to <strong className="font-semibold text-gray-900 dark:text-white">capture attention and drive conversion.</strong>
+                    Every shot we film is designed to help your brand grow <strong className="font-semibold text-gray-900 dark:text-white">by capturing your audience’s attention and turning interest into action.</strong>
                   </p>
                 </div>
 
