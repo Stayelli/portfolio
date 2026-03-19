@@ -4,11 +4,23 @@ import { ArrowRight, ArrowLeft, CheckCircle, X, Mail, Phone } from 'lucide-react
 import { Link } from 'react-router-dom';
 import { LiquidBackground } from './LiquidBackground';
 import { Link, useSearchParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'; // ADDED useEffect
 
 export const DiscoveryForm = () => {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  export const DiscoveryForm = () => {
+  // ADD THIS BLOCK: Forces the page to the top and locks in dark mode
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.classList.add('dark');
+  }, []);
+
+  const [step, setStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  // ... rest of your state
 
   // ADD THIS LOGIC: Check the URL for the hidden region tag
   const [searchParams] = useSearchParams();
