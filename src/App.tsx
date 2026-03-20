@@ -197,7 +197,7 @@ function App() {
                 {/* The Authority */}
                 <div className="mb-10 max-w-2xl mx-auto">
                   <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
-                    Every shot we film is designed to help your brand grow by<strong className="font-semibold text-gray-900 dark:text-white">capturing your audience’s attention and turning interest into action.</strong>
+                    Every shot we film is designed to help your brand grow by<strong className="font-semibold text-gray-900 dark:text-white"> capturing your audience’s attention and turning interest into action.</strong>
                   </p>
                 </div>
 
