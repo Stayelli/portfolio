@@ -15,7 +15,7 @@ export const LoadingScreen = () => {
       <div className="relative z-10 flex flex-col items-center">
         {/* Brand Name Reveal */}
         <motion.div 
-          className="text-4xl md:text-5xl font-bold tracking-tight flex items-center gap-1 mb-8"
+          className="text-4xl md:text-5xl font-bold tracking-tight flex items-center mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -24,14 +24,31 @@ export const LoadingScreen = () => {
           <span className="text-zinc-500">elli</span>
         </motion.div>
 
-        {/* Cinematic Progress Bar */}
-        <div className="w-48 md:w-64 h-[2px] bg-zinc-800 rounded-full overflow-hidden shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+{/* Cinematic Progress Bar */}
+        {/* Note: Removed `overflow-hidden` here so the glow can bleed out */}
+        <div className="w-48 md:w-64 h-[2px] bg-zinc-800 rounded-full shadow-[0_0_15px_rgba(0,0,0,0.5)]">
           <motion.div
-            className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500"
-            initial={{ width: "0%" }}
-            animate={{ width: "100%" }}
-            // This 2-second animation dictates how long the loading screen stays visible
-            transition={{ duration: 2, ease: "easeInOut" }} 
+            // Added `rounded-full` here to keep the edges smooth since we removed overflow-hidden above
+            className="h-full rounded-full bg-gradient-to-r from-zinc-600 via-zinc-400 to-zinc-200"
+            initial={{ 
+              width: "0%",
+              boxShadow: "0px 0px 4px rgba(228, 228, 231, 0.2)"
+            }}
+            animate={{ 
+              width: "100%",
+              // Animate through an array of shadows to create the pulse
+              boxShadow: [
+                "0px 0px 4px rgba(228, 228, 231, 0.3)", 
+                "0px 0px 12px rgba(228, 228, 231, 0.8)", 
+                "0px 0px 4px rgba(228, 228, 231, 0.3)"
+              ]
+            }}
+            transition={{ 
+              // The width fills once over 2 seconds
+              width: { duration: 2, ease: "easeInOut" },
+              // The glow loops continuously every 1.5 seconds
+              boxShadow: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
+            }} 
           />
         </div>
 
