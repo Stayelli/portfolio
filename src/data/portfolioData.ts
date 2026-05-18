@@ -61,7 +61,7 @@ export const portfolioProjects: PortfolioProject[] = [
       isVideo: true
     },
   ]
-}
+},
 
     {
   id: 'LBConcept2',
@@ -85,7 +85,7 @@ export const portfolioProjects: PortfolioProject[] = [
       isVideo: true
     },
   ]
-}
+},
 
     {
     id: 'PenroseLyric',
