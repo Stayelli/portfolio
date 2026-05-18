@@ -40,6 +40,50 @@ export interface PortfolioProject {
 export const portfolioProjects: PortfolioProject[] = [
   // === VIDEO PROJECTS ===
   {
+    id: 'LBConcept1',
+    title: 'Video | LahatBawal - Mini Concept #1 S-LOG2',
+    category: 'Videos',
+    description: 'My first mini concept for Lahat Bawal, an apparel startup. Gimbal shots were taken using my friend's A6300 and handheld shots were taken with my A6400. Edited and color graded in Davinci Resolve 20',
+    coverImage: 'https://img.youtube.com/vi/KqIBkupGqfE/hqdefault.jpg',
+    client: 'LahatBawal AXL',
+    year: '2026',
+    tags: ['Cinematic', 'Streetwear', 'Music Video'],
+    images: [
+      {
+        id: 'LBConcept1',
+        src: 'https://www.youtube.com/shorts/KqIBkupGqfE',
+        youtubeId: 'eLaTL3bNzvc',
+        thumbnail: 'https://img.youtube.com/vi/KqIBkupGqfE/hqdefault.jpg',
+        title: 'LahatBawal - Mini Concept #1 S-LOG2',
+        description: 'My first mini concept for Lahat Bawal, an apparel startup. Gimbal shots were taken using my friend's A6300 and handheld shots were taken with my A6400. Edited and color graded in Davinci Resolve 20',
+        isVideo: true
+      },
+    ]
+  },
+
+    {
+    id: 'LBConcept2',
+    title: 'Video | LahatBawal - Mini Concept #2 S-LOG2',
+    category: 'Videos',
+    description: 'My second  mini concept for Lahat Bawal, an apparel startup. Gimbal shots were taken using my friend's A6300 and handheld shots were taken with my A6400. Edited and color graded in Davinci Resolve 20',
+    coverImage: 'https://img.youtube.com/vi/iIlphnFb1RI/hqdefault.jpg',
+    client: 'LahatBawal AXL',
+    year: '2026',
+    tags: ['Cinematic', 'Streetwear', 'Music Video'],
+    images: [
+      {
+        id: 'LBConcept2',
+        src: 'https://www.youtube.com/shorts/iIlphnFb1RI',
+        youtubeId: 'eLaTL3bNzvc',
+        thumbnail: 'https://img.youtube.com/vi/iIlphnFb1RI/hqdefault.jpg',
+        title: 'LahatBawal - Mini Concept #2 S-LOG2',
+        description: 'My second mini concept for Lahat Bawal, an apparel startup. Gimbal shots were taken using my friend's A6300 and handheld shots were taken with my A6400. Edited and color graded in Davinci Resolve 20',
+        isVideo: true
+      },
+    ]
+  },
+
+    {
     id: 'PenroseLyric',
     title: 'Video | Lexie Liu - Penrose Lyric Video',
     category: 'Videos',
@@ -60,6 +104,7 @@ export const portfolioProjects: PortfolioProject[] = [
       },
     ]
   },
+
   {
     id: 'cinematic-reel-2024',
     title: 'Reel | Claws by Tenshi',
